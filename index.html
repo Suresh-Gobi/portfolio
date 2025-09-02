@@ -10,23 +10,55 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   </head>
   <body>
-    <!-- Hero Section -->
-    <section class="hero">
-      <h1>Suresh Gobi<br /><span>Designer & Developer</span></h1>
-      <p>Scroll to explore my portfolio →</p>
-    </section>
-
-    <!-- Horizontal Scroll Section -->
-    <section class="horizontal">
-      <div class="scroll-container">
-        <div class="panel">Graphic Design</div>
-        <div class="panel">Software Dev</div>
-        <div class="panel">Web Design & Dev</div>
-        <div class="panel">WordPress Dev</div>
-        <div class="panel">SEO Projects</div>
+    <div class="custom-cursor">
+      <div class="cursor-circle">
+        <span
+          >scroll <br />
+          to <br />
+          view</span
+        >
       </div>
-    </section>
+    </div>
 
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="img/logo.png" alt="Suresh Gobi Logo" />
+        </div>
+        <ul class="nav-menu">
+          <li><a href="#">Graphic Design</a></li>
+          <li><a href="#">Web Design & Dev</a></li>
+          <li><a href="#">WordPress Dev</a></li>
+          <li><a href="#">Software Dev</a></li>
+          <li><a href="#">SEO Projects</a></li>
+        </ul>
+      </div>
+      <div class="nav-line"></div>
+    </nav>
+
+    <div class="horizontal-wrapper">
+      <div class="panel hero">
+        <div class="hero-content">
+          <div class="profile-header">
+            <img src="img/propic.png" alt="Suresh Gobi" class="profile-pic" />
+            <h2>Suresh Gobi</h2>
+          </div>
+          <h1>
+            Designer <span>&</span><br />
+            Developer
+          </h1>
+        </div>
+      </div>
+      <div class="panel panel2">Project 1</div>
+      <div class="panel panel3">Project 2</div>
+      <div class="panel panel4">Project 3</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/custom-cursor.js"></script>
+    <script src="js/bg-image.js"></script>
   </body>
 </html>
