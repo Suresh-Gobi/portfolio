@@ -261,8 +261,20 @@ p {
 .panel2,
 .panel3,
 .panel4 {
-  background-color: rgba(255, 255, 255, 0.438);
+  background-color: rgba(255, 255, 255, 0.945);
   color: #111;
   z-index: 2;
   position: relative;
+}
+
+.right-triangle {
+  position: absolute; /* position it */
+  top: -59vh;
+  right: -115vh;
+  width: 0;
+  height: 0;
+  border-right: 150vh solid white; /* width of triangle */
+  border-top: 150vh solid transparent; /* height of triangle */
+  z-index: 10;
+  opacity: 0.8;
 }
