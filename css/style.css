@@ -94,7 +94,8 @@ h2 {
 h3 {
   font-family: "Tw Cen MT", sans-serif;
   color: #808080;
-  font-size: 36px;
+  font-size: 26px;
+  font-weight: 200;
 }
 
 h4 {
@@ -108,7 +109,8 @@ h4 {
 p {
   font-family: "Tw Cen MT", sans-serif;
   color: #808080;
-  font-size: 12px;
+  font-size: 24px;
+  font-weight: 100;
 }
 
 /* ----------------- BUTTONS ----------------- */
@@ -239,7 +241,7 @@ p {
   margin-bottom: 10px;
 }
 
-#portfolio-container{
+#portfolio-container {
   margin-top: 80px;
 }
 
@@ -411,6 +413,14 @@ p {
   right: 3rem;
   font-size: 2rem;
   cursor: pointer;
+}
+
+#modal-title {
+  font-size: 32px;
+  color: black;
+  font-family: "Tw Cen MT", sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 50px;
 }
 
 #modal-images img {
