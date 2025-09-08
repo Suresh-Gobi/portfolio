@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("portfolio-container");
   const modal = document.getElementById("portfolio-modal");
   const modalClose = modal.querySelector(".modal-close");
-  
+
   const modalTitle = document.getElementById("modal-title");
   const modalDescription = document.getElementById("modal-description");
   const modalImages = document.getElementById("modal-images");
@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch JSON
   fetch("../data.json")
-    .then(res => res.json())
-    .then(data => {
-      data.forEach(item => {
+    .then((res) => res.json())
+    .then((data) => {
+      data.forEach((item) => {
         const card = document.createElement("div");
         card.classList.add("news-card");
         card.innerHTML = `
@@ -37,15 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="${item.portfolio_img02}" />
             <img src="${item.portfolio_img03}" />
           `;
-          modalSkills.innerHTML = item.skills.map(s => `<span>${s}</span>`).join(" ");
+          modalSkills.innerHTML = item.skills
+            .map((s) => `<button class="button-2">${s}</button>`)
+            .join(" ");
+
           modalLive.href = item.live_site_link;
           modalGithub.href = item.github_repo;
-          modalPublished.textContent = `Published: ${item.published_date}`;
-          modalCompany.textContent = `Contributed: ${item.contributed_company}`;
+          modalPublished.textContent = `Published on ${item.published_date}`;
+          modalCompany.innerHTML = `Contributed to <span class="company-name">${item.contributed_company}</span>`;
         });
       });
     })
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 
   // Close modal
   modalClose.addEventListener("click", () => {
@@ -54,6 +57,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Close modal when clicking outside content
   window.addEventListener("click", (e) => {
-    if(e.target === modal) modal.style.display = "none";
+    if (e.target === modal) modal.style.display = "none";
   });
 });

@@ -5,7 +5,7 @@
     "title": "Business Consultant Website – WordPress, Web Design & Branding",
     "thumbnail_img": "tumbnail/Asset 8.png",
 
-    "project_description": "A responsive personal portfolio website with horizontal scrolling, motion graphics, and custom GSAP animations.",
+    "project_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     "skills": ["HTML", "CSS", "JavaScript", "GSAP", "Responsive Design"],
     "live_site_link": "https://yourdomain.com/portfolio",
     "github_repo": "https://github.com/username/portfolio",
@@ -23,7 +23,7 @@
     "thumbnail_img": "tumbnail/Asset 8.png",
 
     "project_description": "A full-stack HR portal with employee fingerprint registration and punch management.",
-    "skills": ["React", "Node.js", "MySQL", "Express", "Docker"],
+    "skills": ["HTML", "CSS", "JavaScript", "GSAP", "Responsive Design"],
     "live_site_link": "https://yourdomain.com/hrms",
     "github_repo": "https://github.com/username/hrms",
     "published_date": "2025-08-20",
