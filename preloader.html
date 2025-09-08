@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SVG Preloader Fill</title>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #000;
+  }
+
+  #logo {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to bottom, rgb(255, 255, 255) 50%, rgb(243, 0, 0) 50%);
+    background-size: 100% 200%;
+    background-position: top;
+    -webkit-mask-image: url('./svg/logo.svg'); /* Your SVG path */
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    -webkit-mask-position: center;
+    mask-image: url('./svg/logo.svg');
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: center;
+    -webkit-mask-composite: destination-in;
+    mask-composite: intersect;
+
+    /* Animate background position from bottom to top */
+    animation: fill 3s forwards;
+  }
+
+  @keyframes fill {
+    from { background-position: top; }
+    to { background-position: bottom; }
+  }
+</style>
+</head>
+<body>
+
+<div id="logo"></div>
+
+</body>
+</html>
