@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SVG Preloader Fill</title>
+<title>Rolling Counter with Logo Fill</title>
 <style>
   body {
     margin: 0;
@@ -12,12 +12,14 @@
     align-items: center;
     height: 100vh;
     background: #000;
+    position: relative;
+    font-family: "Bebas Neue", sans-serif;
   }
 
   #logo {
     width: 200px;
     height: 200px;
-    background: linear-gradient(to bottom, rgb(255, 255, 255) 50%, rgb(243, 0, 0) 50%);
+    background: linear-gradient(to bottom, white 50%, red 50%);
     background-size: 100% 200%;
     background-position: top;
     -webkit-mask-image: url('./svg/logo.svg');
@@ -30,12 +32,6 @@
     mask-position: center;
     -webkit-mask-composite: destination-in;
     mask-composite: intersect;
-    animation: fill 3s forwards;
-  }
-
-  @keyframes fill {
-    from { background-position: top; }
-    to { background-position: bottom; }
   }
 
   #counter {
@@ -145,5 +141,6 @@ for (let i = 0; i < checkpoints.length - 1; i++) {
   });
 }
 </script>
+
 </body>
 </html>
