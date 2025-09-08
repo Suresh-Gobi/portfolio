@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Suresh Gobi | Portfolio</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <!-- GSAP & ScrollTrigger CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -37,7 +41,7 @@
       <div class="nav-line"></div>
     </nav>
 
-    <!-- <div class="horizontal-wrapper">
+    <div class="horizontal-wrapper">
       <div class="panel hero">
         <div class="hero-content">
           <div class="profile-header">
@@ -50,22 +54,62 @@
           </h1>
         </div>
       </div>
-      <div class="panel panel2">Project 1</div>
+      <div class="panel panel2">
+        <div class="content-wrapper" id="portfolio-container"></div>
+      </div>
       <div class="panel panel3">Project 2</div>
       <div class="panel panel4">Project 3</div>
-    </div> -->
+    </div>
 
-    <section class="portfolio">
-      <div class="portfolio-grid" id="portfolioGrid">
-        <!-- Cards will be injected dynamically with JS -->
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quo non sunt soluta, harum omnis ullam mollitia aut consectetur libero molestiae commodi et doloremque laudantium ipsa veritatis, beatae quia fuga?</p>
+    <!-- Modal -->
+    <div id="portfolio-modal" class="modal">
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2 id="modal-title"></h2>
+        <div class="modal-body">
+          <!-- Left Column -->
+
+          <div class="modal-left">
+            <h2>Project Description.</h2>
+            <p id="modal-description"></p>
+            <h2>Skills and deliverables</h2>
+            <div id="modal-skills"></div>
+            <div class="modal-buttons">
+              <button
+                id="modal-live"
+                target="_blank"
+                class="button-1"
+                role="button"
+              >
+                Live Site <i class="fas fa-arrow-right"></i>
+              </button>
+
+              <a id="modal-github" target="_blank">
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+
+            <div class="modal-meta">
+              <p id="modal-published"></p>
+
+              <div id="modal-company"></div>
+            </div>
+            <hr />
+          </div>
+
+          <!-- Right Column -->
+          <div class="modal-right">
+            <div id="modal-images"></div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/custom-cursor.js"></script>
-    <!-- <script src="js/bg-image.js"></script> -->
+    <script src="js/bg-image.js"></script>
+    <script src="./js/map.js"></script>
   </body>
 </html>

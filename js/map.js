@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card.innerHTML = `
           <img src="${item.thumbnail_img}" class="news-card__image" alt="${item.title}" />
           <div class="news-card__text-wrapper">
-            <h2 class="news-card__title">${item.title}</h2>
+            <h4 class="news-card__title">${item.title}</h4>
           </div>
         `;
         container.appendChild(card);
