@@ -93,9 +93,10 @@ h2 {
 
 h3 {
   font-family: "Tw Cen MT", sans-serif;
-  color: #808080;
+  color: #636363;
   font-size: 26px;
   font-weight: 200;
+  margin-bottom: 25px;
 }
 
 h4 {
@@ -408,6 +409,7 @@ p {
   align-items: center;
 }
 .modal-close {
+  color: #000;
   position: absolute;
   top: 2rem;
   right: 3rem;
