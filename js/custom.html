@@ -1,44 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Rolling Odometer</title>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SVG Preloader Fill</title>
     <style>
       body {
+        margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-color: #333;
-        font-family: sans-serif;
+        background: #000;
+      }
+
+      #logo {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(
+          to bottom,
+          rgb(255, 255, 255) 50%,
+          rgb(243, 0, 0) 50%
+        );
+        background-size: 100% 200%;
+        background-position: top;
+        -webkit-mask-image: url("./svg/logo.svg");
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        -webkit-mask-position: center;
+        mask-image: url("./svg/logo.svg");
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        mask-position: center;
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
+        animation: fill 10s forwards;
+      }
+
+      @keyframes fill {
+        from {
+          background-position: top;
+        }
+        to {
+          background-position: bottom;
+        }
       }
 
       .odometer {
         display: flex;
-        font-size: 60px;
+        font-size: 120px;
         color: white;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
       }
-
       .digit {
         overflow: hidden;
         height: 100px;
-        width: 60px;
+        width: 55px;
         position: relative;
-        margin: 0 2px;
+        margin: 0 1px;
       }
 
       .number {
+        font-family: monospace;
+        font-weight: 500;
         position: absolute;
         top: 0;
         left: 0;
@@ -46,6 +73,7 @@
       }
 
       .number div {
+        letter-spacing: 0px;
         height: 100px;
         display: flex;
         justify-content: center;
@@ -53,83 +81,25 @@
       }
     </style>
   </head>
-
   <body>
-    <div class="odometer">
-      <div class="digit">
-        <div class="number" id="digit-1">
-          <div>0</div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
-        </div>
-      </div>
-      <div class="digit">
-        <div class="number" id="digit-2">
-          <div>0</div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
-        </div>
-      </div>
-    </div>
+    <div id="logo"></div>
 
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
-      function animateOdometer(target, end, duration, onComplete) {
-        gsap.to(target, {
-          y: -(100 * end),
-          duration: duration,
-          ease: "power2.out",
-          onComplete: onComplete,
-        });
-      }
+      const logo = document.getElementById("logo");
+      const totalDuration = 5; // total seconds for logo fill
 
-      function startOdometerAnimation(finalValue) {
-        let currentValue = 0;
+      // Animate logo fill
+      gsap.to(logo, {
+        duration: totalDuration,
+        backgroundPosition: "bottom",
+        ease: "power2.inOut",
+      });
 
-        function animateNext() {
-          if (currentValue > finalValue) return;
-
-          let tens = Math.floor(currentValue / 10);
-          let ones = currentValue % 10;
-
-          // Animate ones place
-          animateOdometer("#digit-2", ones, 0.1, () => {
-            // Animate tens place when ones rolls over
-            if (ones === 0) {
-              animateOdometer("#digit-1", tens, 0.3);
-            }
-
-            currentValue++;
-            animateNext(); // Continue loop
-          });
-        }
-
-        animateNext();
-      }
-
-      // Start odometer up to 25
-      startOdometerAnimation(25);
     </script>
 
     <!-- Bootstrap JS -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

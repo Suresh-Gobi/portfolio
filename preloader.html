@@ -34,7 +34,7 @@
         mask-position: center;
         -webkit-mask-composite: destination-in;
         mask-composite: intersect;
-        animation: fill 3s forwards;
+        animation: fill 10s forwards;
       }
 
       @keyframes fill {
@@ -48,7 +48,7 @@
 
       .odometer {
         display: flex;
-        font-size: 60px;
+        font-size: 120px;
         color: white;
         position: fixed;
         bottom: 20px;
@@ -57,8 +57,8 @@
       }
       .digit {
         overflow: hidden;
-        height: 80px;
-        width: 30px;
+        height: 100px;
+        width: 55px;
         position: relative;
         margin: 0 1px;
       }
@@ -140,50 +140,26 @@
         backgroundPosition: "bottom",
         ease: "power2.inOut",
       });
-    </script>
 
-    <script>
-      function animateOdometer(target, end, duration, onComplete) {
-        gsap.to(target, {
-          y: -(100 * end),
-          duration: duration,
-          ease: "power2.out",
-          onComplete: onComplete,
-        });
-      }
+      // Odometer animation synced with logo fill
+      const odometer = { value: 0 }; // current number
 
-      function startOdometerAnimation(finalValue) {
-        let currentValue = 0;
+      gsap.to(odometer, {
+        value: 100, // final number
+        duration: totalDuration,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          const currentValue = Math.floor(odometer.value);
 
-        function animateNext() {
-          if (currentValue > finalValue) return;
+          const hundreds = Math.floor(currentValue / 100);
+          const tens = Math.floor((currentValue % 100) / 10);
+          const ones = currentValue % 10;
 
-          let hundreds = Math.floor(currentValue / 100);
-          let tens = Math.floor((currentValue % 100) / 10);
-          let ones = currentValue % 10;
-
-          // Animate ones place
-          animateOdometer("#digit-3", ones, 0.1, () => {
-            // Animate tens place when ones rolls over
-            if (ones === 0) {
-              animateOdometer("#digit-2", tens, 0.3);
-            }
-
-            // Animate hundreds place when tens rolls over
-            if (ones === 0 && tens === 0) {
-              animateOdometer("#digit-1", hundreds, 0.3);
-            }
-
-            currentValue++;
-            animateNext(); // Continue loop
-          });
-        }
-
-        animateNext();
-      }
-
-      // Start odometer up to 100
-      startOdometerAnimation(100);
+          gsap.set("#digit-1", { y: -hundreds * 100 });
+          gsap.set("#digit-2", { y: -tens * 100 });
+          gsap.set("#digit-3", { y: -ones * 100 });
+        },
+      });
     </script>
 
     <!-- Bootstrap JS -->
