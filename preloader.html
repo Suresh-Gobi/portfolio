@@ -1,149 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SVG Preloader Fill</title>
-<style>
-  body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: #000;
-  }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SVG Preloader Fill</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #000;
+      }
 
-  #logo {
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(to bottom, rgb(255, 255, 255) 50%, rgb(243, 0, 0) 50%);
-    background-size: 100% 200%;
-    background-position: top;
-    -webkit-mask-image: url('./svg/logo.svg');
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    -webkit-mask-position: center;
-    mask-image: url('./svg/logo.svg');
-    mask-repeat: no-repeat;
-    mask-size: contain;
-    mask-position: center;
-    -webkit-mask-composite: destination-in;
-    mask-composite: intersect;
-    animation: fill 3s forwards;
-  }
+      #logo {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(
+          to bottom,
+          rgb(255, 255, 255) 50%,
+          rgb(243, 0, 0) 50%
+        );
+        background-size: 100% 200%;
+        background-position: top;
+        -webkit-mask-image: url("./svg/logo.svg");
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        -webkit-mask-position: center;
+        mask-image: url("./svg/logo.svg");
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        mask-position: center;
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
+        animation: fill 3s forwards;
+      }
 
-  @keyframes fill {
-    from { background-position: top; }
-    to { background-position: bottom; }
-  }
+      @keyframes fill {
+        from {
+          background-position: top;
+        }
+        to {
+          background-position: bottom;
+        }
+      }
 
-  #counter {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: clamp(2rem, 8vw, 6rem);
-    color: white;
-    display: flex;
-    letter-spacing: 0.03em;
-  }
+      .odometer {
+        display: flex;
+        font-size: 60px;
+        color: white;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+      .digit {
+        overflow: hidden;
+        height: 80px;
+        width: 30px;
+        position: relative;
+        margin: 0 1px;
+      }
 
-  .digit {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    height: 1em;
-  }
+      .number {
+        font-family: monospace;
+        font-weight: 500;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
 
-  .digit span {
-    display: block;
-  }
+      .number div {
+        letter-spacing: 0px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="logo"></div>
 
-  .cloneText {
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-</style>
-</head>
-<body>
+    <div class="odometer">
+      <div class="digit">
+        <div class="number" id="digit-1">
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+      </div>
+      <div class="digit">
+        <div class="number" id="digit-2">
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+      </div>
+      <div class="digit">
+        <div class="number" id="digit-3">
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+      </div>
+    </div>
 
-<div id="logo"></div>
-<div id="counter">0%</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+      const logo = document.getElementById("logo");
+      const totalDuration = 5; // total seconds for logo fill
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script>
-const logo = document.getElementById('logo');
-const counterEl = document.getElementById('counter');
-const totalDuration = 5; // total seconds for logo fill
-const checkpoints = [0, 30, 50, 70, 88, 100];
+      // Animate logo fill
+      gsap.to(logo, {
+        duration: totalDuration,
+        backgroundPosition: "bottom",
+        ease: "power2.inOut",
+      });
+    </script>
 
-// Animate logo fill
-gsap.to(logo, {
-  duration: totalDuration,
-  backgroundPosition: "bottom",
-  ease: "power2.inOut"
-});
+    <script>
+      function animateOdometer(target, end, duration, onComplete) {
+        gsap.to(target, {
+          y: -(100 * end),
+          duration: duration,
+          ease: "power2.out",
+          onComplete: onComplete,
+        });
+      }
 
-// Function to create rolling digits like SplitText
-function createDigit(num) {
-  const digit = document.createElement('div');
-  digit.classList.add('digit');
+      function startOdometerAnimation(finalValue) {
+        let currentValue = 0;
 
-  const original = document.createElement('span');
-  original.classList.add('originalText');
-  original.textContent = num;
+        function animateNext() {
+          if (currentValue > finalValue) return;
 
-  const clone = document.createElement('span');
-  clone.classList.add('cloneText');
-  clone.textContent = num;
+          let hundreds = Math.floor(currentValue / 100);
+          let tens = Math.floor((currentValue % 100) / 10);
+          let ones = currentValue % 10;
 
-  digit.appendChild(original);
-  digit.appendChild(clone);
+          // Animate ones place
+          animateOdometer("#digit-3", ones, 0.1, () => {
+            // Animate tens place when ones rolls over
+            if (ones === 0) {
+              animateOdometer("#digit-2", tens, 0.3);
+            }
 
-  return digit;
-}
+            // Animate hundreds place when tens rolls over
+            if (ones === 0 && tens === 0) {
+              animateOdometer("#digit-1", hundreds, 0.3);
+            }
 
-// Function to update counter for rolling effect
-function updateCounter(num) {
-  const str = Math.floor(num).toString();
-  counterEl.innerHTML = '';
-  for (let i = 0; i < str.length; i++) {
-    counterEl.appendChild(createDigit(str[i]));
-  }
+            currentValue++;
+            animateNext(); // Continue loop
+          });
+        }
 
-  // Add % sign
-  const percent = document.createElement('span');
-  percent.textContent = '%';
-  counterEl.appendChild(percent);
+        animateNext();
+      }
 
-  // Animate each digit rolling
-  const digits = counterEl.querySelectorAll('.digit');
-  digits.forEach((digit, i) => {
-    gsap.set(digit.children[1], { yPercent: i % 2 === 0 ? -100 : 100 });
-    gsap.to(digit.children, {
-      yPercent: i % 2 === 0 ? "+=100" : "-=100",
-      ease: "power1.inOut",
-      duration: 2
-    });
-  });
-}
+      // Start odometer up to 100
+      startOdometerAnimation(100);
+    </script>
 
-// Animate counter through checkpoints
-const tl = gsap.timeline();
-for (let i = 0; i < checkpoints.length - 1; i++) {
-  const start = checkpoints[i];
-  const end = checkpoints[i + 1];
-  const segmentDuration = totalDuration / (checkpoints.length - 1);
-  tl.to({ value: start }, {
-    value: end,
-    duration: segmentDuration,
-    ease: "power2.inOut",
-    onUpdate: function() {
-      updateCounter(this.targets()[0].value);
-    }
-  });
-}
-</script>
-</body>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
