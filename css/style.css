@@ -15,6 +15,87 @@ body {
   background-blend-mode: overlay;
 }
 
+/*---------preloader---------*/
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f3f2ec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+#logo {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(
+    to bottom,
+    rgb(255, 255, 255) 50%,
+    rgb(243, 0, 0) 50%
+  );
+  background-size: 100% 200%;
+  background-position: top;
+  -webkit-mask-image: url("../svg/logo.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  mask-image: url("../svg/logo.svg");
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: fill 10s forwards;
+}
+
+@keyframes fill {
+  from {
+    background-position: top;
+  }
+  to {
+    background-position: bottom;
+  }
+}
+
+.odometer {
+  display: flex;
+  font-size: 60px;
+  color: #e62727;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  z-index: 9999;
+}
+.digit {
+  overflow: hidden;
+  height: 100px;
+  width: 30px;
+  position: relative;
+  margin: 0 1px;
+}
+
+.number {
+  font-family: monospace;
+  font-weight: 500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.number div {
+  letter-spacing: 0px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /*------------------ CUSTOM CURSOR ----------------- */
 .custom-cursor {
   position: fixed;

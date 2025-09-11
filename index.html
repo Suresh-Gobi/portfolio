@@ -14,6 +14,55 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   </head>
   <body>
+    <div id="preloader">
+      <div id="logo"></div>
+
+      <div class="odometer">
+        <div class="digit">
+          <div class="number" id="digit-1">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+          </div>
+        </div>
+        <div class="digit">
+          <div class="number" id="digit-2">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+          </div>
+        </div>
+        <div class="digit">
+          <div class="number" id="digit-3">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- <div class="custom-cursor">
       <div class="cursor-circle">
         <span
@@ -111,5 +160,55 @@
     <script src="js/custom-cursor.js"></script>
     <script src="js/bg-image.js"></script>
     <script src="./js/map.js"></script>
+
+    <script>
+      const logo = document.getElementById("logo");
+      const totalDuration = 5; // total seconds for logo fill
+
+      // Animate logo fill
+      gsap.to(logo, {
+        duration: totalDuration,
+        backgroundPosition: "bottom",
+        ease: "power2.inOut",
+      });
+
+      // Odometer animation synced with logo fill
+      const odometer = { value: 0 }; // current number
+
+      gsap.to(odometer, {
+        value: 100, // final number
+        duration: totalDuration,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          const currentValue = Math.floor(odometer.value);
+
+          const hundreds = Math.floor(currentValue / 100);
+          const tens = Math.floor((currentValue % 100) / 10);
+          const ones = currentValue % 10;
+
+          gsap.set("#digit-1", { y: -hundreds * 100 });
+          gsap.set("#digit-2", { y: -tens * 100 });
+          gsap.set("#digit-3", { y: -ones * 100 });
+        },
+        onComplete: () => {
+          // Fade out preloader, fade in homepage
+          gsap.to("#preloader", {
+            duration: 1.2,
+            opacity: 0,
+            ease: "power2.inOut",
+            onComplete: () => {
+              document.getElementById("preloader").style.display = "none";
+            },
+          });
+
+          gsap.to("#homepage", {
+            duration: 1.5,
+            opacity: 1,
+            delay: 0.5,
+            ease: "power2.inOut",
+          });
+        },
+      });
+    </script>
   </body>
 </html>

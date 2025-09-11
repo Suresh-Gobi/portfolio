@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SVG Preloader Fill</title>
     <style>
-      body {
-        margin: 0;
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f3f2ec;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        background: #000;
+        flex-direction: column;
+        z-index: 9999;
       }
 
       #logo {
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
         background: linear-gradient(
           to bottom,
           rgb(255, 255, 255) 50%,
@@ -48,17 +53,17 @@
 
       .odometer {
         display: flex;
-        font-size: 120px;
-        color: white;
+        font-size: 60px;
+        color: #e62727;
         position: fixed;
-        bottom: 20px;
+        bottom: 0;
         right: 20px;
         z-index: 9999;
       }
       .digit {
         overflow: hidden;
         height: 100px;
-        width: 55px;
+        width: 30px;
         position: relative;
         margin: 0 1px;
       }
@@ -79,54 +84,68 @@
         justify-content: center;
         align-items: center;
       }
+      #homepage {
+        opacity: 0;
+        padding: 50px;
+        text-align: center;
+        color: white;
+      }
     </style>
   </head>
   <body>
-    <div id="logo"></div>
+    <div id="preloader">
+      <div id="logo"></div>
 
-    <div class="odometer">
-      <div class="digit">
-        <div class="number" id="digit-1">
-          <div>0</div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
+      <div class="odometer">
+        <div class="digit">
+          <div class="number" id="digit-1">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+          </div>
+        </div>
+        <div class="digit">
+          <div class="number" id="digit-2">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+          </div>
+        </div>
+        <div class="digit">
+          <div class="number" id="digit-3">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+          </div>
         </div>
       </div>
-      <div class="digit">
-        <div class="number" id="digit-2">
-          <div>0</div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
-        </div>
-      </div>
-      <div class="digit">
-        <div class="number" id="digit-3">
-          <div>0</div>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
-        </div>
-      </div>
+    </div>
+
+    <!-- Homepage -->
+    <div id="homepage">
+      <h1>Welcome to the Homepage 🎉</h1>
+      <p>Your content goes here after the preloader fades out.</p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -158,6 +177,24 @@
           gsap.set("#digit-1", { y: -hundreds * 100 });
           gsap.set("#digit-2", { y: -tens * 100 });
           gsap.set("#digit-3", { y: -ones * 100 });
+        },
+        onComplete: () => {
+          // Fade out preloader, fade in homepage
+          gsap.to("#preloader", {
+            duration: 1.2,
+            opacity: 0,
+            ease: "power2.inOut",
+            onComplete: () => {
+              document.getElementById("preloader").style.display = "none";
+            },
+          });
+
+          gsap.to("#homepage", {
+            duration: 1.5,
+            opacity: 1,
+            delay: 0.5,
+            ease: "power2.inOut",
+          });
         },
       });
     </script>

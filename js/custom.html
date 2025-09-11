@@ -3,103 +3,105 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SVG Preloader Fill</title>
+    <title>SVG Preloader Transition</title>
     <style>
       body {
         margin: 0;
+        overflow: hidden;
+        background: #000;
+        font-family: Arial, sans-serif;
+      }
+
+      /* Preloader container */
+      #preloader {
+        position: fixed;
+        inset: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
         background: #000;
+        z-index: 9999;
       }
 
+      /* Logo fill animation box */
       #logo {
         width: 200px;
         height: 200px;
-        background: linear-gradient(
-          to bottom,
-          rgb(255, 255, 255) 50%,
-          rgb(243, 0, 0) 50%
-        );
+        background: linear-gradient(to bottom, white 50%, red 50%);
         background-size: 100% 200%;
         background-position: top;
-        -webkit-mask-image: url("./svg/logo.svg");
-        -webkit-mask-repeat: no-repeat;
-        -webkit-mask-size: contain;
-        -webkit-mask-position: center;
-        mask-image: url("./svg/logo.svg");
-        mask-repeat: no-repeat;
-        mask-size: contain;
-        mask-position: center;
-        -webkit-mask-composite: destination-in;
-        mask-composite: intersect;
-        animation: fill 10s forwards;
+        /* Inline SVG mask (replace with your logo.svg later) */
+        -webkit-mask: url("../svg/logo.svg") no-repeat center / contain;
+        mask: url("../svg/logo.svg") no-repeat center / contain;
       }
 
-      @keyframes fill {
-        from {
-          background-position: top;
-        }
-        to {
-          background-position: bottom;
-        }
-      }
-
-      .odometer {
-        display: flex;
-        font-size: 120px;
-        color: white;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 9999;
-      }
-      .digit {
-        overflow: hidden;
-        height: 100px;
-        width: 55px;
-        position: relative;
-        margin: 0 1px;
-      }
-
-      .number {
-        font-family: monospace;
-        font-weight: 500;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-      }
-
-      .number div {
-        letter-spacing: 0px;
-        height: 100px;
+      /* Homepage */
+      #home {
+        min-height: 100vh;
+        background: linear-gradient(to right, #ff416c, #ff4b2b);
         display: flex;
         justify-content: center;
         align-items: center;
+        color: white;
+        font-size: 48px;
+        font-weight: bold;
+        opacity: 0; /* will fade in */
       }
     </style>
   </head>
   <body>
-    <div id="logo"></div>
+    <!-- Preloader -->
+    <div id="preloader">
+      <div id="logo"></div>
+    </div>
 
+    <!-- Homepage -->
+    <section id="home">🚀 Welcome to the Home Page!</section>
 
+    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
       const logo = document.getElementById("logo");
-      const totalDuration = 5; // total seconds for logo fill
+      const preloader = document.getElementById("preloader");
+      const home = document.getElementById("home");
 
-      // Animate logo fill
-      gsap.to(logo, {
-        duration: totalDuration,
+      const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+
+      // Step 1: Fill the logo
+      tl.to(logo, {
+        duration: 2,
         backgroundPosition: "bottom",
-        ease: "power2.inOut",
-      });
+      })
 
+        // Step 2: Scale preloader (mask) to reveal homepage
+        .to(
+          preloader,
+          {
+            scale: 3000,
+            duration: 2, // slower zoom for smoothness
+            ease: "power3.inOut",
+          },
+          "+=0.2"
+        )
+
+        // Step 3: Fade in homepage content
+        .to(
+          home,
+          {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.inOut",
+          },
+          "-=1.5"
+        )
+
+        // Step 4: Remove preloader after animation
+        .to(preloader, {
+          opacity: 0,
+          duration: 0.5,
+          ease: "power1.out",
+          onComplete: () => preloader.remove(),
+        });
     </script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
