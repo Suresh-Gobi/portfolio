@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SVG Preloader Fill</title>
+    <style>
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #f3f2ec;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 9999;
+      }
+
+      #logo {
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(
+          to bottom,
+          rgb(255, 255, 255) 50%,
+          rgb(243, 0, 0) 50%
+        );
+        background-size: 100% 200%;
+        background-position: top;
+        -webkit-mask-image: url("./svg/logo.svg");
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-size: contain;
+        -webkit-mask-position: center;
+        mask-image: url("./svg/logo.svg");
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        mask-position: center;
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
+        animation: fill 10s forwards;
+      }
+
+      @keyframes fill {
+        from {
+          background-position: top;
+        }
+        to {
+          background-position: bottom;
+        }
+      }
+
+      .odometer {
+        display: flex;
+        font-size: 60px;
+        color: #e62727;
+        position: fixed;
+        bottom: 0;
+        right: 20px;
+        z-index: 9999;
+      }
+      .digit {
+        overflow: hidden;
+        height: 100px;
+        width: 30px;
+        position: relative;
+        margin: 0 1px;
+      }
+
+      .number {
+        font-family: monospace;
+        font-weight: 500;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .number div {
+        letter-spacing: 0px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #homepage {
+        opacity: 0;
+        padding: 50px;
+        text-align: center;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="preloader">
+      <div id="logo"></div>
+
+      <div class="odometer">
+        <div class="digit">
+          <div class="number" id="digit-1">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+          </div>
+        </div>
+        <div class="digit">
+          <div class="number" id="digit-2">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+          </div>
+        </div>
+        <div class="digit">
+          <div class="number" id="digit-3">
+            <div>0</div>
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div>8</div>
+            <div>9</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Homepage -->
+    <div id="homepage">
+      <h1>Welcome to the Homepage 🎉</h1>
+      <p>Your content goes here after the preloader fades out.</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+      const logo = document.getElementById("logo");
+      const totalDuration = 5; // total seconds for logo fill
+
+      // Animate logo fill
+      gsap.to(logo, {
+        duration: totalDuration,
+        backgroundPosition: "bottom",
+        ease: "power2.inOut",
+      });
+
+      // Odometer animation synced with logo fill
+      const odometer = { value: 0 }; // current number
+
+      gsap.to(odometer, {
+        value: 100, // final number
+        duration: totalDuration,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          const currentValue = Math.floor(odometer.value);
+
+          const hundreds = Math.floor(currentValue / 100);
+          const tens = Math.floor((currentValue % 100) / 10);
+          const ones = currentValue % 10;
+
+          gsap.set("#digit-1", { y: -hundreds * 100 });
+          gsap.set("#digit-2", { y: -tens * 100 });
+          gsap.set("#digit-3", { y: -ones * 100 });
+        },
+        onComplete: () => {
+          // Fade out preloader, fade in homepage
+          gsap.to("#preloader", {
+            duration: 1.2,
+            opacity: 0,
+            ease: "power2.inOut",
+            onComplete: () => {
+              document.getElementById("preloader").style.display = "none";
+            },
+          });
+
+          gsap.to("#homepage", {
+            duration: 1.5,
+            opacity: 1,
+            delay: 0.5,
+            ease: "power2.inOut",
+          });
+        },
+      });
+    </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+[
+  {
+    "portfolio_id": "1",
+    "tag": "Web Development",
+    "title": "Business Consultant Website – WordPress, Web Design & Branding",
+    "thumbnail_img": "tumbnail/Asset 8.png",
+
+    "project_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "skills": ["HTML", "CSS", "JavaScript", "GSAP", "Responsive Design"],
+    "live_site_link": "https://yourdomain.com/portfolio",
+    "github_repo": "https://github.com/username/portfolio",
+    "published_date": "2025-09-01",
+    "contributed_company": "Freelance",
+
+    "portfolio_img01": "projects/web design/01/01.png",
+    "portfolio_img02": "projects/web design/01/02.png",
+    "portfolio_img03": "projects/web design/01/03.png"
+  },
+  {
+    "portfolio_id": "2",
+    "tag": "Software Development",
+    "title": "HR Management System",
+    "thumbnail_img": "tumbnail/Asset 8.png",
+
+    "project_description": "A full-stack HR portal with employee fingerprint registration and punch management.",
+    "skills": ["HTML", "CSS", "JavaScript", "GSAP", "Responsive Design"],
+    "live_site_link": "https://yourdomain.com/hrms",
+    "github_repo": "https://github.com/username/hrms",
+    "published_date": "2025-08-20",
+    "contributed_company": "St. Joseph Hospital",
+
+    "portfolio_img01": "img/portfolio/hrms-01.jpg",
+    "portfolio_img02": "img/portfolio/hrms-02.jpg",
+    "portfolio_img03": "img/portfolio/hrms-03.jpg",
+    "portfolio_img04": "img/portfolio/hrms-04.jpg",
+    "portfolio_img05": "img/portfolio/hrms-05.jpg"
+  },
+  {
+    "portfolio_id": "2",
+    "tag": "Software Development",
+    "title": "HR Management System",
+    "thumbnail_img": "tumbnail/Asset 8.png",
+
+    "project_description": "A full-stack HR portal with employee fingerprint registration and punch management.",
+    "skills": ["React", "Node.js", "MySQL", "Express", "Docker"],
+    "live_site_link": "https://yourdomain.com/hrms",
+    "github_repo": "https://github.com/username/hrms",
+    "published_date": "2025-08-20",
+    "contributed_company": "St. Joseph Hospital",
+
+    "portfolio_img01": "img/portfolio/hrms-01.jpg",
+    "portfolio_img02": "img/portfolio/hrms-02.jpg",
+    "portfolio_img03": "img/portfolio/hrms-03.jpg",
+    "portfolio_img04": "img/portfolio/hrms-04.jpg",
+    "portfolio_img05": "img/portfolio/hrms-05.jpg"
+  },
+  {
+    "portfolio_id": "2",
+    "tag": "Software Development",
+    "title": "HR Management System",
+    "thumbnail_img": "tumbnail/Asset 8.png",
+
+    "project_description": "A full-stack HR portal with employee fingerprint registration and punch management.",
+    "skills": ["React", "Node.js", "MySQL", "Express", "Docker"],
+    "live_site_link": "https://yourdomain.com/hrms",
+    "github_repo": "https://github.com/username/hrms",
+    "published_date": "2025-08-20",
+    "contributed_company": "St. Joseph Hospital",
+
+    "portfolio_img01": "img/portfolio/hrms-01.jpg",
+    "portfolio_img02": "img/portfolio/hrms-02.jpg",
+    "portfolio_img03": "img/portfolio/hrms-03.jpg",
+    "portfolio_img04": "img/portfolio/hrms-04.jpg",
+    "portfolio_img05": "img/portfolio/hrms-05.jpg"
+  },
+  {
+    "portfolio_id": "2",
+    "tag": "Software Development",
+    "title": "HR Management System",
+    "thumbnail_img": "tumbnail/Asset 8.png",
+
+    "project_description": "A full-stack HR portal with employee fingerprint registration and punch management.",
+    "skills": ["React", "Node.js", "MySQL", "Express", "Docker"],
+    "live_site_link": "https://yourdomain.com/hrms",
+    "github_repo": "https://github.com/username/hrms",
+    "published_date": "2025-08-20",
+    "contributed_company": "St. Joseph Hospital",
+
+    "portfolio_img01": "img/portfolio/hrms-01.jpg",
+    "portfolio_img02": "img/portfolio/hrms-02.jpg",
+    "portfolio_img03": "img/portfolio/hrms-03.jpg",
+    "portfolio_img04": "img/portfolio/hrms-04.jpg",
+    "portfolio_img05": "img/portfolio/hrms-05.jpg"
+  },
+  {
+    "portfolio_id": "2",
+    "tag": "Software Development",
+    "title": "HR Management System",
+    "thumbnail_img": "tumbnail/Asset 8.png",
+
+    "project_description": "A full-stack HR portal with employee fingerprint registration and punch management.",
+    "skills": ["React", "Node.js", "MySQL", "Express", "Docker"],
+    "live_site_link": "https://yourdomain.com/hrms",
+    "github_repo": "https://github.com/username/hrms",
+    "published_date": "2025-08-20",
+    "contributed_company": "St. Joseph Hospital",
+
+    "portfolio_img01": "img/portfolio/hrms-01.jpg",
+    "portfolio_img02": "img/portfolio/hrms-02.jpg",
+    "portfolio_img03": "img/portfolio/hrms-03.jpg",
+    "portfolio_img04": "img/portfolio/hrms-04.jpg",
+    "portfolio_img05": "img/portfolio/hrms-05.jpg"
+  },
+  {
+    "portfolio_id": "2",
+    "tag": "Software Development",
+    "title": "HR Management System",
+    "thumbnail_img": "tumbnail/Asset 8.png",
+
+    "project_description": "A full-stack HR portal with employee fingerprint registration and punch management.",
+    "skills": ["React", "Node.js", "MySQL", "Express", "Docker"],
+    "live_site_link": "https://yourdomain.com/hrms",
+    "github_repo": "https://github.com/username/hrms",
+    "published_date": "2025-08-20",
+    "contributed_company": "St. Joseph Hospital",
+
+    "portfolio_img01": "img/portfolio/hrms-01.jpg",
+    "portfolio_img02": "img/portfolio/hrms-02.jpg",
+    "portfolio_img03": "img/portfolio/hrms-03.jpg",
+    "portfolio_img04": "img/portfolio/hrms-04.jpg",
+    "portfolio_img05": "img/portfolio/hrms-05.jpg"
+  },
+  {
+    "portfolio_id": "2",
+    "tag": "Software Development",
+    "title": "HR Management System",
+    "thumbnail_img": "tumbnail/Asset 8.png",
+
+    "project_description": "A full-stack HR portal with employee fingerprint registration and punch management.",
+    "skills": ["React", "Node.js", "MySQL", "Express", "Docker"],
+    "live_site_link": "https://yourdomain.com/hrms",
+    "github_repo": "https://github.com/username/hrms",
+    "published_date": "2025-08-20",
+    "contributed_company": "St. Joseph Hospital",
+
+    "portfolio_img01": "img/portfolio/hrms-01.jpg",
+    "portfolio_img02": "img/portfolio/hrms-02.jpg",
+    "portfolio_img03": "img/portfolio/hrms-03.jpg",
+    "portfolio_img04": "img/portfolio/hrms-04.jpg",
+    "portfolio_img05": "img/portfolio/hrms-05.jpg"
+  }
+]
