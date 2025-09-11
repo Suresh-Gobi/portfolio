@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  cursor: none;
+  /* cursor: none; */
 }
 
 body {
@@ -12,8 +12,88 @@ body {
   background: url("../img/bg-01.jpg") center/cover no-repeat fixed;
   position: relative;
   transition: background-image 1s ease-in-out;
-  background-color: rgba(0, 0, 0, 0.5);
   background-blend-mode: overlay;
+}
+
+/*---------preloader---------*/
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f3f2ec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+#logo {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(
+    to bottom,
+    rgb(255, 255, 255) 50%,
+    rgb(243, 0, 0) 50%
+  );
+  background-size: 100% 200%;
+  background-position: top;
+  -webkit-mask-image: url("../svg/logo.svg");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  mask-image: url("../svg/logo.svg");
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: fill 10s forwards;
+}
+
+@keyframes fill {
+  from {
+    background-position: top;
+  }
+  to {
+    background-position: bottom;
+  }
+}
+
+.odometer {
+  display: flex;
+  font-size: 60px;
+  color: #e62727;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  z-index: 9999;
+}
+.digit {
+  overflow: hidden;
+  height: 100px;
+  width: 30px;
+  position: relative;
+  margin: 0 1px;
+}
+
+.number {
+  font-family: monospace;
+  font-weight: 500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.number div {
+  letter-spacing: 0px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*------------------ CUSTOM CURSOR ----------------- */
@@ -94,21 +174,25 @@ h2 {
 
 h3 {
   font-family: "Tw Cen MT", sans-serif;
-  color: #808080;
-  font-size: 36px;
+  color: #636363;
+  font-size: 26px;
+  font-weight: 200;
+  margin-bottom: 25px;
 }
 
 h4 {
   font-family: "Tw Cen MT", sans-serif;
   color: #ffffff;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 100;
   text-transform: uppercase;
 }
 
 p {
   font-family: "Tw Cen MT", sans-serif;
   color: #808080;
-  font-size: 12px;
+  font-size: 24px;
+  font-weight: 100;
 }
 
 /* ----------------- BUTTONS ----------------- */
@@ -239,6 +323,10 @@ p {
   margin-bottom: 10px;
 }
 
+#portfolio-container {
+  margin-top: 80px;
+}
+
 /*------------------ NEXT SECTION ----------------- */
 .horizontal-wrapper {
   display: flex;
@@ -261,20 +349,279 @@ p {
 .panel2,
 .panel3,
 .panel4 {
-  background-color: rgba(255, 255, 255, 0.945);
+  background-color: rgba(255, 255, 255, 0.438);
   color: #111;
   z-index: 2;
   position: relative;
 }
 
-.right-triangle {
-  position: absolute; /* position it */
-  top: -59vh;
-  right: -115vh;
-  width: 0;
-  height: 0;
-  border-right: 150vh solid white; /* width of triangle */
-  border-top: 150vh solid transparent; /* height of triangle */
-  z-index: 10;
-  opacity: 0.8;
+/*------------------ PORTFOLIO SECTION ----------------- */
+.content-wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.news-card {
+  margin: 0.25rem;
+  position: relative;
+  height: 10rem;
+  overflow: hidden;
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+}
+
+.news-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 0;
+}
+
+.news-card__card-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.news-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 3s ease;
+  z-index: -1;
+}
+.news-card__text-wrapper {
+  position: absolute;
+  bottom: 0px;
+  padding: 1rem;
+  color: white;
+  transition: background-color 1.5s ease;
+}
+
+.news-card__title {
+  margin-bottom: 0.5rem;
+  transition: color 1s ease;
+}
+
+.news-card__post-date {
+  font-size: 0.7rem;
+  margin-bottom: 1rem;
+  color: #ccc;
+}
+
+.news-card__details-wrapper {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 1.5s ease, opacity 1s ease;
+}
+
+.news-card__excerpt {
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 900px) {
+  .news-card {
+    height: 14rem;
+  }
+
+  .news-card:hover .news-card__image {
+    transform: scale(1.1);
+  }
+}
+/*---- MODAL ----*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 100%;
+  max-height: none;
+  overflow: visible;
+}
+
+.modal-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.modal-left {
+  flex: 1;
+  min-width: 250px;
+}
+
+.modal-right {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-close {
+  color: #000;
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+#modal-title {
+  font-size: 32px;
+  color: black;
+  font-family: "Tw Cen MT", sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+}
+
+#modal-images img {
+  width: 100%;
+  height: auto;
+  margin: 0.5rem 0;
+  display: block;
+  object-fit: contain;
+}
+
+/*---- BTN --*/
+
+.button-1 {
+  background-color: #405ff2;
+  border-radius: 20px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.modal-buttons,
+#modal-skills,
+#modal-description {
+  margin-bottom: 50px;
+}
+#modal-github {
+  font-size: 1.5rem;
+  color: #333;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+#modal-github:hover {
+  color: #000;
+}
+
+.modal-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+hr {
+  margin: 1rem 0;
+  opacity: 0.3;
+}
+
+.modal-meta p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+#modal-company {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+#modal-company .company-name {
+  color: #405ff2;
+  font-weight: 500;
+}
+
+#modal-live i {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+#modal-live:hover i {
+  transform: translateX(5px);
+}
+
+.button-2 {
+  background-color: #e9e9e9;
+  border-radius: 20px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #252525;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-1:hover,
+.button-1:focus {
+  background-color: #0366cf;
 }
