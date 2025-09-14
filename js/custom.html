@@ -1,117 +1,85 @@
-<div class="loading-container">
-  <div class="loading-screen">
-    <div class="numbers">
-      <div class="number number-1">
-        <div class="number-wrap">
-          <p class="number-p">0</p>
-          <p class="number-p">1</p>
-        </div>
-      </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSAP SplitText Animation</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+  }
 
-      <div class="number number-2 number-ten-times">
-        <div class="number-wrap">
-          <p class="number-p">0</p>
-          <p class="number-p">1</p>
-          <p class="number-p">2</p>
-          <p class="number-p">3</p>
-          <p class="number-p">4</p>
-          <p class="number-p">5</p>
-          <p class="number-p">6</p>
-          <p class="number-p">7</p>
-          <p class="number-p">8</p>
-          <p class="number-p">9</p>
-        </div>
-      </div>
+  .split {
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 1.2;
+  }
 
-      <div class="number number-3 number-ten-times">
-        <div class="number-wrap">
-          <p class="number-p">0</p>
-          <p class="number-p">1</p>
-          <p class="number-p">2</p>
-          <p class="number-p">3</p>
-          <p class="number-p">4</p>
-          <p class="number-p">5</p>
-          <p class="number-p">6</p>
-          <p class="number-p">7</p>
-          <p class="number-p">8</p>
-          <p class="number-p">9</p>
-        </div>
-      </div>
-    </div>
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="split">Suresh Gobi - Animate Me!</div>
+  <div>
+    <button id="charsBtn">Characters</button>
+    <button id="wordsBtn">Words</button>
+    <button id="linesBtn">Lines</button>
   </div>
 </div>
 
-<style>
-.loading-container {
-  position: fixed;
-  top:0; left:0; width:100%; height:100%;
-  background:#000;
-  display:flex; justify-content:center; align-items:center;
-  flex-direction:column;
-  z-index:9999;
-}
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 
-.numbers {
-  display:flex;
-  gap:5px;
-  font-family:'Schabo Condensed', Arial, sans-serif;
-  font-weight:700;
-  color:#e62727;
-  font-size:clamp(40px,8vw,80px);
-  overflow:hidden;
-}
-
-.number {
-  overflow:hidden;
-  height:1em;
-  width:0.6em;
-  position:relative;
-}
-
-.number-wrap {
-  display:flex;
-  flex-direction:column;
-  position:absolute;
-  top:0;
-  left:0; right:0;
-}
-.number-p {
-  height:1em;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin:0;
-}
-</style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script>
-const milestones = [0, 36, 58, 76, 94, 100];
-const totalDuration = 6; 
-const digit1 = document.querySelector(".number-1 .number-wrap");
-const digit2 = document.querySelector(".number-2 .number-wrap");
-const digit3 = document.querySelector(".number-3 .number-wrap");
+gsap.registerPlugin(SplitText);
 
-// Animate slot-machine for each milestone
-let tl = gsap.timeline({defaults:{ease:"power2.inOut"}});
+let split; // will hold the split instance
+let animation; // will hold the current animation
 
-milestones.forEach((milestone, i) => {
-  tl.to({}, {
-    duration: totalDuration / milestones.length,
-    onUpdate: function() {
-      const hundreds = Math.floor(milestone / 100);
-      const tens = Math.floor((milestone % 100) / 10);
-      const ones = milestone % 10;
+function runAnimation(type) {
+  // revert previous split/animation
+  split && split.revert();
+  animation && animation.revert();
 
-      gsap.to(digit1, {y: -hundreds + "em", duration:0.3});
-      gsap.to(digit2, {y: -tens + "em", duration:0.3});
-      gsap.to(digit3, {y: -ones + "em", duration:0.3});
+  // split text
+  split = SplitText.create(".split", { type: type, autoSplit: true });
+
+  // animate based on type
+  animation = gsap.from(
+    type === "chars" ? split.chars :
+    type === "words" ? split.words :
+    split.lines, {
+      duration: 1,
+      y: 50,
+      autoAlpha: 0,
+      stagger: 0.05,
+      ease: "power3.out"
     }
-  });
-});
+  );
+}
 
-// Fade out loader after completion
-tl.to(".loading-container", {opacity:0, duration:1, onComplete: ()=>{
-  document.querySelector(".loading-container").style.display="none";
-}});
+// buttons
+document.getElementById("charsBtn").addEventListener("click", () => runAnimation("chars"));
+document.getElementById("wordsBtn").addEventListener("click", () => runAnimation("words"));
+document.getElementById("linesBtn").addEventListener("click", () => runAnimation("lines"));
+
+// run initial animation
+runAnimation("chars");
 </script>
+
+</body>
+</html>
