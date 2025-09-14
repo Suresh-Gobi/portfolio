@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   /* cursor: none; */
+  overflow: hidden;
 }
 
 body {
@@ -28,11 +29,13 @@ body {
   align-items: center;
   flex-direction: column;
   z-index: 9999;
+  padding: 20px;
 }
 
 #logo {
-  width: 150px;
-  height: 150px;
+  width: clamp(80px, 25vw, 150px);
+  height: clamp(80px, 25vw, 150px);
+
   background: linear-gradient(
     to bottom,
     rgb(255, 255, 255) 50%,
@@ -44,13 +47,18 @@ body {
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: contain;
   -webkit-mask-position: center;
+
   mask-image: url("../svg/logo.svg");
   mask-repeat: no-repeat;
   mask-size: contain;
   mask-position: center;
+
   -webkit-mask-composite: destination-in;
   mask-composite: intersect;
+
   animation: fill 10s forwards;
+
+  display: block;
 }
 
 @keyframes fill {
@@ -64,24 +72,24 @@ body {
 
 .odometer {
   display: flex;
-  font-size: 60px;
+  font-size: 100px;
   color: #e62727;
   position: fixed;
-  bottom: 0;
-  right: 20px;
+  bottom: 20px;
+  right: 30px;
   z-index: 9999;
 }
 .digit {
   overflow: hidden;
   height: 100px;
-  width: 30px;
+  width: 45px;
   position: relative;
   margin: 0 1px;
 }
 
 .number {
-  font-family: monospace;
-  font-weight: 500;
+  font-family: "Schabo Condensed", Arial, sans-serif;
+  font-weight: 600;
   position: absolute;
   top: 0;
   left: 0;
