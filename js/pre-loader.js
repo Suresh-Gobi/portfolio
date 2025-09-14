@@ -1,47 +1,46 @@
-const logo = document.getElementById("logo");
-      const totalDuration = 5; // total seconds for logo fill
+window.addEventListener("load", () => {
+  const logo = document.getElementById("logo");
+  const totalDuration = 5; // seconds for the logo fill
 
-      // Animate logo fill
-      gsap.to(logo, {
-        duration: totalDuration,
-        backgroundPosition: "bottom",
-        ease: "power2.inOut",
-      });
+  // Animate logo fill dynamically
+  gsap.to(logo, {
+    duration: totalDuration,
+    backgroundPosition: "0% 100%", // animate from top to bottom
+    ease: "power2.inOut",
+  });
 
-      // Odometer animation synced with logo fill
-      const odometer = { value: 0 }; // current number
+  // Slot-machine style number animation
+  const milestones = [10, 36, 58, 76, 99];
 
-      gsap.to(odometer, {
-        value: 100, // final number
-        duration: totalDuration,
-        ease: "power2.inOut",
-        onUpdate: () => {
-          const currentValue = Math.floor(odometer.value);
+  const digit2 = document.querySelector(".number-2 .number-wrap");
+  const digit3 = document.querySelector(".number-3 .number-wrap");
 
-          const hundreds = Math.floor(currentValue / 100);
-          const tens = Math.floor((currentValue % 100) / 10);
-          const ones = currentValue % 10;
+  // Timeline for milestone animation
+  let tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-          gsap.set("#digit-1", { y: -hundreds * 100 });
-          gsap.set("#digit-2", { y: -tens * 100 });
-          gsap.set("#digit-3", { y: -ones * 100 });
+  milestones.forEach((milestone) => {
+    tl.to(
+      {},
+      {
+        duration: totalDuration / milestones.length,
+        onUpdate: function () {
+          const hundreds = Math.floor(milestone / 100);
+          const tens = Math.floor((milestone % 100) / 10);
+          const ones = milestone % 10;
+
+          gsap.to(digit2, { y: -tens + "em", duration: 0.3 });
+          gsap.to(digit3, { y: -ones + "em", duration: 0.3 });
         },
-        onComplete: () => {
-          // Fade out preloader, fade in homepage
-          gsap.to("#preloader", {
-            duration: 1.2,
-            opacity: 0,
-            ease: "power2.inOut",
-            onComplete: () => {
-              document.getElementById("preloader").style.display = "none";
-            },
-          });
+      }
+    );
+  });
 
-          gsap.to("#homepage", {
-            duration: 1.5,
-            opacity: 1,
-            delay: 0.5,
-            ease: "power2.inOut",
-          });
-        },
-      });
+  // Fade out loader after completion
+  tl.to("#preloader", {
+    opacity: 0,
+    duration: 1,
+    onComplete: () => {
+      document.querySelector("#preloader").style.display = "none";
+    },
+  });
+});

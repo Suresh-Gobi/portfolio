@@ -1,107 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SVG Preloader Transition</title>
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-        background: #000;
-        font-family: Arial, sans-serif;
-      }
+<div class="loading-container">
+  <div class="loading-screen">
+    <div class="numbers">
+      <div class="number number-1">
+        <div class="number-wrap">
+          <p class="number-p">0</p>
+          <p class="number-p">1</p>
+        </div>
+      </div>
 
-      /* Preloader container */
-      #preloader {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #000;
-        z-index: 9999;
-      }
+      <div class="number number-2 number-ten-times">
+        <div class="number-wrap">
+          <p class="number-p">0</p>
+          <p class="number-p">1</p>
+          <p class="number-p">2</p>
+          <p class="number-p">3</p>
+          <p class="number-p">4</p>
+          <p class="number-p">5</p>
+          <p class="number-p">6</p>
+          <p class="number-p">7</p>
+          <p class="number-p">8</p>
+          <p class="number-p">9</p>
+        </div>
+      </div>
 
-      /* Logo fill animation box */
-      #logo {
-        width: 200px;
-        height: 200px;
-        background: linear-gradient(to bottom, white 50%, red 50%);
-        background-size: 100% 200%;
-        background-position: top;
-        /* Inline SVG mask (replace with your logo.svg later) */
-        -webkit-mask: url("../svg/logo.svg") no-repeat center / contain;
-        mask: url("../svg/logo.svg") no-repeat center / contain;
-      }
-
-      /* Homepage */
-      #home {
-        min-height: 100vh;
-        background: linear-gradient(to right, #ff416c, #ff4b2b);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        font-size: 48px;
-        font-weight: bold;
-        opacity: 0; /* will fade in */
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Preloader -->
-    <div id="preloader">
-      <div id="logo"></div>
+      <div class="number number-3 number-ten-times">
+        <div class="number-wrap">
+          <p class="number-p">0</p>
+          <p class="number-p">1</p>
+          <p class="number-p">2</p>
+          <p class="number-p">3</p>
+          <p class="number-p">4</p>
+          <p class="number-p">5</p>
+          <p class="number-p">6</p>
+          <p class="number-p">7</p>
+          <p class="number-p">8</p>
+          <p class="number-p">9</p>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <!-- Homepage -->
-    <section id="home">🚀 Welcome to the Home Page!</section>
+<style>
+.loading-container {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background:#000;
+  display:flex; justify-content:center; align-items:center;
+  flex-direction:column;
+  z-index:9999;
+}
 
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script>
-      const logo = document.getElementById("logo");
-      const preloader = document.getElementById("preloader");
-      const home = document.getElementById("home");
+.numbers {
+  display:flex;
+  gap:5px;
+  font-family:'Schabo Condensed', Arial, sans-serif;
+  font-weight:700;
+  color:#e62727;
+  font-size:clamp(40px,8vw,80px);
+  overflow:hidden;
+}
 
-      const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+.number {
+  overflow:hidden;
+  height:1em;
+  width:0.6em;
+  position:relative;
+}
 
-      // Step 1: Fill the logo
-      tl.to(logo, {
-        duration: 2,
-        backgroundPosition: "bottom",
-      })
+.number-wrap {
+  display:flex;
+  flex-direction:column;
+  position:absolute;
+  top:0;
+  left:0; right:0;
+}
+.number-p {
+  height:1em;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:0;
+}
+</style>
 
-        // Step 2: Scale preloader (mask) to reveal homepage
-        .to(
-          preloader,
-          {
-            scale: 3000,
-            duration: 2, // slower zoom for smoothness
-            ease: "power3.inOut",
-          },
-          "+=0.2"
-        )
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+const milestones = [0, 36, 58, 76, 94, 100];
+const totalDuration = 6; 
+const digit1 = document.querySelector(".number-1 .number-wrap");
+const digit2 = document.querySelector(".number-2 .number-wrap");
+const digit3 = document.querySelector(".number-3 .number-wrap");
 
-        // Step 3: Fade in homepage content
-        .to(
-          home,
-          {
-            opacity: 1,
-            duration: 0.5,
-            ease: "power2.inOut",
-          },
-          "-=1.5"
-        )
+// Animate slot-machine for each milestone
+let tl = gsap.timeline({defaults:{ease:"power2.inOut"}});
 
-        // Step 4: Remove preloader after animation
-        .to(preloader, {
-          opacity: 0,
-          duration: 0.5,
-          ease: "power1.out",
-          onComplete: () => preloader.remove(),
-        });
-    </script>
-  </body>
-</html>
+milestones.forEach((milestone, i) => {
+  tl.to({}, {
+    duration: totalDuration / milestones.length,
+    onUpdate: function() {
+      const hundreds = Math.floor(milestone / 100);
+      const tens = Math.floor((milestone % 100) / 10);
+      const ones = milestone % 10;
+
+      gsap.to(digit1, {y: -hundreds + "em", duration:0.3});
+      gsap.to(digit2, {y: -tens + "em", duration:0.3});
+      gsap.to(digit3, {y: -ones + "em", duration:0.3});
+    }
+  });
+});
+
+// Fade out loader after completion
+tl.to(".loading-container", {opacity:0, duration:1, onComplete: ()=>{
+  document.querySelector(".loading-container").style.display="none";
+}});
+</script>
