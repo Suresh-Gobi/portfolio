@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const logo = document.getElementById("logo");
   const totalDuration = 5; // seconds for the logo fill
 
@@ -11,20 +11,18 @@ window.addEventListener("load", () => {
 
   // Slot-machine style number animation
   const milestones = [10, 36, 58, 76, 99];
-
   const digit2 = document.querySelector(".number-2 .number-wrap");
   const digit3 = document.querySelector(".number-3 .number-wrap");
 
-  // Timeline for milestone animation
-  let tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+  // Timeline for preloader animation
+  let preloaderTl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
   milestones.forEach((milestone) => {
-    tl.to(
+    preloaderTl.to(
       {},
       {
         duration: totalDuration / milestones.length,
         onUpdate: function () {
-          const hundreds = Math.floor(milestone / 100);
           const tens = Math.floor((milestone % 100) / 10);
           const ones = milestone % 10;
 
@@ -35,12 +33,32 @@ window.addEventListener("load", () => {
     );
   });
 
-  // Fade out loader after completion
-  tl.to("#preloader", {
+  // Fade out preloader after completion and start hero animations
+  preloaderTl.to("#preloader", {
     opacity: 0,
     duration: 1,
     onComplete: () => {
-      document.querySelector("#preloader").style.display = "none";
+      document.getElementById("preloader").style.display = "none";
+      startHeroAnimations(); // trigger hero animations
     },
   });
+
+  // --- Hero section animations (paused until preloader finishes) ---
+  const heroTl = gsap.timeline({ paused: true });
+
+  // Profile header animation
+  heroTl.from(".profile-pic", { scale: 0, opacity: 0, duration: 0.8, ease: "back.out(1.7)" });
+  heroTl.from(".profile-header h2", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5");
+
+  // Hero main title animation
+  heroTl.from(".hero-content h1", { y: 50, opacity: 0, duration: 1 });
+  heroTl.from(".hero-content h1 span", { scale: 0, opacity: 0, duration: 0.5 }, "-=0.5");
+
+  // Function to start hero animations
+  function startHeroAnimations() {
+    heroTl.play();
+    if (typeof startTextAnimation === "function") {
+      startTextAnimation(); // optional additional animations
+    }
+  }
 });

@@ -1,85 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GSAP SplitText Animation</title>
-<style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #111;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP SplitText Animation</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #111;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        gap: 40px;
+      }
 
-  .split {
-    font-size: clamp(2rem, 6vw, 4rem);
-    line-height: 1.2;
-  }
+      .split {
+        font-size: clamp(2rem, 6vw, 4rem);
+        line-height: 1.2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="split" id="charsText">Suresh Gobi - Animate by Characters!</div>
+    <div class="split" id="wordsText">Suresh Gobi - Animate by Words!</div>
+    <div class="split" id="linesText">Suresh Gobi - Animate by Lines!</div>
 
-  button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-</style>
-</head>
-<body>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script>
+      gsap.registerPlugin(SplitText);
 
-<div>
-  <div class="split">Suresh Gobi - Animate Me!</div>
-  <div>
-    <button id="charsBtn">Characters</button>
-    <button id="wordsBtn">Words</button>
-    <button id="linesBtn">Lines</button>
-  </div>
-</div>
+      window.onload = () => {
+        function animateText(selector, type, delay = 0) {
+          const split = new SplitText(selector, { type: type });
+          gsap.from(
+            type === "chars"
+              ? split.chars
+              : type === "words"
+              ? split.words
+              : split.lines,
+            {
+              duration: 1,
+              y: 50,
+              autoAlpha: 0,
+              stagger: 0.05,
+              ease: "power3.out",
+              delay: delay,
+            }
+          );
+        }
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
-
-<script>
-gsap.registerPlugin(SplitText);
-
-let split; // will hold the split instance
-let animation; // will hold the current animation
-
-function runAnimation(type) {
-  // revert previous split/animation
-  split && split.revert();
-  animation && animation.revert();
-
-  // split text
-  split = SplitText.create(".split", { type: type, autoSplit: true });
-
-  // animate based on type
-  animation = gsap.from(
-    type === "chars" ? split.chars :
-    type === "words" ? split.words :
-    split.lines, {
-      duration: 1,
-      y: 50,
-      autoAlpha: 0,
-      stagger: 0.05,
-      ease: "power3.out"
-    }
-  );
-}
-
-// buttons
-document.getElementById("charsBtn").addEventListener("click", () => runAnimation("chars"));
-document.getElementById("wordsBtn").addEventListener("click", () => runAnimation("words"));
-document.getElementById("linesBtn").addEventListener("click", () => runAnimation("lines"));
-
-// run initial animation
-runAnimation("chars");
-</script>
-
-</body>
+        // Animate all on load with slight delays
+        animateText("#charsText", "chars", 0);
+        animateText("#wordsText", "words", 0.5);
+        animateText("#linesText", "lines", 1);
+      };
+    </script>
+  </body>
 </html>
