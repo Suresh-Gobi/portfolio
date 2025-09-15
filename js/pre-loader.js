@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("no-scroll");
   const logo = document.getElementById("logo");
   const totalDuration = 5; // seconds for the logo fill
 
@@ -40,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     onComplete: () => {
       document.getElementById("preloader").style.display = "none";
       startHeroAnimations(); // trigger hero animations
+      document.body.classList.remove("no-scroll");
     },
   });
 
@@ -47,13 +49,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroTl = gsap.timeline({ paused: true });
 
   // Profile header animation
-  heroTl.from(".profile-pic", { scale: 0, opacity: 0, duration: 0.8, ease: "back.out(1.7)" });
-  heroTl.from(".profile-header h2", { y: 30, opacity: 0, duration: 0.8 }, "-=0.5");
+  heroTl.from(".profile-pic", {
+    scale: 0,
+    opacity: 0,
+    duration: 0.8,
+    ease: "back.out(1.7)",
+  });
+  heroTl.from(
+    ".profile-header h2",
+    { y: 30, opacity: 0, duration: 0.8 },
+    "-=0.5"
+  );
 
   // Hero main title animation
   heroTl.from(".hero-content h1", { y: 50, opacity: 0, duration: 1 });
-  heroTl.from(".hero-content h1 span", { scale: 0, opacity: 0, duration: 0.5 }, "-=0.5");
+  heroTl.from(
+    ".hero-content h1 span",
+    { scale: 0, opacity: 0, duration: 0.5 },
+    "-=0.5"
+  );
 
+  // description animation
+  heroTl.from("#linesText1", { y: 50, opacity: 0, duration: 1 });
+  heroTl.from("#linesText2", { y: 50, opacity: 0, duration: 0.5 }, "-=0.5");
+
+
+  
   // Function to start hero animations
   function startHeroAnimations() {
     heroTl.play();
