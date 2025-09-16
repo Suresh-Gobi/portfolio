@@ -74,7 +74,18 @@ document.addEventListener("DOMContentLoaded", () => {
   heroTl.from("#linesText2", { y: 50, opacity: 0, duration: 0.5 }, "-=0.5");
 
 
-  
+  // Animate all nav links together
+  heroTl.from(
+    ".nav-menu",
+    {
+      y: 30,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.2, // makes them appear one after another
+    },
+    "-=0.3"
+  );
+
   // Function to start hero animations
   function startHeroAnimations() {
     heroTl.play();
