@@ -80,14 +80,13 @@
           </ul>
 
           <!-- Hamburger button for mobile -->
-            <div class="hamburger" id="hamburger">
-            Menu
-            </div>
+          <div class="hamburger" id="hamburger">Menu</div>
         </div>
         <div class="nav-line"></div>
 
         <!-- Mobile Overlay Menu -->
         <div class="mobile-menu" id="mobileMenu">
+          <span class="menu-close" id="menuClose">&times;</span>
           <div class="menu-inner">
             <div class="menu-nav">
               <h5>Navigation</h5>
@@ -101,6 +100,7 @@
             <div class="menu-socials">
               <h5>Socials</h5>
               <div class="stripe"></div>
+
               <ul>
                 <li><a href="#" target="_blank">Instagram</a></li>
                 <li><a href="#" target="_blank">Twitter</a></li>
@@ -201,12 +201,18 @@
     <script src="./js/map.js"></script>
     <script src="./js/splitText.js"></script>
     <script src="./js/pre-loader.js"></script>
+
     <script>
-      const hamburger = document.getElementById("hamburger");
       const mobileMenu = document.getElementById("mobileMenu");
+      const menuClose = document.getElementById("menuClose");
+      const hamburger = document.querySelector(".hamburger");
 
       hamburger.addEventListener("click", () => {
-        mobileMenu.classList.toggle("active");
+        mobileMenu.classList.add("active");
+      });
+
+      menuClose.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
       });
     </script>
   </body>

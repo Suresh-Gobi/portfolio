@@ -448,35 +448,46 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #111;
+  background-color: #202020;
   color: #fff;
   display: none;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   z-index: 9999;
 }
 
 .mobile-menu.active {
   display: flex;
 }
-
+.menu-inner {
+  margin-top: 150px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  margin-left: 30px;
+}
 .mobile-menu h5 {
-  font-size: 14px;
+  color: #808080;
+  font-weight: 100;
+  font-size: 12px;
+  text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 10px;
 }
 
 .mobile-menu .stripe {
-  height: 2px;
-  width: 50px;
-  background: #fff;
+  height: 1px;
+  width: 80%;
+  background: #ffffff9a;
   margin-bottom: 20px;
 }
 
 .mobile-menu ul {
   list-style: none;
-  text-align: center;
+  text-align: left;
   padding: 0;
 }
 
@@ -487,7 +498,7 @@ p {
 .mobile-menu ul li a {
   text-decoration: none;
   color: #fff;
-  font-size: 24px;
+  font-size: 36px;
   text-transform: uppercase;
   transition: color 0.3s ease;
 }
@@ -496,11 +507,52 @@ p {
   color: #e62727;
 }
 
+/* Make social links horizontal */
+.menu-socials ul {
+  display: flex;
+  flex-direction: row; 
+  gap: 15px; 
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.menu-socials ul li {
+  margin: 0; 
+}
+
+.menu-socials ul li a {
+  font-size: 16px; 
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.menu-socials ul li a:hover {
+  color: #e62727;
+}
+
+.menu-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 36px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10000;
+  transition: color 0.3s ease;
+}
+
+.menu-close:hover {
+  color: #e62727;
+}
+
 /* Show hamburger and hide desktop menu on mobile */
 @media (max-width: 768px) {
   .logo img {
-  height: 30px;
-}
+    height: 30px;
+  }
   .nav-menu {
     display: none;
   }
