@@ -54,6 +54,7 @@ body::before {
   width: 100%;
   height: 100%;
   background: #f3f2ec;
+  overflow: hidden !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,6 +146,89 @@ body::before {
   justify-content: center;
   align-items: center;
   margin: 0;
+}
+
+/* Small devices (phones, 0-480px) */
+@media (max-width: 480px) {
+  #preloader {
+    padding: 15px;
+  }
+
+  #logo {
+    width: clamp(60px, 35vw, 120px);
+    height: clamp(60px, 35vw, 120px);
+  }
+
+  .numbers {
+    font-size: clamp(30px, 12vw, 60px);
+    gap: 4px;
+    bottom: 15px;
+    right: 10px;
+  }
+
+  .number {
+    width: 45px;
+    height: 0.9em;
+  }
+
+  .number-wrap p {
+    font-size: clamp(30px, 12vw, 60px);
+  }
+}
+
+/* Medium devices (phones & small tablets, 481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  #preloader {
+    padding: 18px;
+  }
+
+  #logo {
+    width: clamp(70px, 30vw, 140px);
+    height: clamp(70px, 30vw, 140px);
+  }
+
+  .numbers {
+    font-size: clamp(35px, 10vw, 70px);
+    gap: 5px;
+    bottom: 18px;
+    right: 15px;
+  }
+
+  .number {
+    width: 50px;
+    height: 1em;
+  }
+
+  .number-wrap p {
+    font-size: clamp(35px, 10vw, 70px);
+  }
+}
+
+/* Large tablets (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #preloader {
+    padding: 20px;
+  }
+
+  #logo {
+    width: clamp(80px, 25vw, 150px);
+    height: clamp(80px, 25vw, 150px);
+  }
+
+  .numbers {
+    font-size: clamp(40px, 8vw, 80px);
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .number {
+    width: 55px;
+    height: 1em;
+  }
+
+  .number-wrap p {
+    font-size: clamp(40px, 8vw, 80px);
+  }
 }
 
 /*------------------ CUSTOM CURSOR ----------------- */
@@ -336,6 +420,95 @@ p {
   display: none;
 }
 
+/* Hamburger Button */
+.hamburger {
+  font-size: 16px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #111;
+  color: #fff;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.mobile-menu.active {
+  display: flex;
+}
+
+.mobile-menu h5 {
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.mobile-menu .stripe {
+  height: 2px;
+  width: 50px;
+  background: #fff;
+  margin-bottom: 20px;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+}
+
+.mobile-menu ul li {
+  margin: 15px 0;
+}
+
+.mobile-menu ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 24px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.mobile-menu ul li a:hover {
+  color: #e62727;
+}
+
+/* Show hamburger and hide desktop menu on mobile */
+@media (max-width: 768px) {
+  .logo img {
+  height: 30px;
+}
+  .nav-menu {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+}
+
 /* ----------------- HERO SECTION ----------------- */
 .hero {
   height: 100vh;
@@ -404,8 +577,16 @@ p {
   font-size: 28px;
   font-weight: 100;
 }
+
+.hero-text p {
+  font-family: "Tw Cen MT", sans-serif;
+  text-align: right;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 100;
+}
 /*------------------ NEXT SECTION ----------------- */
-.horizontal-wrapper {
+/* .horizontal-wrapper {
   display: flex;
   height: 100vh;
   width: 400vw;
@@ -430,7 +611,7 @@ p {
   color: #111;
   z-index: 2;
   position: relative;
-}
+} */
 
 /*------------------ PORTFOLIO SECTION ----------------- */
 .content-wrapper {
