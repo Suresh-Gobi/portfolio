@@ -68,48 +68,49 @@
     <div id="homepage">
       <nav class="navbar">
         <div class="nav-container">
-          <div class="logo">
-            <img src="img/logo.png" alt="Suresh Gobi Logo" />
-          </div>
-
-          <!-- Desktop Menu -->
-          <ul class="nav-menu" id="wordsText">
+          <div class="logo"><img src="img/logo.png" alt="Logo" /></div>
+          <ul class="nav-menu">
             <li><a href="#">Work</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
           </ul>
-
-          <!-- Hamburger button for mobile -->
-          <div class="hamburger" id="hamburger">Menu</div>
+          <div class="menu-trigger" id="menuTrigger">
+            <span class="menu-label" id="hamburgerBtn">Menu</span>
+          </div>
         </div>
         <div class="nav-line"></div>
+      </nav>
 
-        <!-- Mobile Overlay Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-          <span class="menu-close" id="menuClose">&times;</span>
-          <div class="menu-inner">
-            <div class="menu-nav">
-              <h5>Navigation</h5>
-              <div class="stripe"></div>
-              <ul>
-                <li><a href="#">Work</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-            </div>
-            <div class="menu-socials">
-              <h5>Socials</h5>
-              <div class="stripe"></div>
-
-              <ul>
-                <li><a href="#" target="_blank">Instagram</a></li>
-                <li><a href="#" target="_blank">Twitter</a></li>
-                <li><a href="#" target="_blank">LinkedIn</a></li>
-              </ul>
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-top">
+          <div class="menu-trigger" id="menuTriggerInside">
+            <div class="btn btn-hamburger" id="hamburgerInside">
+              <div class="btn-click"><div class="btn-bars"></div></div>
             </div>
           </div>
         </div>
-      </nav>
+        <div class="menu-inner">
+          <div class="menu-nav">
+            <h5>Navigation</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Work</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="menu-socials">
+            <h5>Socials</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
       <div class="horizontal-wrapper">
         <div class="panel hero">
@@ -203,16 +204,51 @@
     <script src="./js/pre-loader.js"></script>
 
     <script>
-      const mobileMenu = document.getElementById("mobileMenu");
-      const menuClose = document.getElementById("menuClose");
-      const hamburger = document.querySelector(".hamburger");
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburgerBtn = document.getElementById("hamburgerBtn");
+        const hamburgerInside = document.getElementById("hamburgerInside");
+        const mobileMenu = document.getElementById("mobileMenu");
+        const menuItems = mobileMenu.querySelectorAll("ul li a");
 
-      hamburger.addEventListener("click", () => {
-        mobileMenu.classList.add("active");
-      });
+        let menuTimeline = gsap.timeline({ paused: true, reversed: true });
 
-      menuClose.addEventListener("click", () => {
-        mobileMenu.classList.remove("active");
+        menuTimeline
+          .to(mobileMenu, { visibility: "visible", opacity: 1, duration: 0.2 })
+          .to(mobileMenu, {
+            clipPath: "circle(150% at 100% 0%)",
+            duration: 1.2,
+            ease: "power4.inOut",
+          })
+          .from(
+            menuItems,
+            {
+              opacity: 0,
+              y: 40,
+              stagger: 0.12,
+              duration: 0.6,
+              ease: "power3.out",
+            },
+            "-=0.6"
+          );
+
+        function toggleMenu() {
+          if (menuTimeline.reversed()) {
+            hamburgerBtn.classList.add("active");
+            hamburgerInside.classList.add("active");
+            menuTimeline.play();
+          } else {
+            hamburgerBtn.classList.remove("active");
+            hamburgerInside.classList.remove("active");
+            menuTimeline.reverse();
+          }
+        }
+
+        document
+          .getElementById("menuTrigger")
+          .addEventListener("click", toggleMenu);
+        document
+          .getElementById("menuTriggerInside")
+          .addEventListener("click", toggleMenu);
       });
     </script>
   </body>
