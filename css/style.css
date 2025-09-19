@@ -1,6 +1,7 @@
 :root {
-  --color-blue: #1e90ff;
-  --color-dark: #202020;
+  --color-white: #ffffff;
+  --color-blue: #e62727;
+  --color-dark: #e62727;
   --color-border-light: #ffffff50;
 }
 
@@ -21,7 +22,7 @@
 
 body {
   font-family: "Tw Cen MT", sans-serif;
-  color: #fff;
+  color: var(--color-white);
   overflow-x: hidden;
   background: url("../img/bg-01.jpg") center/cover no-repeat fixed;
   position: relative;
@@ -504,8 +505,8 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #202020;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   display: flex;
   flex-direction: column;
   z-index: 9999;
@@ -537,7 +538,7 @@ p {
 .mobile-menu .stripe {
   height: 1px;
   width: 80%;
-  background: #ffffff9a;
+  background: #0505059a;
   margin-bottom: 20px;
 }
 .mobile-menu ul {
@@ -549,7 +550,7 @@ p {
 }
 .mobile-menu ul li a {
   text-decoration: none;
-  color: #fff;
+  color: #202020;
   font-size: 36px;
   text-transform: uppercase;
   transition: color 0.3s;
@@ -559,7 +560,7 @@ p {
 }
 
 .menu-socials {
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 .menu-socials h5 {
@@ -581,7 +582,7 @@ p {
 
 .menu-socials ul li a {
   font-size: 16px;
-  color: #fff;
+  color: #202020;
   text-decoration: none;
   text-transform: uppercase;
   transition: color 0.3s ease;
@@ -673,6 +674,17 @@ p {
   font-size: 20px;
   font-weight: 100;
 }
+
+.credit {
+  position: fixed;
+  bottom: -10;
+  right: 0;
+  margin: 0;
+  color: var(--color-white);
+  font-size: 16px;
+  z-index: 1000;
+}
+
 /*------------------ NEXT SECTION ----------------- */
 /* .horizontal-wrapper {
   display: flex;
