@@ -686,10 +686,10 @@ p {
 }
 
 /*------------------ NEXT SECTION ----------------- */
-/* .horizontal-wrapper {
+.horizontal-wrapper {
   display: flex;
   height: 100vh;
-  width: 400vw;
+  width: 100vw;
   transform: translateX(0);
   transition: transform 0.3s ease-out;
 }
@@ -704,14 +704,31 @@ p {
   color: white;
 }
 
-.panel2,
-.panel3,
-.panel4 {
+/* Default hidden state */
+.panel2 {
+  position: relative;
+  overflow: hidden;
   background-color: rgba(255, 255, 255, 0.438);
   color: #111;
-  z-index: 2;
+  opacity: 0;
+  clip-path: circle(0% at 100% 50%); /* start from right center */
+}
+
+/* panel3 can use similar if needed */
+.panel3 {
   position: relative;
-} */
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.438);
+  color: #111;
+  opacity: 0;
+  clip-path: circle(0% at 0% 50%); /* start from left center if desired */
+}
+
+/* optional smooth transition fallback */
+.panel2, .panel3 {
+  transition: opacity 0.5s ease, clip-path 1.2s ease-in-out;
+}
+
 
 /*------------------ PORTFOLIO SECTION ----------------- */
 .content-wrapper {
