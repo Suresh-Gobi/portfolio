@@ -281,21 +281,32 @@ nav a:focus ~ .cursor-text {
 
 /* ----------------- TYPOGRAPHY ----------------- */
 h1 {
-  font-family: "Palatino Linotype", serif;
-  color: #ffffff;
-  font-size: 100px;
+  font-family: "FormulaCondensed", Impact, sans-serif;
+  font-weight: 200 !important;
+  color: #e62727;
+  font-size: 150px;
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 0.84; /* tighter spacing */
+  margin: 0; /* reset spacing */
 }
 
 h1 span {
   font-size: 57px;
+  color: #e62727; /* applies to & */
 }
 
+h1 .highlight {
+  font-size: 150px;
+  color: #ffffff; /* override red for Developer */
+}
+
+
 h2 {
-  font-family: "Palatino Linotype", serif;
+  font-family: "FormulaCondensed", Impact, sans-serif;
+  font-weight: 100 !important;
   color: #ffffff;
-  font-size: 36px;
+  font-weight: bolder;
+  font-size: 38px;
   text-transform: uppercase;
 }
 
@@ -373,7 +384,7 @@ p {
 }
 
 .logo img {
-  height: 40px;
+  height: 30px;
 }
 .nav-menu {
   display: flex;
@@ -381,10 +392,11 @@ p {
   list-style: none;
 }
 .nav-menu li a {
+  font-family: "Inter", sans-serif;
   text-decoration: none;
   color: #fff;
   text-transform: uppercase;
-  font-size: 18px;
+  font-size: 14px;
   transition: transform 0.3s;
 }
 .nav-menu li a:hover {
@@ -630,26 +642,29 @@ p {
 .hero-text {
   position: absolute;
   right: 50px;
-  top: 65%;
+  top: 73%;
   transform: translateY(-50%);
   max-width: 600px;
   text-align: justify;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .hero-text h4 {
-  font-family: "Palatino Linotype", serif;
+  font-family: "Inter", sans-serif;
   color: #ffffff;
-  font-size: 42px;
+  font-size: 38px;
   font-weight: 100;
   /* text-transform: uppercase; */
 }
 
 .hero-text h3 {
-  font-family: "Tw Cen MT", sans-serif;
-  color: #dddddd;
-  font-size: 28px;
+  font-family: "Inter", sans-serif;
+  font-weight: 50 !important;
+  color: #ffffff;
+  font-size: 18px;
   font-weight: 100;
+  text-transform: uppercase;
+  
 }
 
 .hero-text p {
@@ -705,7 +720,7 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.664);
+  background-color: rgba(22, 22, 22, 0.829);
   pointer-events: none;
   z-index: 0;
 }
