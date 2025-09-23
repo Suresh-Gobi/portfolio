@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   </head>
   <body>
-    <!-- <div id="preloader">
+    <div id="preloader">
       <div id="logo"></div>
 
       <div class="loading-container">
@@ -52,7 +52,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <!-- <div class="custom-cursor">
       <div class="cursor-circle">
@@ -121,7 +121,9 @@
           <div class="hero-content">
             <div class="profile-header">
               <!-- <img src="img/propic.png" alt="Suresh Gobi" class="profile-pic" /> -->
-              <h2 id="wordsText"><span style="color: #e62727;">#</span>Suresh Gobi</h2>
+              <h2 id="wordsText">
+                <span style="color: #e62727">#</span>Suresh Gobi
+              </h2>
             </div>
 
             <h1 id="wordsText">
@@ -198,88 +200,6 @@
 
     <script src="js/main.js"></script>
     <script src="js/custom-cursor.js"></script>
-    <script src="js/bg-image.js"></script>
     <script src="./js/map.js"></script>
-    <script src="./js/splitText.js"></script>
-    <script src="./js/pre-loader.js"></script>
-
-    <script>
-      gsap.registerPlugin(ScrollTrigger);
-
-      // PANEL 2 reveal (top-right)
-      gsap.to(".panel2", {
-        scrollTrigger: {
-          trigger: "#container",
-          start: "top top",
-          end: "33% top",
-          scrub: 1.2,
-        },
-        clipPath: "circle(150% at 100% 0%)",
-        opacity: 1,
-        ease: "expo.inOut",
-      });
-
-      // PANEL 3 reveal (bottom-left)
-      gsap.to(".panel3", {
-        scrollTrigger: {
-          trigger: "#container",
-          start: "33% top",
-          end: "66% top",
-          scrub: 1.2,
-        },
-        clipPath: "circle(150% at 0% 100%)",
-        opacity: 1,
-        ease: "expo.inOut",
-      });
-    </script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const hamburgerBtn = document.getElementById("hamburgerBtn");
-        const hamburgerInside = document.getElementById("hamburgerInside");
-        const mobileMenu = document.getElementById("mobileMenu");
-        const menuItems = mobileMenu.querySelectorAll("ul li a");
-
-        let menuTimeline = gsap.timeline({ paused: true, reversed: true });
-
-        menuTimeline
-          .to(mobileMenu, { visibility: "visible", opacity: 1, duration: 0.2 })
-          .to(mobileMenu, {
-            clipPath: "circle(150% at 100% 0%)",
-            duration: 1.2,
-            ease: "power4.inOut",
-          })
-          .from(
-            menuItems,
-            {
-              opacity: 0,
-              y: 40,
-              stagger: 0.12,
-              duration: 0.6,
-              ease: "power3.out",
-            },
-            "-=0.6"
-          );
-
-        function toggleMenu() {
-          if (menuTimeline.reversed()) {
-            hamburgerBtn.classList.add("active");
-            hamburgerInside.classList.add("active");
-            menuTimeline.play();
-          } else {
-            hamburgerBtn.classList.remove("active");
-            hamburgerInside.classList.remove("active");
-            menuTimeline.reverse();
-          }
-        }
-
-        document
-          .getElementById("menuTrigger")
-          .addEventListener("click", toggleMenu);
-        document
-          .getElementById("menuTriggerInside")
-          .addEventListener("click", toggleMenu);
-      });
-    </script>
   </body>
 </html>
