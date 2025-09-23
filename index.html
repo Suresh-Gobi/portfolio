@@ -113,8 +113,10 @@
         </div>
       </div>
 
-      <div class="horizontal-wrapper">
-        <div class="panel hero">
+      <div id="container"></div>
+
+      <div class="panel panel1">
+        <div class="hero">
           <div class="hero-content">
             <div class="profile-header">
               <img src="img/propic.png" alt="Suresh Gobi" class="profile-pic" />
@@ -140,13 +142,9 @@
             <p class="credit" id="linesText2">&copy; Coded by Gobi</p>
           </div>
         </div>
-
-        <div class="panel panel2">
-          <div class="content-wrapper" id="portfolio-container"></div>
-        </div>
-        <div class="panel panel3">Project 2</div>
-        <div class="panel panel4">Project 3</div>
       </div>
+      <div class="panel panel2">Panel 2</div>
+      <div class="panel panel3">Panel 3</div>
 
       <!-- Modal -->
       <div id="portfolio-modal" class="modal">
@@ -203,6 +201,35 @@
     <script src="./js/splitText.js"></script>
     <script src="./js/pre-loader.js"></script>
 
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      // PANEL 2 reveal (top-right)
+      gsap.to(".panel2", {
+        scrollTrigger: {
+          trigger: "#container",
+          start: "top top",
+          end: "33% top",
+          scrub: 1.2,
+        },
+        clipPath: "circle(150% at 100% 0%)",
+        opacity: 1,
+        ease: "expo.inOut",
+      });
+
+      // PANEL 3 reveal (bottom-left)
+      gsap.to(".panel3", {
+        scrollTrigger: {
+          trigger: "#container",
+          start: "33% top",
+          end: "66% top",
+          scrub: 1.2,
+        },
+        clipPath: "circle(150% at 0% 100%)",
+        opacity: 1,
+        ease: "expo.inOut",
+      });
+    </script>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {

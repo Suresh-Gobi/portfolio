@@ -24,10 +24,7 @@ body {
   font-family: "Tw Cen MT", sans-serif;
   color: var(--color-white);
   overflow-x: hidden;
-  background: url("../img/bg-01.jpg") center/cover no-repeat fixed;
-  position: relative;
-  transition: background-image 1s ease-in-out;
-  background-blend-mode: overlay;
+
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -39,18 +36,6 @@ body::-webkit-scrollbar {
 
 body.no-scroll {
   overflow: hidden;
-}
-
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.664);
-  pointer-events: none;
-  z-index: 0;
 }
 
 /*---------preloader---------*/
@@ -686,49 +671,56 @@ p {
 }
 
 /*------------------ NEXT SECTION ----------------- */
-.horizontal-wrapper {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  transform: translateX(0);
-  transition: transform 0.3s ease-out;
+#container {
+  height: 300vh; /* scrolling space */
+  width: 100%;
 }
 
 .panel {
-  flex: 0 0 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   font-size: 3rem;
   color: white;
+  pointer-events: none;
 }
 
-/* Default hidden state */
+.panel1 {
+  background: url("../img/bg-01.jpg") center/cover no-repeat fixed;
+  position: fixed;
+  transition: background-image 1s ease-in-out;
+  background-blend-mode: overlay;
+  z-index: 1;
+}
+
+.panel1::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.664);
+  pointer-events: none;
+  z-index: 0;
+}
 .panel2 {
-  position: relative;
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.438);
-  color: #111;
+  background: #ffffff;
+  z-index: 2;
   opacity: 0;
-  clip-path: circle(0% at 100% 50%); /* start from right center */
+  clip-path: circle(0% at 100% 0%); /* start from top-right */
 }
-
-/* panel3 can use similar if needed */
 .panel3 {
-  position: relative;
-  overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.438);
-  color: #111;
+  background: #555;
+  z-index: 3;
   opacity: 0;
-  clip-path: circle(0% at 0% 50%); /* start from left center if desired */
+  clip-path: circle(0% at 0% 100%); /* start from bottom-left */
 }
-
-/* optional smooth transition fallback */
-.panel2, .panel3 {
-  transition: opacity 0.5s ease, clip-path 1.2s ease-in-out;
-}
-
 
 /*------------------ PORTFOLIO SECTION ----------------- */
 .content-wrapper {

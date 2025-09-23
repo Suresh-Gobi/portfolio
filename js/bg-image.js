@@ -8,7 +8,7 @@ const bgImages = [
   {desktop: "img/bg-03.jpg", mobile: "img/bg-03-small.jpg"}
 ];
 
-const hero = document.querySelector("body");
+const hero = document.querySelector(".panel1");
 
 function preloadImage(src) {
   return new Promise((resolve) => {
