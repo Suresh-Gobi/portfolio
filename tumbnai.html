@@ -3,319 +3,183 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title>News Cards</title>
+    <title>Portfolio Layout</title>
     <style>
-      .content-wrapper {
-        margin: 0 auto;
-        max-width: 1200px;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: center;
-        padding: 0.5rem;
-      }
-
-      .news-card {
-        margin: 0.25rem;
-        position: relative;
-        height: 10rem;
-        overflow: hidden;
-        flex: 1;
-        min-width: 250px;
-        max-width: 300px;
-      }
-
-      .news-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0) 50%,
-          rgba(0, 0, 0, 0.7) 100%
-        );
-        z-index: 0;
-      }
-
-      .news-card__card-link {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-      }
-
-      .news-card__image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 3s ease;
-        z-index: -1;
-      }
-      .news-card__text-wrapper {
-        position: absolute;
-        bottom: 0px;
-        padding: 1rem;
-        color: white;
-        transition: background-color 1.5s ease;
-      }
-
-      .news-card__title {
-        margin-bottom: 0.5rem;
-        transition: color 1s ease;
-      }
-
-      .news-card__post-date {
-        font-size: 0.7rem;
-        margin-bottom: 1rem;
-        color: #ccc;
-      }
-
-      .news-card__details-wrapper {
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: max-height 1.5s ease, opacity 1s ease;
-      }
-
-      .news-card__excerpt {
-        font-weight: 300;
-        font-size: 0.9rem;
-      }
-
-      @media (min-width: 900px) {
-        .news-card {
-          height: 14rem;
-        }
-
-        .news-card:hover .news-card__image {
-          transform: scale(1.1);
-        }
-      }
-      /*---- MODAL ----*/
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        padding: 1rem;
-        box-sizing: border-box;
-        overflow-y: auto;
-      }
-
-      .modal-content {
-        background-color: #fff;
-        margin: auto;
+      body {
+        font-family: sans-serif;
+        background-color: #e5e5e5;
         padding: 2rem;
-        border-radius: 8px;
-        max-width: 100%;
-        max-height: none;
-        overflow: visible;
+        color: #333;
       }
 
-      .modal-body {
+      .heading {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        color: #1a1a1a;
+      }
+
+      .portfolio-grid {
+        margin-top: 150px;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 2fr 3fr;
+        height: 50vh;
+      }
+
+      .main-card {
+        grid-column: 1 / span 1;
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .side-cards {
+        display: grid;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
       }
-      .modal-left {
-        flex: 1;
-        min-width: 250px;
-      }
 
-      .modal-right {
-        flex: 1;
-        min-width: 250px;
+      .card {
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
         display: flex;
         flex-direction: column;
-        align-items: center;
-      }
-      .modal-close {
-        position: absolute;
-        top: 2rem;
-        right: 3rem;
-        font-size: 2rem;
-        cursor: pointer;
       }
 
-      #modal-images img {
-        width: 100%;
-        height: auto;
-        margin: 0.5rem 0;
-        display: block;
-        object-fit: contain;
-      }
-
-      /*---- BTN --*/
-
-      .button-1 {
-        background-color: #405ff2;
-        border-radius: 20px;
-        border-style: none;
-        box-sizing: border-box;
-        color: #ffffff;
-        cursor: pointer;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 500;
-        height: 40px;
-        line-height: 20px;
-        list-style: none;
-        margin: 0;
-        outline: none;
-        padding: 10px 16px;
+      .card-image-container {
         position: relative;
-        text-align: center;
-        text-decoration: none;
-        transition: color 100ms;
-        vertical-align: baseline;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-      }
-      .modal-buttons,
-      #modal-skills,
-      #modal-description {
-        margin-bottom: 50px;
-      }
-      #modal-github {
-        font-size: 1.5rem;
-        color: #333;
-        margin-left: 1rem;
-        text-decoration: none;
+        flex-grow: 1; /* Make image container fill available space */
+        overflow: hidden;
       }
 
-      #modal-github:hover {
-        color: #000;
+      .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures images fill their container without distortion */
+        display: block;
       }
 
-      .modal-meta {
+      .card-text {
+        padding: 1rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 1rem;
-        margin-bottom: 2rem;
+        font-size: 1rem;
+        flex-shrink: 0;
       }
 
-      hr {
-        margin: 1rem 0;
-        opacity: 0.3;
+      .card-title {
+        font-weight: bold;
       }
 
-      .modal-meta p {
-        margin: 0;
+      .card-category {
         font-size: 0.9rem;
-        color: #555;
+        color: #777;
       }
 
-      #modal-company {
-        color: #333;
-        font-size: 0.95rem;
+      .year-badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        background-color: #000;
+        color: #fff;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+        font-weight: bold;
+        border-radius: 4px;
       }
 
-      #modal-company .company-name {
-        color: #405ff2;
-        font-weight: 500;
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
       }
-
-      #modal-live i {
-        margin-left: 0.5rem;
-        transition: transform 0.3s ease;
-      }
-
-      #modal-live:hover i {
-        transform: translateX(5px);
-      }
-
-      .button-2 {
-        background-color: #e9e9e9;
-        border-radius: 20px;
-        border-style: none;
-        box-sizing: border-box;
-        color: #252525;
-        cursor: pointer;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: 500;
-        height: 40px;
-        line-height: 20px;
-        list-style: none;
-        margin: 0;
-        outline: none;
-        padding: 10px 16px;
-        position: relative;
-        text-align: center;
-        text-decoration: none;
-        transition: color 100ms;
-        vertical-align: baseline;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-      }
-
-      .button-1:hover,
-      .button-1:focus {
-        background-color: #0366cf;
-      }
-
     </style>
   </head>
   <body>
-    <div class="content-wrapper" id="portfolio-container"></div>
+    <h1 class="heading">Recent Projects</h1>
 
-    <!-- Modal -->
-    <div id="portfolio-modal" class="modal">
-      <div class="modal-content">
-        <span class="modal-close">&times;</span>
-        <h2 id="modal-title"></h2>
-        <div class="modal-body">
-          <!-- Left Column -->
+    <div class="portfolio-grid">
+      <div class="card main-card">
+        <div class="card-image-container">
+          <img
+            src="https://i.imgur.com/GzB9M2V.jpeg"
+            alt="Martians"
+            class="card-image"
+          />
+          <span class="year-badge">2025</span>
+        </div>
+        <div class="card-text">
+          <span class="card-title">Martians</span>
+          <span class="card-category">Branding</span>
+        </div>
+      </div>
 
-          <div class="modal-left">
-            <h2>Project Description.</h2>
-            <p id="modal-description"></p>
-            <h2>Skills and deliverables</h2>
-            <div id="modal-skills"></div>
-            <div class="modal-buttons">
-              <button
-                id="modal-live"
-                target="_blank"
-                class="button-1"
-                role="button"
-              >
-                Live Site <i class="fas fa-arrow-right"></i>
-              </button>
-
-              <a id="modal-github" target="_blank">
-                <i class="fab fa-github"></i>
-              </a>
-            </div>
-
-            <div class="modal-meta">
-              <p id="modal-published"></p>
-
-              <div id="modal-company"></div>
-            </div>
-            <hr />
+      <div class="side-cards">
+        <div class="card">
+          <div class="card-image-container">
+            <img
+              src="https://i.imgur.com/6S305a4.jpeg"
+              alt="La Lily"
+              class="card-image"
+            />
+            <span class="year-badge">2025</span>
           </div>
-
-          <!-- Right Column -->
-          <div class="modal-right">
-            <div id="modal-images"></div>
+          <div class="card-text">
+            <span class="card-title">La Lily</span>
+            <span class="card-category">Web Design</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image-container">
+            <img
+              src="https://i.imgur.com/1Dq56fN.jpeg"
+              alt="Blur Lines"
+              class="card-image"
+            />
+            <span class="year-badge">2025</span>
+          </div>
+          <div class="card-text">
+            <span class="card-title">Blur Lines</span>
+            <span class="card-category">Photography</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image-container">
+            <img
+              src="https://i.imgur.com/yFj0461.jpeg"
+              alt="Project 3"
+              class="card-image"
+            />
+            <span class="year-badge">2025</span>
+          </div>
+          <div class="card-text">
+            <span class="card-title">Project 3</span>
+            <span class="card-category">Category</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-image-container">
+            <img
+              src="https://i.imgur.com/0FwJ6cW.jpeg"
+              alt="Project 4"
+              class="card-image"
+            />
+            <span class="year-badge">2025</span>
+          </div>
+          <div class="card-text">
+            <span class="card-title">Project 4</span>
+            <span class="card-category">Category</span>
           </div>
         </div>
       </div>
     </div>
-
-    <script src="./js/map.js"></script>
   </body>
 </html>

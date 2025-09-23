@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //       startTextAnimation(); // optional additional animations
 //     }
 //   }
-
+  
 
   // ---------------------------
   // BACKGROUND IMAGE ANIMTAION
@@ -253,3 +253,5 @@ function startTextAnimation() {
   animateText("#wordsText", "words", 0.5);
   animateText("#linesText", "lines", 1);
 }
+
+
