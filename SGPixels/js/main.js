@@ -148,30 +148,30 @@ document.addEventListener("DOMContentLoaded", () => {
   // PANEL REVEAL ANIMATIONS
   // ---------------------------
   // PANEL 2 reveal (top-right)
-  gsap.to(".panel2", {
-    scrollTrigger: {
-      trigger: "#container",
-      start: "top top",
-      end: "33% top",
-      scrub: 1.2,
-    },
-    clipPath: "circle(150% at 100% 0%)",
-    opacity: 1,
-    ease: "expo.inOut",
-  });
+  // gsap.to(".panel2", {
+  //   scrollTrigger: {
+  //     trigger: "#container",
+  //     start: "top top",
+  //     end: "33% top",
+  //     scrub: 1.2,
+  //   },
+  //   clipPath: "circle(150% at 100% 0%)",
+  //   opacity: 1,
+  //   ease: "expo.inOut",
+  // });
 
   // PANEL 3 reveal (bottom-left)
-  gsap.to(".panel3", {
-    scrollTrigger: {
-      trigger: "#container",
-      start: "33% top",
-      end: "66% top",
-      scrub: 1.2,
-    },
-    clipPath: "circle(150% at 0% 100%)",
-    opacity: 1,
-    ease: "expo.inOut",
-  });
+  // gsap.to(".panel3", {
+  //   scrollTrigger: {
+  //     trigger: "#container",
+  //     start: "33% top",
+  //     end: "66% top",
+  //     scrub: 1.2,
+  //   },
+  //   clipPath: "circle(150% at 0% 100%)",
+  //   opacity: 1,
+  //   ease: "expo.inOut",
+  // });
 
   // ---------------------------
   // HAMBURGER / MOBILE MENU
