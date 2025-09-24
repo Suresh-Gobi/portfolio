@@ -371,24 +371,62 @@
       });
     </script>
     <script>
+      const navLinks = document.querySelectorAll(".nav-menu li a");
+
+      // Get positions of menu links relative to viewport
+      const menuPositions = Array.from(navLinks).map((link) => {
+        const rect = link.getBoundingClientRect();
+        return {
+          link: link,
+          left: rect.left + rect.width / 2,
+          top: rect.top + rect.height / 2,
+        };
+      });
+
       gsap.to(".panel2", {
         scrollTrigger: {
           trigger: "#container",
-
           start: "top top",
-          end: "33% top",
+          end: "15% top",
           scrub: 1.2,
         },
-        clipPath: "circle(150% at 100% 0%)",
+        clipPath: "circle(150% at 100% 0%)", // circle expands from top-right
         opacity: 1,
         ease: "expo.inOut",
+        onUpdate: function () {
+          // Read the current clip-path radius from the panel2 element
+          const style = window.getComputedStyle(this.targets()[0]);
+          const clipPath = style.clipPath || style.webkitClipPath;
+
+          const match = clipPath.match(
+            /circle\(([\d.]+)% at ([\d.]+)% ([\d.]+)%\)/
+          );
+          if (!match) return;
+
+          const radiusPercent = parseFloat(match[1]);
+          const circleX = window.innerWidth * (parseFloat(match[2]) / 100);
+          const circleY = window.innerHeight * (parseFloat(match[3]) / 100);
+
+          // Convert radius from % to px (approximation using viewport diagonal)
+          const maxDim = Math.max(window.innerWidth, window.innerHeight);
+          const radiusPx = (radiusPercent / 100) * maxDim;
+
+          menuPositions.forEach(({ link, left, top }) => {
+            const distance = Math.hypot(left - circleX, top - circleY);
+            if (distance <= radiusPx) {
+              link.style.color = "#000"; // black when circle covers
+            } else {
+              link.style.color = "#fff"; // white otherwise
+            }
+          });
+        },
       });
 
       // PANEL 3 reveal (bottom-left)
       gsap.to(".panel3", {
         scrollTrigger: {
           trigger: "#container",
-          start: "33% top",
+          start: "15% top",
           end: "66% top",
           scrub: 1.2,
         },
