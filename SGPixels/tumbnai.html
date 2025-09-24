@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Recent Work</title>
+  <style>
+    :root {
+      --primary-dark: #111;
+      --color-blue: #e62727;
+      --color-surface-white: #fff;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: #111;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 80%;
+      position: relative;
+    }
+
+    .grid-sub-title h5 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #aaa;
+    }
+
+    .work-items {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 per row */
+      gap: 30px 80px; /* row gap | column gap */
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .work-items li h4 {
+      font-size: 28px;
+      margin: 0;
+      transition: color 0.3s;
+    }
+
+    .work-items li p {
+      font-size: 14px;
+      margin: 5px 0 0;
+      color: #aaa;
+    }
+
+    .work-items li:hover h4 {
+      color: #e62727;
+    }
+
+    /* Floating image preview */
+    .float-image-wrap {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 600px;
+      height: 400px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      overflow: hidden;
+      border-radius: 3px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .float-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Button styles */
+    .btn-container {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .button {
+      align-items: center;
+      background: 0 0;
+      border: none;
+      border-radius: 6.25rem;
+      color: var(--color-surface-white);
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 1.2rem;
+      font-weight: 600;
+      gap: 0.363636em;
+      justify-content: center;
+      letter-spacing: -0.01em;
+      line-height: 1.04545;
+      overflow: hidden;
+      padding: 0.9375rem 1.5rem;
+      position: relative;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .button--stroke:after {
+      border: 0.125rem solid var(--color-surface-white);
+      border-radius: 6.25rem;
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .button__label {
+      position: relative;
+      text-align: center;
+      transition: color 0.05s ease;
+    }
+
+    .button__flair {
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: scale(0);
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    .button__flair:before {
+      aspect-ratio: 1/1;
+      background-color: var(--color-surface-white);
+      border-radius: 50%;
+      content: "";
+      display: block;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      transform: translate(-50%, -50%);
+      width: 170%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="grid-sub-title">
+      <h5>Recent work</h5>
+    </div>
+
+    <ul class="work-items mouse-pos-list-image-wrap">
+      <li class="portfolio-item" data-img="https://picsum.photos/id/1015/600/400">
+        <a href="#"><h4>TWICE</h4><p>Interaction & Development</p></a>
+      </li>
+      <li class="portfolio-item" data-img="https://picsum.photos/id/1016/600/400">
+        <a href="#"><h4>The Damai</h4><p>Design & Development</p></a>
+      </li>
+      <li class="portfolio-item" data-img="https://picsum.photos/id/1018/600/400">
+        <a href="#"><h4>FABRIC™</h4><p>Design & Development</p></a>
+      </li>
+      <li class="portfolio-item" data-img="https://picsum.photos/id/1020/600/400">
+        <a href="#"><h4>Aanstekelijk</h4><p>Design & Development</p></a>
+      </li>
+      <li class="portfolio-item" data-img="https://picsum.photos/id/1024/600/400">
+        <a href="#"><h4>Another Project</h4><p>Design & Development</p></a>
+      </li>
+      <li class="portfolio-item" data-img="https://picsum.photos/id/1025/600/400">
+        <a href="#"><h4>Final Showcase</h4><p>Design & Development</p></a>
+      </li>
+    </ul>
+
+    <!-- Button -->
+    <div class="btn-container">
+      <button class="button button--stroke" data-block="button">
+        <span class="button__label">More Work</span>
+        <span class="button__flair"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating image -->
+  <div class="float-image-wrap">
+    <img id="float-img" src="" alt="preview" />
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    // Floating portfolio image
+    const floatWrap = document.querySelector(".float-image-wrap");
+    const floatImg = document.getElementById("float-img");
+
+    document.querySelectorAll(".portfolio-item").forEach((item) => {
+      item.addEventListener("mouseenter", () => {
+        floatImg.src = item.getAttribute("data-img");
+        gsap.to(floatWrap, { opacity: 1, scale: 1, duration: 0.3 });
+      });
+      item.addEventListener("mouseleave", () => {
+        gsap.to(floatWrap, { opacity: 0, scale: 0.9, duration: 0.3 });
+      });
+      item.addEventListener("mousemove", (e) => {
+        gsap.to(floatWrap, { x: e.clientX + 20, y: e.clientY - 20, duration: 0.3, ease: "power2.out" });
+      });
+    });
+
+    // Button animation
+    class Button {
+      constructor(buttonElement) {
+        this.block = buttonElement;
+        this.init();
+        this.initEvents();
+      }
+      init() {
+        const el = gsap.utils.selector(this.block);
+        this.DOM = { button: this.block, flair: el(".button__flair") };
+        this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
+        this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
+      }
+      getXY(e) {
+        const { left, top, width, height } = this.DOM.button.getBoundingClientRect();
+        const xTransformer = gsap.utils.pipe(gsap.utils.mapRange(0, width, 0, 100), gsap.utils.clamp(0, 100));
+        const yTransformer = gsap.utils.pipe(gsap.utils.mapRange(0, height, 0, 100), gsap.utils.clamp(0, 100));
+        return { x: xTransformer(e.clientX - left), y: yTransformer(e.clientY - top) };
+      }
+      initEvents() {
+        this.DOM.button.addEventListener("mouseenter", (e) => {
+          const { x, y } = this.getXY(e);
+          this.xSet(x); this.ySet(y);
+          gsap.to(this.DOM.flair, { scale: 1, duration: 0.4, ease: "power2.out" });
+        });
+        this.DOM.button.addEventListener("mouseleave", (e) => {
+          const { x, y } = this.getXY(e);
+          gsap.killTweensOf(this.DOM.flair);
+          gsap.to(this.DOM.flair, {
+            xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
+            yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
+            scale: 0,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+        this.DOM.button.addEventListener("mousemove", (e) => {
+          const { x, y } = this.getXY(e);
+          gsap.to(this.DOM.flair, { xPercent: x, yPercent: y, duration: 0.4, ease: "power2" });
+        });
+      }
+    }
+
+    const buttonElements = document.querySelectorAll('[data-block="button"]');
+    buttonElements.forEach((buttonElement) => { new Button(buttonElement); });
+  </script>
+</body>
+</html>

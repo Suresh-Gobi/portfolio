@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suresh Gobi | Portfolio</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    
+    <!-- GSAP & ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <!-- <div id="preloader">
+      <div id="logo"></div>
+
+      <div class="loading-container">
+        <div class="loading-screen">
+          <div class="numbers">
+            <div class="number number-2 number-ten-times">
+              <div class="number-wrap">
+                <p class="number-p">0</p>
+                <p class="number-p">1</p>
+                <p class="number-p">2</p>
+                <p class="number-p">3</p>
+                <p class="number-p">4</p>
+                <p class="number-p">5</p>
+                <p class="number-p">6</p>
+                <p class="number-p">7</p>
+                <p class="number-p">8</p>
+                <p class="number-p">9</p>
+              </div>
+            </div>
+
+            <div class="number number-3 number-ten-times">
+              <div class="number-wrap">
+                <p class="number-p">0</p>
+                <p class="number-p">1</p>
+                <p class="number-p">2</p>
+                <p class="number-p">3</p>
+                <p class="number-p">4</p>
+                <p class="number-p">5</p>
+                <p class="number-p">6</p>
+                <p class="number-p">7</p>
+                <p class="number-p">8</p>
+                <p class="number-p">9</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div class="custom-cursor">
+      <div class="cursor-circle">
+        <span
+          >scroll <br />
+          to <br />
+          view</span
+        >
+      </div>
+    </div> -->
+
+    <!-- Navigation Bar -->
+    <div id="homepage">
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="logo"><img src="img/logo.png" alt="Logo" /></div>
+          <ul class="nav-menu">
+            <li><a href="#">Work</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <div class="menu-trigger" id="menuTrigger">
+            <span class="menu-label" id="hamburgerBtn">Menu</span>
+          </div>
+        </div>
+        <div class="nav-line"></div>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-top">
+          <div class="menu-trigger" id="menuTriggerInside">
+            <div class="btn btn-hamburger" id="hamburgerInside">
+              <div class="btn-click"><div class="btn-bars"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-inner">
+          <div class="menu-nav">
+            <h5>Navigation</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Work</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="menu-socials">
+            <h5>Socials</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="container"></div>
+
+      <div class="panel panel1">
+        <div class="hero">
+          <div class="hero-content">
+            <div class="profile-header">
+              <!-- <img src="img/propic.png" alt="Suresh Gobi" class="profile-pic" /> -->
+              <h2 id="wordsText">
+                <span style="color: #e62727">#</span>Suresh Gobi
+              </h2>
+            </div>
+
+            <h1 id="wordsText">
+              Designer <span>&</span><br />
+              <span class="highlight">Developer</span>
+            </h1>
+          </div>
+
+          <!-- Right Side Text -->
+          <div class="hero-text">
+            <h4 id="linesText1">
+              Helping brands thrive in the digital age. Together, we’ll shape
+              what’s next— fearless, innovative, and future-driven.
+            </h4>
+            <br />
+            <h3 id="linesText2">
+              My passion for design, code, and interaction places me in a unique
+              position within the digital world.
+            </h3>
+            <!-- <p class="credit" id="linesText2">&copy; Coded by Gobi</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="panel panel2">
+        
+      </div>
+      <div class="panel panel3">Panel 3</div>
+
+      <!-- Modal -->
+      <div id="portfolio-modal" class="modal">
+        <div class="modal-content">
+          <span class="modal-close">&times;</span>
+          <p id="modal-title"></p>
+          <div class="modal-body">
+            <!-- Left Column -->
+
+            <div class="modal-left">
+              <h3>Project Description.</h3>
+              <p id="modal-description"></p>
+              <h3>Skills and deliverables</h3>
+              <div id="modal-skills"></div>
+              <div class="modal-buttons">
+                <button
+                  id="modal-live"
+                  target="_blank"
+                  class="button-1"
+                  role="button"
+                >
+                  Live Site <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <a id="modal-github" target="_blank">
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+
+              <div class="modal-meta">
+                <p id="modal-published"></p>
+
+                <div id="modal-company"></div>
+              </div>
+              <hr />
+            </div>
+
+            <!-- Right Column -->
+            <div class="modal-right">
+              <div id="modal-images"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/custom-cursor.js"></script>
+    <script src="./js/map.js"></script>
+  </body>
+</html>
