@@ -372,16 +372,38 @@
     </script>
     <script>
       const navLinks = document.querySelectorAll(".nav-menu li a");
+      const navLine = document.querySelector(".nav-line");
+      const logo = document.querySelector(".logo img"); // your logo <img>
 
-      // Get positions of menu links relative to viewport
-      const menuPositions = Array.from(navLinks).map((link) => {
-        const rect = link.getBoundingClientRect();
-        return {
-          link: link,
-          left: rect.left + rect.width / 2,
-          top: rect.top + rect.height / 2,
-        };
-      });
+      let menuPositions = [];
+      let navLineRect = null;
+      let logoRect = null;
+
+      function updatePositions() {
+        menuPositions = Array.from(navLinks).map((link) => {
+          const rect = link.getBoundingClientRect();
+          return {
+            link,
+            left: rect.left + rect.width / 2,
+            top: rect.top + rect.height / 2,
+          };
+        });
+
+        if (navLine) {
+          navLineRect = navLine.getBoundingClientRect();
+        }
+        if (logo) {
+          logoRect = logo.getBoundingClientRect();
+        }
+      }
+
+      // init and keep updated on resize / refresh
+      updatePositions();
+      if (window.ScrollTrigger)
+        ScrollTrigger.addEventListener("refreshInit", updatePositions);
+      window.addEventListener("resize", () =>
+        gsap.delayedCall(0.1, updatePositions)
+      );
 
       gsap.to(".panel2", {
         scrollTrigger: {
@@ -390,14 +412,12 @@
           end: "15% top",
           scrub: 1.2,
         },
-        clipPath: "circle(150% at 100% 0%)", // circle expands from top-right
+        clipPath: "circle(150% at 100% 0%)",
         opacity: 1,
         ease: "expo.inOut",
         onUpdate: function () {
-          // Read the current clip-path radius from the panel2 element
           const style = window.getComputedStyle(this.targets()[0]);
           const clipPath = style.clipPath || style.webkitClipPath;
-
           const match = clipPath.match(
             /circle\(([\d.]+)% at ([\d.]+)% ([\d.]+)%\)/
           );
@@ -407,18 +427,51 @@
           const circleX = window.innerWidth * (parseFloat(match[2]) / 100);
           const circleY = window.innerHeight * (parseFloat(match[3]) / 100);
 
-          // Convert radius from % to px (approximation using viewport diagonal)
           const maxDim = Math.max(window.innerWidth, window.innerHeight);
           const radiusPx = (radiusPercent / 100) * maxDim;
 
+          // --- nav links ---
           menuPositions.forEach(({ link, left, top }) => {
             const distance = Math.hypot(left - circleX, top - circleY);
-            if (distance <= radiusPx) {
-              link.style.color = "#000"; // black when circle covers
-            } else {
-              link.style.color = "#fff"; // white otherwise
-            }
+            link.style.color = distance <= radiusPx ? "#000" : "#fff";
           });
+
+          // --- nav line ---
+          if (navLine && navLineRect) {
+            const closestX = Math.max(
+              navLineRect.left,
+              Math.min(circleX, navLineRect.right)
+            );
+            const closestY = Math.max(
+              navLineRect.top,
+              Math.min(circleY, navLineRect.bottom)
+            );
+            const distanceToNavLine = Math.hypot(
+              closestX - circleX,
+              closestY - circleY
+            );
+
+            navLine.style.background =
+              distanceToNavLine <= radiusPx ? "#000" : "#fff";
+          }
+
+          // --- logo image ---
+          if (logo && logoRect) {
+            const logoCenterX = logoRect.left + logoRect.width / 2;
+            const logoCenterY = logoRect.top + logoRect.height / 2;
+            const distanceToLogo = Math.hypot(
+              logoCenterX - circleX,
+              logoCenterY - circleY
+            );
+
+            if (distanceToLogo <= radiusPx) {
+              logo.style.filter =
+                "brightness(0) saturate(100%) invert(24%) sepia(92%) saturate(7481%) hue-rotate(0deg) brightness(96%) contrast(119%)";
+              // this makes it red, works for PNG/SVG logos
+            } else {
+              logo.style.filter = "none"; // back to normal
+            }
+          }
         },
       });
 

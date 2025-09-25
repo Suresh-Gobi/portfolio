@@ -394,7 +394,7 @@ p {
   font-family: "Inter", sans-serif;
   text-decoration: none;
   color: #fff;
-  transition: color 0.3s; 
+  transition: color 0.3s;
   text-transform: uppercase;
   font-size: 14px;
   transition: transform 0.3s;
@@ -409,6 +409,7 @@ p {
   opacity: 50%;
   width: 100%;
   margin-top: 1px;
+  transition: background-color 0.18s ease;
 }
 
 /* Hide hamburger/menu trigger on desktop */
