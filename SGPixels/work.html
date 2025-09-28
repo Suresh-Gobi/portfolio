@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Products Portfolio</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- GSAP & ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <div class="work-container">
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="logo"><img src="img/logo01.png" alt="Logo" /></div>
+          <ul class="nav-menu">
+            <li><a href="#">Work</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <div class="menu-trigger" id="menuTrigger">
+            <span class="menu-label" id="hamburgerBtn">Menu</span>
+          </div>
+        </div>
+        <div class="nav-line"></div>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-top">
+          <div class="menu-trigger" id="menuTriggerInside">
+            <div class="btn btn-hamburger" id="hamburgerInside">
+              <div class="btn-click"><div class="btn-bars"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-inner">
+          <div class="menu-nav">
+            <h5>Navigation</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Work</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="menu-socials">
+            <h5>Socials</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <header class="portfolio-header">
+        <h1 class="portfolio-title">
+          Transforming Ideas into <br />Impactful Digital Products
+        </h1>
+        <div class="header-controls">
+          <nav class="filters">
+            <div class="btn-container">
+              <button
+                class="button button--stroke filter-btn active"
+                data-filter="all"
+                data-block="button"
+              >
+                <span class="button__label">All</span>
+                <span class="button__flair"></span>
+              </button>
+            </div>
+
+            <div class="btn-container" id="design">
+              <button
+                class="button button--stroke filter-btn"
+                data-filter="design"
+                data-block="button"
+              >
+                <span class="button__label">Design</span>
+                <span class="button__flair"></span>
+              </button>
+            </div>
+
+            <div class="btn-container">
+              <button
+                class="button button--stroke filter-btn"
+                data-filter="development"
+                data-block="button"
+              >
+                <span class="button__label">Development</span>
+                <span class="button__flair"></span>
+              </button>
+            </div>
+          </nav>
+
+          <!-- View Toggles -->
+          <div class="view-toggles">
+            <div class="btn-container">
+              <button
+                class="button button--stroke toggle-btn list-view-btn"
+                data-block="button"
+              >
+                <span class="button__label"><i class="fas fa-bars"></i></span>
+                <span class="button__flair"></span>
+              </button>
+            </div>
+
+            <div class="btn-container">
+              <button
+                class="button button--stroke toggle-btn grid-view-btn active"
+                data-block="button"
+              >
+                <span class="button__label"><i class="fas fa-th"></i></span>
+                <span class="button__flair"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="portfolio-grid">
+        <a href="#" class="portfolio-item" data-category="design development">
+          <div class="image-container">
+            <img src="./tumbnail/Asset 8.png" alt="The Damai" />
+          </div>
+          <div class="details">
+            <h2 class="title">The damai</h2>
+            <div class="meta">
+              <span class="tags">design & development</span>
+              <span class="year">2024</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="portfolio-item" data-category="design">
+          <div class="image-container">
+            <img src="https://picsum.photos/id/1025/800/600" alt="Fabric" />
+          </div>
+          <div class="details">
+            <h2 class="title">Fabric™</h2>
+            <div class="meta">
+              <span class="tags">design</span>
+              <span class="year">2023</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="portfolio-item" data-category="development">
+          <div class="image-container">
+            <img src="https://picsum.photos/id/1035/800/600" alt="NextGen" />
+          </div>
+          <div class="details">
+            <h2 class="title">nextgen</h2>
+            <div class="meta">
+              <span class="tags">development</span>
+              <span class="year">2022</span>
+            </div>
+          </div>
+        </a>
+      </main>
+    </div>
+    <div class="float-image-wrap">
+      <img id="float-img" src="" alt="Floating Preview" />
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <script>
+      // animate portfolio items on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const items = document.querySelectorAll(".portfolio-item");
+        gsap.set(items, { autoAlpha: 0, y: 50 });
+        gsap.to(items, {
+          duration: 0.8,
+          autoAlpha: 1,
+          y: 0,
+          ease: "power3.out",
+          stagger: 0.15,
+        });
+
+        // --- set list mode on page load ---
+        const grid = document.querySelector(".portfolio-grid");
+        const listBtn = document.querySelector(".list-view-btn");
+        const gridBtn = document.querySelector(".grid-view-btn");
+
+        grid.classList.add("list-view"); // activate list mode
+        listBtn.classList.add("active"); // mark list button active
+        gridBtn.classList.remove("active"); // mark grid button inactive
+      });
+
+      // filter logic
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      const items = document.querySelectorAll(".portfolio-item");
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const filter = btn.dataset.filter;
+
+          items.forEach((item) => {
+            const categories = item.dataset.category.split(" ");
+            if (filter === "all" || categories.includes(filter)) {
+              gsap.to(item, {
+                autoAlpha: 1,
+                scale: 1,
+                duration: 0.3,
+                onStart: () => {
+                  item.style.display = "flex"; // ✅ show again
+                },
+              });
+              item.style.pointerEvents = "auto";
+            } else {
+              gsap.to(item, {
+                autoAlpha: 0,
+                scale: 0.9,
+                duration: 0.3,
+                onComplete: () => {
+                  item.style.display = "none"; // ✅ hide from layout
+                },
+              });
+              item.style.pointerEvents = "none";
+            }
+          });
+        });
+      });
+
+      // view toggle logic
+      const gridBtn = document.querySelector(".grid-view-btn");
+      const listBtn = document.querySelector(".list-view-btn");
+      const grid = document.querySelector(".portfolio-grid");
+
+      gridBtn.addEventListener("click", () => {
+        grid.classList.remove("list-view");
+        gridBtn.classList.add("active");
+        listBtn.classList.remove("active");
+      });
+
+      listBtn.addEventListener("click", () => {
+        grid.classList.add("list-view");
+        listBtn.classList.add("active");
+        gridBtn.classList.remove("active");
+      });
+    </script>
+
+    <script>
+      // Floating portfolio image for list-view only
+      const floatWrap = document.querySelector(".float-image-wrap");
+      const floatImg = document.getElementById("float-img");
+
+      document
+        .querySelectorAll(".portfolio-grid .portfolio-item")
+        .forEach((item) => {
+          const imgSrc =
+            item.getAttribute("data-img") || item.querySelector("img").src;
+
+          item.addEventListener("mouseenter", () => {
+            // Only show floating image in list-view
+            if (
+              item.closest(".portfolio-grid").classList.contains("list-view")
+            ) {
+              floatImg.src = imgSrc;
+              gsap.to(floatWrap, { opacity: 1, scale: 1, duration: 0.3 });
+            }
+          });
+
+          item.addEventListener("mouseleave", () => {
+            gsap.to(floatWrap, { opacity: 0, scale: 0.9, duration: 0.3 });
+          });
+
+          item.addEventListener("mousemove", (e) => {
+            // Only move floating image in list-view
+            if (
+              item.closest(".portfolio-grid").classList.contains("list-view")
+            ) {
+              gsap.to(floatWrap, {
+                x: e.clientX + 20,
+                y: e.clientY - 20,
+                duration: 0.3,
+                ease: "power2.out",
+              });
+            }
+          });
+        });
+
+      // Button animation
+      class Button {
+        constructor(buttonElement) {
+          this.block = buttonElement;
+          this.init();
+          this.initEvents();
+        }
+        init() {
+          const el = gsap.utils.selector(this.block);
+          this.DOM = { button: this.block, flair: el(".button__flair") };
+          this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
+          this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
+        }
+        getXY(e) {
+          const { left, top, width, height } =
+            this.DOM.button.getBoundingClientRect();
+          const xTransformer = gsap.utils.pipe(
+            gsap.utils.mapRange(0, width, 0, 100),
+            gsap.utils.clamp(0, 100)
+          );
+          const yTransformer = gsap.utils.pipe(
+            gsap.utils.mapRange(0, height, 0, 100),
+            gsap.utils.clamp(0, 100)
+          );
+          return {
+            x: xTransformer(e.clientX - left),
+            y: yTransformer(e.clientY - top),
+          };
+        }
+        initEvents() {
+          this.DOM.button.addEventListener("mouseenter", (e) => {
+            const { x, y } = this.getXY(e);
+            this.xSet(x);
+            this.ySet(y);
+            gsap.to(this.DOM.flair, {
+              scale: 1,
+              duration: 0.4,
+              ease: "power2.out",
+            });
+          });
+          this.DOM.button.addEventListener("mouseleave", (e) => {
+            const { x, y } = this.getXY(e);
+            gsap.killTweensOf(this.DOM.flair);
+            gsap.to(this.DOM.flair, {
+              xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
+              yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
+              scale: 0,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          });
+          this.DOM.button.addEventListener("mousemove", (e) => {
+            const { x, y } = this.getXY(e);
+            gsap.to(this.DOM.flair, {
+              xPercent: x,
+              yPercent: y,
+              duration: 0.4,
+              ease: "power2",
+            });
+          });
+        }
+      }
+
+      const buttonElements = document.querySelectorAll('[data-block="button"]');
+      buttonElements.forEach((buttonElement) => {
+        new Button(buttonElement);
+      });
+    </script>
+  </body>
+</html>

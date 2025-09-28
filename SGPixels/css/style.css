@@ -1092,7 +1092,7 @@ hr {
   padding: 2rem;
 }
 
-.work-container .navbar{
+.work-container .navbar {
   position: absolute;
 }
 
@@ -1114,17 +1114,37 @@ hr {
 }
 .portfolio-title {
   text-align: left;
-  font-size: 85px;
+  font-size: 95px;
   font-weight: 600;
+  width: 90%;
   text-transform: uppercase;
-  margin-bottom: 1rem;
+  margin: 0 auto;
+}
+
+.portfolio-item .details {
+  position: relative;
+  text-align: center;
+  padding: 30px 0 30px 0;
+  border-top: 1px solid #b4b4b47a;
+}
+
+.portfolio-item:hover .details{
+  opacity: 0.7;
 }
 
 .header-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .filters button {
@@ -1137,28 +1157,40 @@ hr {
   transition: color 0.2s ease;
 }
 .filters button.active {
-  color: #000;
+  color: #242424;
   font-weight: bold;
 }
 
 .view-toggles {
   display: flex;
-  gap: 0.5rem;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
 }
-.toggle-btn {
-  width: 32px;
-  height: 32px;
-  border: 1px solid #555;
-  background: transparent;
-  cursor: pointer;
-  border-radius: 4px;
-  color: #888;
-  font-size: 1rem;
-  line-height: 1;
+
+.view-toggles .button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+
+  background: #fff;
+  transition: all 0.3s ease;
 }
-.toggle-btn.active {
-  background: #000;
+
+.view-toggles .button.active {
+  background: #858585;
   color: #fff;
+}
+
+.view-toggles .button__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .portfolio-grid {
@@ -1187,11 +1219,10 @@ hr {
 .image-container {
   position: relative;
   background: #111;
-  padding-top: 75%;
+
   overflow: hidden;
 }
 .image-container img {
-  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1204,15 +1235,20 @@ hr {
   display: flex;
   justify-content: space-between;
   padding-top: 1rem;
+  width: 90%;
+  margin: 0 auto;
 }
+
 .details .title {
+  font-family: "Inter", sans-serif;
+  color: #242424;
   font-size: 1.4rem;
   margin: 0;
   font-weight: 400;
-  text-transform: lowercase;
 }
 .details .tags,
 .details .year {
+  family: "Inter", sans-serif;
   font-size: 0.85rem;
   color: #888;
 }
