@@ -4,195 +4,130 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Digital Products Portfolio</title>
-    <style>
-      body {
-        background: #ffffff;
-        color: #161616;
-        font-family: "Inter", sans-serif;
-        margin: 0;
-        padding: 2rem;
-      }
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-      /* header */
-      .portfolio-header {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: center;
-        padding-bottom: 3rem;
-      }
-      .portfolio-title {
-        text-align: center;
-        font-size: 3rem;
-        font-weight: 600;
-        text-transform: lowercase;
-        margin-bottom: 1rem;
-      }
-
-      /* filters + view toggles container */
-      .header-controls {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-      }
-
-      /* filters */
-      .filters button {
-        background: transparent;
-        border: none;
-        color: #888;
-        margin-right: 1rem;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: color 0.2s ease;
-      }
-      .filters button.active {
-        color: #000;
-        font-weight: bold;
-      }
-
-      /* view toggles */
-      .view-toggles {
-        display: flex;
-        gap: 0.5rem;
-      }
-      .toggle-btn {
-        width: 32px;
-        height: 32px;
-        border: 1px solid #555;
-        background: transparent;
-        cursor: pointer;
-        border-radius: 4px;
-        color: #888;
-        font-size: 1rem;
-        line-height: 1;
-      }
-      .toggle-btn.active {
-        background: #000;
-        color: #fff;
-      }
-
-      /* portfolio grid */
-      .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 3rem;
-        transition: all 0.3s ease;
-      }
-      .portfolio-grid.list-view {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
-
-      /* Hide images in list view */
-      .portfolio-grid.list-view .image-container {
-        display: none;
-      }
-
-      /* portfolio item */
-      .portfolio-item {
-        text-decoration: none;
-        color: inherit;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.3s ease;
-      }
-      .image-container {
-        position: relative;
-        background: #111;
-        padding-top: 75%; /* 4:3 ratio */
-        overflow: hidden;
-      }
-      .image-container img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.4s ease;
-      }
-      .portfolio-item:hover img {
-        transform: scale(1.05);
-      }
-      .details {
-        display: flex;
-        justify-content: space-between;
-        padding-top: 1rem;
-      }
-      .details .title {
-        font-size: 1.4rem;
-        margin: 0;
-        font-weight: 400;
-        text-transform: lowercase;
-      }
-      .details .tags,
-      .details .year {
-        font-size: 0.85rem;
-        color: #888;
-      }
-    </style>
+    <!-- GSAP & ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   </head>
   <body>
-    <header class="portfolio-header">
-      <h1 class="portfolio-title">Creating next level digital products</h1>
-      <div class="header-controls">
-        <nav class="filters">
-          <button class="filter-btn active" data-filter="all">all</button>
-          <button class="filter-btn" data-filter="design">design</button>
-          <button class="filter-btn" data-filter="development">
-            development
-          </button>
-        </nav>
-        <div class="view-toggles">
-          <button class="toggle-btn list-view-btn">≡</button>
-          <button class="toggle-btn grid-view-btn active">▦</button>
+    <div class="work-container">
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="logo"><img src="img/logo01.png" alt="Logo" /></div>
+          <ul class="nav-menu">
+            <li><a href="#">Work</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <div class="menu-trigger" id="menuTrigger">
+            <span class="menu-label" id="hamburgerBtn">Menu</span>
+          </div>
+        </div>
+        <div class="nav-line"></div>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-top">
+          <div class="menu-trigger" id="menuTriggerInside">
+            <div class="btn btn-hamburger" id="hamburgerInside">
+              <div class="btn-click"><div class="btn-bars"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-inner">
+          <div class="menu-nav">
+            <h5>Navigation</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Work</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="menu-socials">
+            <h5>Socials</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">LinkedIn</a></li>
+            </ul>
+          </div>
         </div>
       </div>
-    </header>
 
-    <main class="portfolio-grid">
-      <a href="#" class="portfolio-item" data-category="design development">
-        <div class="image-container">
-          <img src="https://picsum.photos/id/1018/800/600" alt="The Damai" />
-        </div>
-        <div class="details">
-          <h2 class="title">the damai</h2>
-          <div class="meta">
-            <span class="tags">design & development</span>
-            <span class="year">2024</span>
+      <header class="portfolio-header">
+        <h1 class="portfolio-title">Creating next level digital products</h1>
+        <div class="header-controls">
+          <nav class="filters">
+            <button class="filter-btn active" data-filter="all">all</button>
+            <button class="filter-btn" data-filter="design">design</button>
+            <button class="filter-btn" data-filter="development">
+              development
+            </button>
+          </nav>
+          <div class="view-toggles">
+            <button class="toggle-btn list-view-btn">≡</button>
+            <button class="toggle-btn grid-view-btn active">▦</button>
           </div>
         </div>
-      </a>
+      </header>
 
-      <a href="#" class="portfolio-item" data-category="design">
-        <div class="image-container">
-          <img src="https://picsum.photos/id/1025/800/600" alt="Fabric" />
-        </div>
-        <div class="details">
-          <h2 class="title">fabric™</h2>
-          <div class="meta">
-            <span class="tags">design</span>
-            <span class="year">2023</span>
+      <main class="portfolio-grid">
+        <a href="#" class="portfolio-item" data-category="design development">
+          <div class="image-container">
+            <img src="https://picsum.photos/id/1018/800/600" alt="The Damai" />
           </div>
-        </div>
-      </a>
-
-      <a href="#" class="portfolio-item" data-category="development">
-        <div class="image-container">
-          <img src="https://picsum.photos/id/1035/800/600" alt="NextGen" />
-        </div>
-        <div class="details">
-          <h2 class="title">nextgen</h2>
-          <div class="meta">
-            <span class="tags">development</span>
-            <span class="year">2022</span>
+          <div class="details">
+            <h2 class="title">the damai</h2>
+            <div class="meta">
+              <span class="tags">design & development</span>
+              <span class="year">2024</span>
+            </div>
           </div>
-        </div>
-      </a>
-    </main>
+        </a>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+        <a href="#" class="portfolio-item" data-category="design">
+          <div class="image-container">
+            <img src="https://picsum.photos/id/1025/800/600" alt="Fabric" />
+          </div>
+          <div class="details">
+            <h2 class="title">fabric™</h2>
+            <div class="meta">
+              <span class="tags">design</span>
+              <span class="year">2023</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#" class="portfolio-item" data-category="development">
+          <div class="image-container">
+            <img src="https://picsum.photos/id/1035/800/600" alt="NextGen" />
+          </div>
+          <div class="details">
+            <h2 class="title">nextgen</h2>
+            <div class="meta">
+              <span class="tags">development</span>
+              <span class="year">2022</span>
+            </div>
+          </div>
+        </a>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="js/main.js"></script>
     <script>
       // animate portfolio items on load
       document.addEventListener("DOMContentLoaded", () => {
@@ -226,7 +161,7 @@
                 duration: 0.3,
                 onStart: () => {
                   item.style.display = "flex"; // ✅ show again
-                }
+                },
               });
               item.style.pointerEvents = "auto";
             } else {
@@ -236,7 +171,7 @@
                 duration: 0.3,
                 onComplete: () => {
                   item.style.display = "none"; // ✅ hide from layout
-                }
+                },
               });
               item.style.pointerEvents = "none";
             }
