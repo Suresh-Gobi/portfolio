@@ -1092,6 +1092,10 @@ hr {
   padding: 2rem;
 }
 
+.work-container .navbar{
+  position: absolute;
+}
+
 .work-container .nav-menu li a {
   color: #161616;
 }
@@ -1106,13 +1110,13 @@ hr {
   align-items: flex-start;
   text-align: center;
   padding-bottom: 3rem;
-  margin-top: 100px;
+  margin-top: 150px;
 }
 .portfolio-title {
-  text-align: center;
-  font-size: 3rem;
+  text-align: left;
+  font-size: 85px;
   font-weight: 600;
-  text-transform: lowercase;
+  text-transform: uppercase;
   margin-bottom: 1rem;
 }
 
