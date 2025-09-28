@@ -3,338 +3,262 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio | Recent Work</title>
+    <title>Digital Products Portfolio</title>
     <style>
-      :root {
-        --primary-dark: #111;
-        --color-surface-white: #fff;
+      body {
+        background: #ffffff;
+        color: #161616;
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        padding: 2rem;
       }
 
-      body {
-        margin: 0;
-        font-family: "Inter", sans-serif;
-        background: #111;
-        color: #fff;
-        height: 100vh;
+      /* header */
+      .portfolio-header {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+        padding-bottom: 3rem;
+      }
+      .portfolio-title {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: 600;
+        text-transform: lowercase;
+        margin-bottom: 1rem;
+      }
+
+      /* filters + view toggles container */
+      .header-controls {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
+        width: 100%;
       }
 
-      .container {
-        width: 80%;
-        position: relative;
+      /* filters */
+      .filters button {
+        background: transparent;
+        border: none;
+        color: #888;
+        margin-right: 1rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+      .filters button.active {
+        color: #000;
+        font-weight: bold;
       }
 
-      .grid-sub-title h5 {
-        font-size: 20px;
-        margin-bottom: 20px;
-        color: #aaa;
+      /* view toggles */
+      .view-toggles {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .toggle-btn {
+        width: 32px;
+        height: 32px;
+        border: 1px solid #555;
+        background: transparent;
+        cursor: pointer;
+        border-radius: 4px;
+        color: #888;
+        font-size: 1rem;
+        line-height: 1;
+      }
+      .toggle-btn.active {
+        background: #000;
+        color: #fff;
       }
 
-      .work-items {
+      /* portfolio grid */
+      .portfolio-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr); /* 3 per row */
-        gap: 30px 80px; /* row gap | column gap */
-        list-style: none;
-        padding: 0;
-        margin: 0;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        transition: all 0.3s ease;
+      }
+      .portfolio-grid.list-view {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
       }
 
-      .work-items li h4 {
-        font-size: 28px;
-        margin: 0;
-        transition: color 0.3s;
+      /* Hide images in list view */
+      .portfolio-grid.list-view .image-container {
+        display: none;
       }
 
-      .work-items li p {
-        font-size: 14px;
-        margin: 5px 0 0;
-        color: #aaa;
+      /* portfolio item */
+      .portfolio-item {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease;
       }
-
-      .work-items li:hover h4 {
-        color: #e62727;
-      }
-
-      /* Floating image preview */
-      .float-image-wrap {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 600px;
-        height: 400px;
-        pointer-events: none;
-        opacity: 0;
-        transform: translate(-50%, -50%);
-        z-index: 9999;
+      .image-container {
+        position: relative;
+        background: #111;
+        padding-top: 75%; /* 4:3 ratio */
         overflow: hidden;
-        border-radius: 3px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
       }
-
-      .float-image-wrap img {
+      .image-container img {
+        position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform 0.4s ease;
       }
-
-      /* Button styles */
-      .btn-container {
-        margin-top: 50px;
+      .portfolio-item:hover img {
+        transform: scale(1.05);
+      }
+      .details {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+        padding-top: 1rem;
       }
-
-      .button {
-        align-items: center;
-        background: #111; /* initial background */
-        border: none;
-        border-radius: 6.25rem;
-        color: var(--color-surface-white);
-        cursor: pointer;
-        display: inline-flex;
-        font-size: 1.2rem;
-        font-weight: 600;
-        gap: 0.363636em;
-        justify-content: center;
-        letter-spacing: -0.01em;
-        line-height: 1.04545;
-        overflow: hidden;
-        padding: 0.9375rem 1.5rem;
-        position: relative;
-        text-decoration: none;
-        word-break: break-word;
-        transition: color 0.3s, background-color 0.3s;
+      .details .title {
+        font-size: 1.4rem;
+        margin: 0;
+        font-weight: 400;
+        text-transform: lowercase;
       }
-
-      .button:hover {
-        background-color: #000; /* black background on hover */
-        color: black;
-      }
-
-      .button--stroke:after {
-        border: 0.125rem solid var(--color-surface-white);
-        border-radius: 6.25rem;
-        content: "";
-        pointer-events: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-      }
-
-      .button__label {
-        position: relative;
-        z-index: 1; /* text above the flair */
-        text-align: center;
-        transition: color 0.05s ease;
-      }
-      .button__label sup {
-        font-size: 0.6em;
-        margin-left: 3px;
-        color: #e62727;
-        font-weight: bold;
-      }
-      .button__flair {
-        bottom: 0;
-        left: 0;
-        pointer-events: none;
-        position: absolute;
-        right: 0;
-        top: 0;
-        transform: scale(0);
-        transform-origin: 0 0;
-        will-change: transform;
-        z-index: 0; /* behind the text */
-      }
-
-      .button__flair:before {
-        aspect-ratio: 1/1;
-        background-color: var(--color-surface-white);
-        border-radius: 50%;
-        content: "";
-        display: block;
-        left: 0;
-        pointer-events: none;
-        position: absolute;
-        top: 0;
-        transform: translate(-50%, -50%);
-        width: 170%;
+      .details .tags,
+      .details .year {
+        font-size: 0.85rem;
+        color: #888;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="grid-sub-title">
-        <h5>Recent work</h5>
+    <header class="portfolio-header">
+      <h1 class="portfolio-title">Creating next level digital products</h1>
+      <div class="header-controls">
+        <nav class="filters">
+          <button class="filter-btn active" data-filter="all">all</button>
+          <button class="filter-btn" data-filter="design">design</button>
+          <button class="filter-btn" data-filter="development">
+            development
+          </button>
+        </nav>
+        <div class="view-toggles">
+          <button class="toggle-btn list-view-btn">≡</button>
+          <button class="toggle-btn grid-view-btn active">▦</button>
+        </div>
       </div>
+    </header>
 
-      <ul class="work-items mouse-pos-list-image-wrap">
-        <li
-          class="portfolio-item"
-          data-img="https://picsum.photos/id/1015/600/400"
-        >
-          <a href="#"
-            ><h4>TWICE</h4>
-            <p>Interaction & Development</p></a
-          >
-        </li>
-        <li
-          class="portfolio-item"
-          data-img="https://picsum.photos/id/1016/600/400"
-        >
-          <a href="#"
-            ><h4>The Damai</h4>
-            <p>Design & Development</p></a
-          >
-        </li>
-        <li
-          class="portfolio-item"
-          data-img="https://picsum.photos/id/1018/600/400"
-        >
-          <a href="#"
-            ><h4>FABRIC™</h4>
-            <p>Design & Development</p></a
-          >
-        </li>
-        <li
-          class="portfolio-item"
-          data-img="https://picsum.photos/id/1020/600/400"
-        >
-          <a href="#"
-            ><h4>Aanstekelijk</h4>
-            <p>Design & Development</p></a
-          >
-        </li>
-        <li
-          class="portfolio-item"
-          data-img="https://picsum.photos/id/1024/600/400"
-        >
-          <a href="#"
-            ><h4>Another Project</h4>
-            <p>Design & Development</p></a
-          >
-        </li>
-        <li
-          class="portfolio-item"
-          data-img="https://picsum.photos/id/1025/600/400"
-        >
-          <a href="#"
-            ><h4>Final Showcase</h4>
-            <p>Design & Development</p></a
-          >
-        </li>
-      </ul>
+    <main class="portfolio-grid">
+      <a href="#" class="portfolio-item" data-category="design development">
+        <div class="image-container">
+          <img src="https://picsum.photos/id/1018/800/600" alt="The Damai" />
+        </div>
+        <div class="details">
+          <h2 class="title">the damai</h2>
+          <div class="meta">
+            <span class="tags">design & development</span>
+            <span class="year">2024</span>
+          </div>
+        </div>
+      </a>
 
-      <!-- Button -->
-      <div class="btn-container">
-        <button class="button button--stroke" data-block="button">
-          <span class="button__label">More Work<sup>11</sup></span>
+      <a href="#" class="portfolio-item" data-category="design">
+        <div class="image-container">
+          <img src="https://picsum.photos/id/1025/800/600" alt="Fabric" />
+        </div>
+        <div class="details">
+          <h2 class="title">fabric™</h2>
+          <div class="meta">
+            <span class="tags">design</span>
+            <span class="year">2023</span>
+          </div>
+        </div>
+      </a>
 
-          <span class="button__flair"></span>
-        </button>
-      </div>
-    </div>
+      <a href="#" class="portfolio-item" data-category="development">
+        <div class="image-container">
+          <img src="https://picsum.photos/id/1035/800/600" alt="NextGen" />
+        </div>
+        <div class="details">
+          <h2 class="title">nextgen</h2>
+          <div class="meta">
+            <span class="tags">development</span>
+            <span class="year">2022</span>
+          </div>
+        </div>
+      </a>
+    </main>
 
-    <!-- Floating image -->
-    <div class="float-image-wrap">
-      <img id="float-img" src="" alt="preview" />
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
-      // Floating portfolio image
-      const floatWrap = document.querySelector(".float-image-wrap");
-      const floatImg = document.getElementById("float-img");
+      // animate portfolio items on load
+      document.addEventListener("DOMContentLoaded", () => {
+        const items = document.querySelectorAll(".portfolio-item");
+        gsap.set(items, { autoAlpha: 0, y: 50 });
+        gsap.to(items, {
+          duration: 0.8,
+          autoAlpha: 1,
+          y: 0,
+          ease: "power3.out",
+          stagger: 0.15,
+        });
+      });
 
-      document.querySelectorAll(".portfolio-item").forEach((item) => {
-        item.addEventListener("mouseenter", () => {
-          floatImg.src = item.getAttribute("data-img");
-          gsap.to(floatWrap, { opacity: 1, scale: 1, duration: 0.3 });
-        });
-        item.addEventListener("mouseleave", () => {
-          gsap.to(floatWrap, { opacity: 0, scale: 0.9, duration: 0.3 });
-        });
-        item.addEventListener("mousemove", (e) => {
-          gsap.to(floatWrap, {
-            x: e.clientX + 20,
-            y: e.clientY - 20,
-            duration: 0.3,
-            ease: "power2.out",
+      // filter logic
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      const items = document.querySelectorAll(".portfolio-item");
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          const filter = btn.dataset.filter;
+
+          items.forEach((item) => {
+            const categories = item.dataset.category.split(" ");
+            if (filter === "all" || categories.includes(filter)) {
+              gsap.to(item, {
+                autoAlpha: 1,
+                scale: 1,
+                duration: 0.3,
+                onStart: () => {
+                  item.style.display = "flex"; // ✅ show again
+                }
+              });
+              item.style.pointerEvents = "auto";
+            } else {
+              gsap.to(item, {
+                autoAlpha: 0,
+                scale: 0.9,
+                duration: 0.3,
+                onComplete: () => {
+                  item.style.display = "none"; // ✅ hide from layout
+                }
+              });
+              item.style.pointerEvents = "none";
+            }
           });
         });
       });
 
-      // Button animation
-      class Button {
-        constructor(buttonElement) {
-          this.block = buttonElement;
-          this.init();
-          this.initEvents();
-        }
-        init() {
-          const el = gsap.utils.selector(this.block);
-          this.DOM = { button: this.block, flair: el(".button__flair") };
-          this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
-          this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
-        }
-        getXY(e) {
-          const { left, top, width, height } =
-            this.DOM.button.getBoundingClientRect();
-          const xTransformer = gsap.utils.pipe(
-            gsap.utils.mapRange(0, width, 0, 100),
-            gsap.utils.clamp(0, 100)
-          );
-          const yTransformer = gsap.utils.pipe(
-            gsap.utils.mapRange(0, height, 0, 100),
-            gsap.utils.clamp(0, 100)
-          );
-          return {
-            x: xTransformer(e.clientX - left),
-            y: yTransformer(e.clientY - top),
-          };
-        }
-        initEvents() {
-          this.DOM.button.addEventListener("mouseenter", (e) => {
-            const { x, y } = this.getXY(e);
-            this.xSet(x);
-            this.ySet(y);
-            gsap.to(this.DOM.flair, {
-              scale: 1,
-              duration: 0.4,
-              ease: "power2.out",
-            });
-          });
-          this.DOM.button.addEventListener("mouseleave", (e) => {
-            const { x, y } = this.getXY(e);
-            gsap.killTweensOf(this.DOM.flair);
-            gsap.to(this.DOM.flair, {
-              xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
-              yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
-              scale: 0,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          });
-          this.DOM.button.addEventListener("mousemove", (e) => {
-            const { x, y } = this.getXY(e);
-            gsap.to(this.DOM.flair, {
-              xPercent: x,
-              yPercent: y,
-              duration: 0.4,
-              ease: "power2",
-            });
-          });
-        }
-      }
+      // view toggle logic
+      const gridBtn = document.querySelector(".grid-view-btn");
+      const listBtn = document.querySelector(".list-view-btn");
+      const grid = document.querySelector(".portfolio-grid");
 
-      const buttonElements = document.querySelectorAll('[data-block="button"]');
-      buttonElements.forEach((buttonElement) => {
-        new Button(buttonElement);
+      gridBtn.addEventListener("click", () => {
+        grid.classList.remove("list-view");
+        gridBtn.classList.add("active");
+        listBtn.classList.remove("active");
+      });
+
+      listBtn.addEventListener("click", () => {
+        grid.classList.add("list-view");
+        listBtn.classList.add("active");
+        gridBtn.classList.remove("active");
       });
     </script>
   </body>
