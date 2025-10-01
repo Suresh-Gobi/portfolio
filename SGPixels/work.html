@@ -15,6 +15,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   </head>
   <body>
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- optional: create 10 tail elements -->
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+
+    <div class="cursor-circle">View</div>
+
     <div id="scroll-animate">
       <div id="scroll-animate-main">
         <div class="wrapper-parallax">
@@ -27,9 +43,6 @@
                   </div>
                   <ul class="nav-menu">
                     <li><a href="#">Work</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
                   </ul>
                   <div class="menu-trigger" id="menuTrigger">
                     <span class="menu-label" id="hamburgerBtn">Menu</span>
@@ -52,10 +65,7 @@
                     <h5>Navigation</h5>
                     <div class="stripe"></div>
                     <ul>
-                      <li><a href="#">Home</a></li>
                       <li><a href="#">Work</a></li>
-                      <li><a href="#">About</a></li>
-                      <li><a href="#">Contact</a></li>
                     </ul>
                   </div>
                   <div class="menu-socials">
@@ -256,6 +266,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <script src="js/main.js"></script>
+    <script src="js/custom-cursor.js"></script>
     <script>
       // animate portfolio items on load
       document.addEventListener("DOMContentLoaded", () => {
@@ -471,14 +482,23 @@
         scrollFooter(window.scrollY, footerHeight);
 
         // on scroll
-        window.onscroll = function () {
+        let scrollPos = 0;
+        const scrollEase = 0.1;
+
+        function smoothScroll() {
           const scroll = window.scrollY;
+          scrollPos += (scroll - scrollPos) * scrollEase;
 
           document.getElementById("scroll-animate-main").style.top =
-            "-" + scroll + "px";
+            "-" + scrollPos + "px";
 
-          scrollFooter(scroll, footerHeight);
-        };
+          scrollFooter(scrollPos, footerHeight);
+
+          requestAnimationFrame(smoothScroll);
+        }
+
+        // start the smooth scroll loop
+        smoothScroll();
       });
     </script>
   </body>

@@ -11,7 +11,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* cursor: none; */
+  cursor: none;
 }
 
 @font-face {
@@ -225,37 +225,55 @@ body.no-scroll {
 }
 
 /*------------------ CUSTOM CURSOR ----------------- */
-/* .custom-cursor {
+.custom-cursor {
   position: fixed;
   top: 0;
   left: 0;
   width: 20px;
   height: 20px;
-  background: white;
+  background: rgb(255, 87, 87);
   border-radius: 50%;
   pointer-events: none;
-  transform: translate(50%, 50%);
-  z-index: 10000 !important;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  transition: transform 0.1s ease-out;
 }
-
+.cursor-tail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  background: rgba(255, 87, 87, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: transform 0.1s linear, opacity 0.2s ease;
+}
 .cursor-circle {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-100px, -100px);
-  width: 120px;
-  height: 120px;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100px;
+  height: 100px;
   background-color: rgb(255, 251, 0);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  color: rgb(19, 19, 19);
   font-size: 18px;
   text-transform: uppercase;
-  z-index: 9999 !important;
-  opacity: 0.8;
+  color: rgb(22, 22, 22);
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0;
+}
+.cursor-circle.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
 }
 
 .cursor-text {
@@ -265,14 +283,14 @@ body.no-scroll {
   padding: 12px 20px;
   border: 2px solid white;
   border-radius: 50%;
-  font-size: 12px;
+  font-size: 9px;
   color: white;
   white-space: nowrap;
   pointer-events: none;
   transform: translate(20px, 20px);
   z-index: 9998;
   transition: opacity 0.2s ease;
-} */
+}
 
 /* nav a:hover ~ .cursor-text,
 nav a:focus ~ .cursor-text {
@@ -838,7 +856,7 @@ p {
   border-width: 0.1rem;
   border-radius: 6.25rem;
   color: var(--color-surface-white);
-  /* cursor: pointer; */
+  cursor: none;
   display: inline-flex;
   font-size: 1.2rem;
   gap: 0.363636em;
@@ -863,6 +881,7 @@ p {
   border-radius: 6.25rem;
   content: "";
   pointer-events: none;
+  cursor: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -871,6 +890,7 @@ p {
 }
 
 .button__label {
+  cursor: none;
   position: relative;
   z-index: 1;
   text-align: center;
@@ -878,12 +898,14 @@ p {
   pointer-events: none;
 }
 .button__label sup {
+  cursor: none;
   font-size: 0.6em;
   margin-left: 3px;
   color: #3f3f3f;
   font-weight: bold;
 }
 .button__flair {
+  cursor: none;
   bottom: 0;
   left: 0;
   pointer-events: none;
@@ -919,6 +941,7 @@ p {
 .view-toggles .button.active,
 .view-toggles .button.active:hover,
 .view-toggles .button.active:focus {
+  cursor: none !important;
   border: none !important; /* remove any real border */
   outline: none !important; /* remove focus outline if present */
   box-shadow: none !important; /* remove any inset border-ish shadow */
@@ -931,6 +954,7 @@ p {
 .view-toggles .button.active::after,
 .view-toggles .button.active:hover::after,
 .view-toggles .button.active:focus::after {
+  cursor: none !important;
   display: none !important; /* simplest: hide the pseudo-element entirely */
   border: none !important;
   border-color: transparent !important;
@@ -965,6 +989,12 @@ p {
   -webkit-user-select: none;
   touch-action: manipulation;
 }
+
+.button,
+.button * {
+  cursor: none !important;
+}
+
 .modal-buttons,
 #modal-skills,
 #modal-description {
@@ -1368,4 +1398,3 @@ footer,
     font-size: 42px;
   }
 }
-
