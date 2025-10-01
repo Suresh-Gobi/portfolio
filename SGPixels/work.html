@@ -18,6 +18,7 @@
     <div class="custom-cursor" id="cursor"></div>
 
     <!-- optional: create 10 tail elements -->
+    <!-- <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
@@ -26,8 +27,7 @@
     <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
-    <div class="cursor-tail"></div>
-    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div> -->
 
     <div class="cursor-circle">View</div>
 
@@ -232,7 +232,72 @@
                     </div>
                   </div>
                 </a>
+                <a href="#" class="portfolio-item" data-category="development">
+                  <div class="image-container">
+                    <img
+                      src="https://picsum.photos/id/1035/800/600"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">nextgen</h2>
+                    <div class="meta">
+                      <span class="tags">development</span>
+                      <span class="year">2022</span>
+                    </div>
+                  </div>
+                </a>
+                <a href="#" class="portfolio-item" data-category="development">
+                  <div class="image-container">
+                    <img
+                      src="https://picsum.photos/id/1035/800/600"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">nextgen</h2>
+                    <div class="meta">
+                      <span class="tags">development</span>
+                      <span class="year">2022</span>
+                    </div>
+                  </div>
+                </a>
+                <a href="#" class="portfolio-item" data-category="development">
+                  <div class="image-container">
+                    <img
+                      src="https://picsum.photos/id/1035/800/600"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">nextgen</h2>
+                    <div class="meta">
+                      <span class="tags">development</span>
+                      <span class="year">2022</span>
+                    </div>
+                  </div>
+                </a>
+                <a href="#" class="portfolio-item" data-category="development">
+                  <div class="image-container">
+                    <img
+                      src="https://picsum.photos/id/1035/800/600"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">nextgen</h2>
+                    <div class="meta">
+                      <span class="tags">development</span>
+                      <span class="year">2022</span>
+                    </div>
+                  </div>
+                </a>
               </main>
+              <div class="pagination">
+                <button class="prev" disabled>Prev</button>
+                <span class="page-info">1 / 1</span>
+                <button class="next">Next</button>
+              </div>
             </div>
           </section>
 
@@ -267,6 +332,62 @@
 
     <script src="js/main.js"></script>
     <script src="js/custom-cursor.js"></script>
+
+    <script>
+      const itemsPerPage = 6; // how many items per page
+      const portfolioGrid = document.querySelector(".portfolio-grid");
+      const portfolioItems = Array.from(
+        portfolioGrid.querySelectorAll(".portfolio-item")
+      );
+
+      const prevBtn = document.querySelector(".pagination .prev");
+      const nextBtn = document.querySelector(".pagination .next");
+      const pageInfo = document.querySelector(".pagination .page-info");
+
+      let currentPage = 1;
+      const totalPages = Math.ceil(portfolioItems.length / itemsPerPage);
+
+      function showPage(page) {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        portfolioItems.forEach((item, index) => {
+          if (index >= start && index < end) {
+            item.style.display = "flex";
+            gsap.to(item, { autoAlpha: 1, scale: 1, duration: 0.3 });
+          } else {
+            gsap.to(item, {
+              autoAlpha: 0,
+              scale: 0.9,
+              duration: 0.3,
+              onComplete: () => (item.style.display = "none"),
+            });
+          }
+        });
+
+        pageInfo.textContent = `${page} / ${totalPages}`;
+        prevBtn.disabled = page === 1;
+        nextBtn.disabled = page === totalPages;
+      }
+
+      // Initial display
+      showPage(currentPage);
+
+      // Button events
+      prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          showPage(currentPage);
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          showPage(currentPage);
+        }
+      });
+    </script>
     <script>
       // animate portfolio items on load
       document.addEventListener("DOMContentLoaded", () => {
