@@ -1418,21 +1418,43 @@ footer,
   align-items: center;
   margin: 2rem 0;
   gap: 1rem;
+  font-family: "Inter", sans-serif;
 }
 
 .pagination button {
-  padding: 0.5rem 1rem;
-  background: #fff;
-  border: 1px solid #333;
-  cursor: pointer;
-  transition: 0.3s;
+  padding: 0.6rem 1.4rem;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  cursor: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #333;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pagination button:active:not(:disabled) {
+  transform: scale(0.95);
 }
 
 .pagination button:disabled {
   opacity: 0.5;
-  cursor: default;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 .pagination .page-info {
+  color: #161616;
   font-weight: bold;
+  font-size: 14px;
+  padding: 0 0.5rem;
 }
+
