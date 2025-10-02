@@ -334,7 +334,7 @@
     <script src="js/custom-cursor.js"></script>
 
     <script>
-      const itemsPerPage = 6; // how many items per page
+      let itemsPerPage = 6; // default for list view
       const portfolioGrid = document.querySelector(".portfolio-grid");
       const portfolioItems = Array.from(
         portfolioGrid.querySelectorAll(".portfolio-item")
@@ -344,10 +344,13 @@
       const nextBtn = document.querySelector(".pagination .next");
       const pageInfo = document.querySelector(".pagination .page-info");
 
+      const gridBtn = document.querySelector(".grid-view-btn");
+      const listBtn = document.querySelector(".list-view-btn");
+
       let currentPage = 1;
-      const totalPages = Math.ceil(portfolioItems.length / itemsPerPage);
 
       function showPage(page) {
+        const totalPages = Math.ceil(portfolioItems.length / itemsPerPage);
         const start = (page - 1) * itemsPerPage;
         const end = start + itemsPerPage;
 
@@ -370,10 +373,10 @@
         nextBtn.disabled = page === totalPages;
       }
 
-      // Initial display
+      // Initial load
       showPage(currentPage);
 
-      // Button events
+      // Pagination buttons
       prevBtn.addEventListener("click", () => {
         if (currentPage > 1) {
           currentPage--;
@@ -382,12 +385,35 @@
       });
 
       nextBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(portfolioItems.length / itemsPerPage);
         if (currentPage < totalPages) {
           currentPage++;
           showPage(currentPage);
         }
       });
+
+      // View toggle buttons
+      gridBtn.addEventListener("click", () => {
+        portfolioGrid.classList.remove("list-view");
+        gridBtn.classList.add("active");
+        listBtn.classList.remove("active");
+
+        itemsPerPage = 3; // grid view → 4 items per page
+        currentPage = 1;
+        showPage(currentPage);
+      });
+
+      listBtn.addEventListener("click", () => {
+        portfolioGrid.classList.add("list-view");
+        listBtn.classList.add("active");
+        gridBtn.classList.remove("active");
+
+        itemsPerPage = 6; // list view → 6 items per page
+        currentPage = 1;
+        showPage(currentPage);
+      });
     </script>
+
     <script>
       // animate portfolio items on load
       document.addEventListener("DOMContentLoaded", () => {
@@ -449,8 +475,7 @@
       });
 
       // view toggle logic
-      const gridBtn = document.querySelector(".grid-view-btn");
-      const listBtn = document.querySelector(".list-view-btn");
+
       const grid = document.querySelector(".portfolio-grid");
 
       gridBtn.addEventListener("click", () => {
