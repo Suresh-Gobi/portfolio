@@ -292,6 +292,15 @@ body.no-scroll {
   transition: opacity 0.2s ease;
 }
 
+@media (max-width: 768px) {
+  .custom-cursor {
+    display: none;
+  }
+  .cursor-tail {
+    display: none;
+  }
+}
+
 /* nav a:hover ~ .cursor-text,
 nav a:focus ~ .cursor-text {
   opacity: 0;
@@ -448,6 +457,14 @@ p {
 .menu-label {
   font-size: 18px;
   color: #fff;
+  text-transform: uppercase;
+  margin-right: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.menu-label-work {
+  font-size: 18px;
+  color: #111111;
   text-transform: uppercase;
   margin-right: 10px;
   transition: opacity 0.3s ease;
@@ -1117,6 +1134,19 @@ hr {
   margin: 0 auto;
 }
 
+@media (max-width: 768px) {
+  .portfolio-title {
+    font-size: 60px;
+  }
+  .portfolio-title span {
+    font-size: 100px;
+    /* display: block; */
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 2px;
+  }
+}
+
 .portfolio-title span {
   font-size: 100px;
   color: #e62727;
@@ -1138,6 +1168,7 @@ hr {
   align-items: center;
   width: 90%;
   margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 .filters {
@@ -1145,6 +1176,7 @@ hr {
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .filters button {
@@ -1198,6 +1230,49 @@ hr {
   justify-content: center;
 }
 
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .header-controls {
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .filters {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px 50px;
+    justify-content: center;
+  }
+
+  .filters button {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .view-toggles .button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-controls {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .filters button {
+    font-size: 16px;
+    padding: 15px;
+  }
+
+  .filters {
+    gap: 5px 5px;
+  }
+  .btn-container {
+    margin-top: 20px;
+  }
+}
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1457,4 +1532,3 @@ footer,
   font-size: 14px;
   padding: 0 0.5rem;
 }
-
