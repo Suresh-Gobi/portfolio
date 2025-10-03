@@ -306,7 +306,7 @@
 
           <footer>
             <div>
-              <h1 class="footer-title">Let’s work <span>together!</span></h1>
+              <h1 class="footer-title">Let’s work <span class="together">together!</span></h1>
             </div>
 
             <div class="footer-bottom">
@@ -337,7 +337,7 @@
     <script src="js/custom-cursor.js"></script>
 
     <script>
-      let itemsPerPage = 6; // default for list view
+      let itemsPerPage = 6; // default list view for desktop
       const portfolioGrid = document.querySelector(".portfolio-grid");
       const portfolioItems = Array.from(
         portfolioGrid.querySelectorAll(".portfolio-item")
@@ -352,6 +352,20 @@
 
       let currentPage = 1;
 
+      // Force grid mode on mobile
+      if (window.innerWidth <= 768) {
+        portfolioGrid.classList.remove("list-view"); // grid only
+        gridBtn.classList.add("active");
+        listBtn.classList.remove("active");
+        itemsPerPage = 6; // smaller pages for grid
+      } else {
+        // Default for desktop → list view
+        portfolioGrid.classList.add("list-view");
+        listBtn.classList.add("active");
+        gridBtn.classList.remove("active");
+        itemsPerPage = 6;
+      }
+
       function showPage(page) {
         const totalPages = Math.ceil(portfolioItems.length / itemsPerPage);
         const start = (page - 1) * itemsPerPage;
@@ -359,7 +373,7 @@
 
         portfolioItems.forEach((item, index) => {
           if (index >= start && index < end) {
-            item.style.display = "flex";
+            item.style.display = "flex"; // images visible
             gsap.to(item, { autoAlpha: 1, scale: 1, duration: 0.3 });
           } else {
             gsap.to(item, {
@@ -395,25 +409,31 @@
         }
       });
 
-      // View toggle buttons
+      // View toggle buttons (desktop only)
       gridBtn.addEventListener("click", () => {
-        portfolioGrid.classList.remove("list-view");
-        gridBtn.classList.add("active");
-        listBtn.classList.remove("active");
+        if (window.innerWidth > 768) {
+          // prevent toggling on mobile
+          portfolioGrid.classList.remove("list-view");
+          gridBtn.classList.add("active");
+          listBtn.classList.remove("active");
 
-        itemsPerPage = 3; // grid view → 4 items per page
-        currentPage = 1;
-        showPage(currentPage);
+          itemsPerPage = 3;
+          currentPage = 1;
+          showPage(currentPage);
+        }
       });
 
       listBtn.addEventListener("click", () => {
-        portfolioGrid.classList.add("list-view");
-        listBtn.classList.add("active");
-        gridBtn.classList.remove("active");
+        if (window.innerWidth > 768) {
+          // prevent toggling on mobile
+          portfolioGrid.classList.add("list-view");
+          listBtn.classList.add("active");
+          gridBtn.classList.remove("active");
 
-        itemsPerPage = 6; // list view → 6 items per page
-        currentPage = 1;
-        showPage(currentPage);
+          itemsPerPage = 6;
+          currentPage = 1;
+          showPage(currentPage);
+        }
       });
     </script>
 
