@@ -95,6 +95,7 @@
                       <button
                         class="button button--stroke filter-btn active"
                         data-filter="all"
+                        data-hash="all"
                         data-block="button"
                       >
                         <span class="button__label">All</span>
@@ -105,7 +106,8 @@
                     <div class="btn-container" id="design">
                       <button
                         class="button button--stroke filter-btn"
-                        data-filter="design"
+                        data-filter="webdesign"
+                        data-hash="web-design"
                         data-block="button"
                       >
                         <span class="button__label">WebDesign</span>
@@ -116,7 +118,8 @@
                     <div class="btn-container">
                       <button
                         class="button button--stroke filter-btn"
-                        data-filter="development"
+                        data-filter="webdev"
+                        data-hash="web-dev"
                         data-block="button"
                       >
                         <span class="button__label">WebDev</span>
@@ -127,7 +130,8 @@
                     <div class="btn-container">
                       <button
                         class="button button--stroke filter-btn"
-                        data-filter="development"
+                        data-filter="webapp"
+                        data-hash="web-apps"
                         data-block="button"
                       >
                         <span class="button__label">WebApps</span>
@@ -138,7 +142,8 @@
                     <div class="btn-container">
                       <button
                         class="button button--stroke filter-btn"
-                        data-filter="development"
+                        data-filter="graphics"
+                        data-hash="graphics"
                         data-block="button"
                       >
                         <span class="button__label">Graphics</span>
@@ -148,7 +153,8 @@
                     <div class="btn-container">
                       <button
                         class="button button--stroke filter-btn"
-                        data-filter="development"
+                        data-filter="seo"
+                        data-hash="seo"
                         data-block="button"
                       >
                         <span class="button__label">SEO</span>
@@ -280,7 +286,7 @@
                     </div>
                   </div>
                 </a>
-                <a href="#" class="portfolio-item" data-category="development">
+                <a href="#" class="portfolio-item" data-category="webdesign">
                   <div class="image-container">
                     <img
                       src="https://picsum.photos/id/1035/800/600"
@@ -306,7 +312,9 @@
 
           <footer>
             <div>
-              <h1 class="footer-title">Let’s work <span class="together">together!</span></h1>
+              <h1 class="footer-title">
+                Let’s work <span class="together">together!</span>
+              </h1>
             </div>
 
             <div class="footer-bottom">
@@ -438,79 +446,104 @@
     </script>
 
     <script>
-      // animate portfolio items on load
-      document.addEventListener("DOMContentLoaded", () => {
+      window.addEventListener("load", () => {
         const items = document.querySelectorAll(".portfolio-item");
-        gsap.set(items, { autoAlpha: 0, y: 50 });
-        gsap.to(items, {
-          duration: 0.8,
-          autoAlpha: 1,
-          y: 0,
-          ease: "power3.out",
-          stagger: 0.15,
-        });
-
-        // --- set list mode on page load ---
         const grid = document.querySelector(".portfolio-grid");
         const listBtn = document.querySelector(".list-view-btn");
         const gridBtn = document.querySelector(".grid-view-btn");
+        const toggleBtns = document.querySelector(".view-toggles");
+        const filterBtns = document.querySelectorAll(".filter-btn");
 
-        grid.classList.add("list-view"); // activate list mode
-        listBtn.classList.add("active"); // mark list button active
-        gridBtn.classList.remove("active"); // mark grid button inactive
-      });
+        // --- Mobile check ---
+        if (window.innerWidth <= 768) {
+          grid.classList.remove("list-view");
+          gridBtn.classList.add("active");
+          listBtn.classList.remove("active");
+          if (toggleBtns) toggleBtns.style.display = "none";
+        } else {
+          grid.classList.add("list-view");
+          listBtn.classList.add("active");
+          gridBtn.classList.remove("active");
+        }
 
-      // filter logic
-      const filterBtns = document.querySelectorAll(".filter-btn");
-      const items = document.querySelectorAll(".portfolio-item");
-
-      filterBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          filterBtns.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          const filter = btn.dataset.filter;
-
+        // --- Filter function ---
+        function applyFilter(filter) {
           items.forEach((item) => {
             const categories = item.dataset.category.split(" ");
             if (filter === "all" || categories.includes(filter)) {
-              gsap.to(item, {
-                autoAlpha: 1,
-                scale: 1,
-                duration: 0.3,
-                onStart: () => {
-                  item.style.display = "flex"; // ✅ show again
-                },
-              });
+              item.style.display = "flex";
+              gsap.to(item, { autoAlpha: 1, scale: 1, duration: 0.3 });
               item.style.pointerEvents = "auto";
             } else {
               gsap.to(item, {
                 autoAlpha: 0,
                 scale: 0.9,
                 duration: 0.3,
-                onComplete: () => {
-                  item.style.display = "none"; // ✅ hide from layout
-                },
+                onComplete: () => (item.style.display = "none"),
               });
               item.style.pointerEvents = "none";
             }
           });
+        }
+
+        // --- Apply hash filter on load ---
+        let currentHash = window.location.hash.replace("#", "");
+        let initialFilter = "all";
+
+        if (currentHash) {
+          const hashBtn = Array.from(filterBtns).find(
+            (b) => b.dataset.hash === currentHash
+          );
+          if (hashBtn) {
+            initialFilter = hashBtn.dataset.filter;
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            hashBtn.classList.add("active");
+          }
+        } else {
+          const allBtn = Array.from(filterBtns).find(
+            (b) => b.dataset.filter === "all"
+          );
+          if (allBtn) {
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            allBtn.classList.add("active");
+          }
+        }
+
+        // Apply the filter **immediately**
+        applyFilter(initialFilter);
+
+        // --- Filter button click events ---
+        filterBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filter = btn.dataset.filter;
+            applyFilter(filter);
+
+            const hash = btn.dataset.hash;
+            if (hash) {
+              history.replaceState(null, null, `#${hash}`);
+            } else {
+              history.replaceState(null, null, "#");
+            }
+          });
         });
-      });
 
-      // view toggle logic
+        // --- View toggle logic for desktop ---
+        if (window.innerWidth > 768) {
+          gridBtn.addEventListener("click", () => {
+            grid.classList.remove("list-view");
+            gridBtn.classList.add("active");
+            listBtn.classList.remove("active");
+          });
 
-      const grid = document.querySelector(".portfolio-grid");
-
-      gridBtn.addEventListener("click", () => {
-        grid.classList.remove("list-view");
-        gridBtn.classList.add("active");
-        listBtn.classList.remove("active");
-      });
-
-      listBtn.addEventListener("click", () => {
-        grid.classList.add("list-view");
-        listBtn.classList.add("active");
-        gridBtn.classList.remove("active");
+          listBtn.addEventListener("click", () => {
+            grid.classList.add("list-view");
+            listBtn.classList.add("active");
+            gridBtn.classList.remove("active");
+          });
+        }
       });
     </script>
 
