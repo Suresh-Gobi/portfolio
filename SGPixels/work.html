@@ -194,10 +194,15 @@
 
               <main class="portfolio-grid">
                 <!-- Web Design & Development Projects -->
-                <a href="#" class="portfolio-item" data-category="webdesign">
+                <a
+                  href="./pages/webdesign/Fish Exports.html"
+                  class="portfolio-item"
+                  data-category="webdesign"
+                  target="_blank"
+                >
                   <div class="image-container">
                     <img
-                      src="./img//portfolio//webdesign/Fish Export Company/01.jpg"
+                      src="../../img//portfolio//webdesign/Fish Export Company/01.jpg"
                       alt="NextGen"
                     />
                   </div>
@@ -210,9 +215,10 @@
                   </div>
                 </a>
                 <a
-                  href="#"
+                  href="./pages/webdesign/10-eleven.html"
                   class="portfolio-item"
                   data-category="webdesign webdev"
+                  target="_blank"
                 >
                   <div class="image-container">
                     <img
@@ -230,7 +236,7 @@
                 </a>
 
                 <a
-                  href="#"
+                  href="./pages/webdesign/Auto-point SriLanka.html"
                   class="portfolio-item"
                   data-category="webdesign webdev"
                 >
@@ -249,7 +255,12 @@
                   </div>
                 </a>
 
-                <a href="#" class="portfolio-item" data-category="webdesign">
+                <a
+                  href="./pages/webdesign/promotional-page.html"
+                  class="portfolio-item"
+                  data-category="webdesign"
+                  target="_blank"
+                >
                   <div class="image-container">
                     <img
                       src="./img/portfolio/webdesign/Promotional landing page/01.jpg"
@@ -265,7 +276,12 @@
                   </div>
                 </a>
 
-                <a href="#" class="portfolio-item" data-category="webdesign">
+                <a
+                  href="./pages/webdesign/acig.html"
+                  class="portfolio-item"
+                  data-category="webdesign"
+                  target="_blank"
+                >
                   <div class="image-container">
                     <img
                       src="./img/portfolio/webdesign/ACIG/01.jpg"
@@ -280,7 +296,12 @@
                     </div>
                   </div>
                 </a>
-                <a href="#" class="portfolio-item" data-category="webdesign">
+                <a
+                  href="./pages/webdesign/SJH.html"
+                  class="portfolio-item"
+                  data-category="webdesign"
+                  target="_blank"
+                >
                   <div class="image-container">
                     <img
                       src="./img/portfolio/webdesign/SJH/01.jpg"
@@ -296,9 +317,10 @@
                   </div>
                 </a>
                 <a
-                  href="#"
+                  href="./pages/webdesign/blockchainbpo.html"
                   class="portfolio-item"
                   data-category="webdesign webdev"
+                  target="_blank"
                 >
                   <div class="image-container">
                     <img
@@ -314,7 +336,7 @@
                     </div>
                   </div>
                 </a>
-                <a href="#" class="portfolio-item" data-category="webdev">
+                <a href="https://kidsandteensfoundation.org/" class="portfolio-item" data-category="webdev">
                   <div class="image-container">
                     <img
                       src="./img/portfolio/webdesign/Kids&Teens Foundation/01.jpg"
@@ -329,7 +351,7 @@
                     </div>
                   </div>
                 </a>
-                <a href="#" class="portfolio-item" data-category="web-dev">
+                <a href="https://www.ktdoctor.com/" class="portfolio-item" data-category="web-dev">
                   <div class="image-container">
                     <img
                       src="./img/portfolio/webdesign/Kids&Teens Medical Group/01.jpg"
@@ -754,114 +776,6 @@
       });
     </script>
 
-    <script>
-      // Floating portfolio image for list-view only
-      const floatWrap = document.querySelector(".float-image-wrap");
-      const floatImg = document.getElementById("float-img");
-
-      document
-        .querySelectorAll(".portfolio-grid .portfolio-item")
-        .forEach((item) => {
-          const imgSrc =
-            item.getAttribute("data-img") || item.querySelector("img").src;
-
-          item.addEventListener("mouseenter", () => {
-            // Only show floating image in list-view
-            if (
-              item.closest(".portfolio-grid").classList.contains("list-view")
-            ) {
-              floatImg.src = imgSrc;
-              gsap.to(floatWrap, { opacity: 1, scale: 1, duration: 0.3 });
-            }
-          });
-
-          item.addEventListener("mouseleave", () => {
-            gsap.to(floatWrap, { opacity: 0, scale: 0.9, duration: 0.3 });
-          });
-
-          item.addEventListener("mousemove", (e) => {
-            // Only move floating image in list-view
-            if (
-              item.closest(".portfolio-grid").classList.contains("list-view")
-            ) {
-              gsap.to(floatWrap, {
-                x: e.clientX + 20,
-                y: e.clientY - 20,
-                duration: 0.3,
-                ease: "power2.out",
-              });
-            }
-          });
-        });
-
-      // Button animation
-      class Button {
-        constructor(buttonElement) {
-          this.block = buttonElement;
-          this.init();
-          this.initEvents();
-        }
-        init() {
-          const el = gsap.utils.selector(this.block);
-          this.DOM = { button: this.block, flair: el(".button__flair") };
-          this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
-          this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
-        }
-        getXY(e) {
-          const { left, top, width, height } =
-            this.DOM.button.getBoundingClientRect();
-          const xTransformer = gsap.utils.pipe(
-            gsap.utils.mapRange(0, width, 0, 100),
-            gsap.utils.clamp(0, 100)
-          );
-          const yTransformer = gsap.utils.pipe(
-            gsap.utils.mapRange(0, height, 0, 100),
-            gsap.utils.clamp(0, 100)
-          );
-          return {
-            x: xTransformer(e.clientX - left),
-            y: yTransformer(e.clientY - top),
-          };
-        }
-        initEvents() {
-          this.DOM.button.addEventListener("mouseenter", (e) => {
-            const { x, y } = this.getXY(e);
-            this.xSet(x);
-            this.ySet(y);
-            gsap.to(this.DOM.flair, {
-              scale: 1,
-              duration: 0.4,
-              ease: "power2.out",
-            });
-          });
-          this.DOM.button.addEventListener("mouseleave", (e) => {
-            const { x, y } = this.getXY(e);
-            gsap.killTweensOf(this.DOM.flair);
-            gsap.to(this.DOM.flair, {
-              xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
-              yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
-              scale: 0,
-              duration: 0.3,
-              ease: "power2.out",
-            });
-          });
-          this.DOM.button.addEventListener("mousemove", (e) => {
-            const { x, y } = this.getXY(e);
-            gsap.to(this.DOM.flair, {
-              xPercent: x,
-              yPercent: y,
-              duration: 0.4,
-              ease: "power2",
-            });
-          });
-        }
-      }
-
-      const buttonElements = document.querySelectorAll('[data-block="button"]');
-      buttonElements.forEach((buttonElement) => {
-        new Button(buttonElement);
-      });
-    </script>
     <script>
       function scrollFooter(scrollY, heightFooter) {
         const footer = document.querySelector("footer");

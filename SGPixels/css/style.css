@@ -1298,7 +1298,7 @@ hr {
   .cursor-circle {
     display: none;
   }
-    footer {
+  footer {
     position: relative !important;
     min-height: auto !important;
     padding: 30px 15px !important;
@@ -1580,4 +1580,159 @@ footer,
   font-weight: bold;
   font-size: 14px;
   padding: 0 0.5rem;
+}
+
+/*------------------ Work Page Design ----------------- */
+.layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.layout .nav-menu li a {
+  color: #161616;
+}
+.layout .nav-line {
+  background: #16161638;
+}
+
+.layout .btn-container {
+  padding-top: 150px;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+  z-index: 10;
+  position: fixed;
+}
+
+.project-info {
+  flex: 0 0 60%;
+  padding-top: 150px !important;
+  padding: 80px 40px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-info .title {
+  color: #242424 !important;
+  font-weight: 400 !important;
+  text-transform: capitalize;
+  line-height: 1.1;
+  margin-bottom: 50px;
+}
+
+.info-grid {
+  display: grid;
+  gap: 30px;
+}
+
+.label {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #777;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 6px;
+}
+
+.content-work {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.cards-area {
+  flex: 1;
+  padding: 100px 20px;
+}
+
+.card-wrapper {
+  width: 100%;
+  perspective: 500px;
+  margin-bottom: 6%;
+}
+
+.card {
+  width: 450px;
+  height: 450px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+}
+@media (max-width: 900px) {
+  .layout {
+    display: block;
+    flex-direction: column;
+  }
+  .project-info {
+    position: relative;
+    height: auto;
+    border-right: none;
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 600px) {
+  .project-info {
+    padding: 40px 15px;
+  }
+
+  .project-info .title {
+    font-size: 24px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+
+  .content {
+    font-size: 14px;
+  }
+
+  .cards-area {
+    padding: 40px 10px;
+  }
+
+  .card {
+    height: 300px;
+  }
+  .layout .btn-container {
+    position: relative;
+    margin-top: -20vh;
+    padding-left: 200px;
+  }
+  .project-info {
+    flex: 0 0 40%;
+  }
+  .card {
+    width: 100%;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 400px) {
+  .project-info .title {
+    font-size: 20px;
+  }
+
+  .info-block {
+    display: flex;
+  }
+
+  .content {
+    font-size: 13px;
+  }
+  .layout .btn-container {
+    position: relative;
+  }
+  .project-info {
+    flex: 0 0 40%;
+  }
+  .card {
+    width: 100%;
+  }
 }

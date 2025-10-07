@@ -1,104 +1,102 @@
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
-
   // ---------------------------
   // PRE LOADER ANIMATIONS
   // ---------------------------
-//   document.body.classList.add("no-scroll");
-//   const logo = document.getElementById("logo");
-//   const totalDuration = 5; // seconds for the logo fill
+  //   document.body.classList.add("no-scroll");
+  //   const logo = document.getElementById("logo");
+  //   const totalDuration = 5; // seconds for the logo fill
 
-//   // Animate logo fill dynamically
-//   gsap.to(logo, {
-//     duration: totalDuration,
-//     backgroundPosition: "0% 100%", // animate from top to bottom
-//     ease: "power2.inOut",
-//   });
+  //   // Animate logo fill dynamically
+  //   gsap.to(logo, {
+  //     duration: totalDuration,
+  //     backgroundPosition: "0% 100%", // animate from top to bottom
+  //     ease: "power2.inOut",
+  //   });
 
-//   // Slot-machine style number animation
-//   const milestones = [10, 36, 58, 76, 99];
-//   const digit2 = document.querySelector(".number-2 .number-wrap");
-//   const digit3 = document.querySelector(".number-3 .number-wrap");
+  //   // Slot-machine style number animation
+  //   const milestones = [10, 36, 58, 76, 99];
+  //   const digit2 = document.querySelector(".number-2 .number-wrap");
+  //   const digit3 = document.querySelector(".number-3 .number-wrap");
 
-//   // Timeline for preloader animation
-//   let preloaderTl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+  //   // Timeline for preloader animation
+  //   let preloaderTl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
 
-//   milestones.forEach((milestone) => {
-//     preloaderTl.to(
-//       {},
-//       {
-//         duration: totalDuration / milestones.length,
-//         onUpdate: function () {
-//           const tens = Math.floor((milestone % 100) / 10);
-//           const ones = milestone % 10;
+  //   milestones.forEach((milestone) => {
+  //     preloaderTl.to(
+  //       {},
+  //       {
+  //         duration: totalDuration / milestones.length,
+  //         onUpdate: function () {
+  //           const tens = Math.floor((milestone % 100) / 10);
+  //           const ones = milestone % 10;
 
-//           gsap.to(digit2, { y: -tens + "em", duration: 0.3 });
-//           gsap.to(digit3, { y: -ones + "em", duration: 0.3 });
-//         },
-//       }
-//     );
-//   });
+  //           gsap.to(digit2, { y: -tens + "em", duration: 0.3 });
+  //           gsap.to(digit3, { y: -ones + "em", duration: 0.3 });
+  //         },
+  //       }
+  //     );
+  //   });
 
-//   // Fade out preloader after completion and start hero animations
-//   preloaderTl.to("#preloader", {
-//     opacity: 0,
-//     duration: 1,
-//     onComplete: () => {
-//       document.getElementById("preloader").style.display = "none";
-//       startHeroAnimations(); // trigger hero animations
-//       document.body.classList.remove("no-scroll");
-//     },
-//   });
+  //   // Fade out preloader after completion and start hero animations
+  //   preloaderTl.to("#preloader", {
+  //     opacity: 0,
+  //     duration: 1,
+  //     onComplete: () => {
+  //       document.getElementById("preloader").style.display = "none";
+  //       startHeroAnimations(); // trigger hero animations
+  //       document.body.classList.remove("no-scroll");
+  //     },
+  //   });
 
-//   // --- Hero section animations (paused until preloader finishes) ---
-//   const heroTl = gsap.timeline({ paused: true });
+  //   // --- Hero section animations (paused until preloader finishes) ---
+  //   const heroTl = gsap.timeline({ paused: true });
 
-//   // Profile header animation
-//   heroTl.from(".profile-pic", {
-//     scale: 0,
-//     opacity: 0,
-//     duration: 0.8,
-//     ease: "back.out(1.7)",
-//   });
-//   heroTl.from(
-//     ".profile-header h2",
-//     { y: 30, opacity: 0, duration: 0.8 },
-//     "-=0.5"
-//   );
+  //   // Profile header animation
+  //   heroTl.from(".profile-pic", {
+  //     scale: 0,
+  //     opacity: 0,
+  //     duration: 0.8,
+  //     ease: "back.out(1.7)",
+  //   });
+  //   heroTl.from(
+  //     ".profile-header h2",
+  //     { y: 30, opacity: 0, duration: 0.8 },
+  //     "-=0.5"
+  //   );
 
-//   // Hero main title animation
-//   heroTl.from(".hero-content h1", { y: 50, opacity: 0, duration: 1 });
-//   heroTl.from(
-//     ".hero-content h1 span",
-//     { scale: 0, opacity: 0, duration: 0.5 },
-//     "-=0.5"
-//   );
+  //   // Hero main title animation
+  //   heroTl.from(".hero-content h1", { y: 50, opacity: 0, duration: 1 });
+  //   heroTl.from(
+  //     ".hero-content h1 span",
+  //     { scale: 0, opacity: 0, duration: 0.5 },
+  //     "-=0.5"
+  //   );
 
-//   // description animation
-//   heroTl.from("#linesText1", { y: 50, opacity: 0, duration: 1 });
-//   heroTl.from("#linesText2", { y: 50, opacity: 0, duration: 0.5 }, "-=0.5");
+  //   // description animation
+  //   heroTl.from("#linesText1", { y: 50, opacity: 0, duration: 1 });
+  //   heroTl.from("#linesText2", { y: 50, opacity: 0, duration: 0.5 }, "-=0.5");
 
-//   // Animate all nav links together
-//   heroTl.from(
-//     ".nav-menu",
-//     {
-//       y: 30,
-//       opacity: 0,
-//       duration: 0.6,
-//       stagger: 0.2, // makes them appear one after another
-//     },
-//     "-=0.3"
-//   );
+  //   // Animate all nav links together
+  //   heroTl.from(
+  //     ".nav-menu",
+  //     {
+  //       y: 30,
+  //       opacity: 0,
+  //       duration: 0.6,
+  //       stagger: 0.2, // makes them appear one after another
+  //     },
+  //     "-=0.3"
+  //   );
 
-//   // Function to start hero animations
-//   function startHeroAnimations() {
-//     heroTl.play();
-//     if (typeof startTextAnimation === "function") {
-//       startTextAnimation(); // optional additional animations
-//     }
-//   }
-  
+  //   // Function to start hero animations
+  //   function startHeroAnimations() {
+  //     heroTl.play();
+  //     if (typeof startTextAnimation === "function") {
+  //       startTextAnimation(); // optional additional animations
+  //     }
+  //   }
 
   // ---------------------------
   // BACKGROUND IMAGE ANIMTAION
@@ -254,4 +252,142 @@ function startTextAnimation() {
   animateText("#linesText", "lines", 1);
 }
 
+// ---------------------------
+// Work Page Card Scroll Animation
+// ---------------------------
+gsap.registerPlugin(ScrollTrigger);
 
+const cardsWrappers = gsap.utils.toArray(".card-wrapper");
+const cards = gsap.utils.toArray(".card");
+
+cardsWrappers.forEach((wrapper, i) => {
+  const card = cards[i];
+  let scale = 1,
+    rotation = 0;
+  if (i !== cards.length - 1) {
+    scale = 0.9 + 0.025 * i;
+    rotation = -10;
+  }
+
+  gsap.to(card, {
+    scale: scale,
+    rotationX: rotation,
+    transformOrigin: "top center",
+    ease: "none",
+    scrollTrigger: {
+      trigger: wrapper,
+      start: "top 20%",
+      end: "bottom bottom",
+      endTrigger: ".wrapper",
+      scrub: true,
+      pin: wrapper,
+      pinSpacing: false,
+      markers: false,
+    },
+  });
+});
+
+// ---------------------------
+// Floating Image
+// ---------------------------
+// Floating portfolio image for list-view only
+const floatWrap = document.querySelector(".float-image-wrap");
+const floatImg = document.getElementById("float-img");
+
+document.querySelectorAll(".portfolio-grid .portfolio-item").forEach((item) => {
+  const imgSrc = item.getAttribute("data-img") || item.querySelector("img").src;
+
+  item.addEventListener("mouseenter", () => {
+    // Only show floating image in list-view
+    if (item.closest(".portfolio-grid").classList.contains("list-view")) {
+      floatImg.src = imgSrc;
+      gsap.to(floatWrap, { opacity: 1, scale: 1, duration: 0.3 });
+    }
+  });
+
+  item.addEventListener("mouseleave", () => {
+    gsap.to(floatWrap, { opacity: 0, scale: 0.9, duration: 0.3 });
+  });
+
+  item.addEventListener("mousemove", (e) => {
+    // Only move floating image in list-view
+    if (item.closest(".portfolio-grid").classList.contains("list-view")) {
+      gsap.to(floatWrap, {
+        x: e.clientX + 20,
+        y: e.clientY - 20,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    }
+  });
+});
+// ---------------------------
+// Button Animation
+// ---------------------------
+// Button animation
+class Button {
+  constructor(buttonElement) {
+    this.block = buttonElement;
+    this.init();
+    this.initEvents();
+  }
+  init() {
+    const el = gsap.utils.selector(this.block);
+    this.DOM = { button: this.block, flair: el(".button__flair") };
+    this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
+    this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
+  }
+  getXY(e) {
+    const { left, top, width, height } =
+      this.DOM.button.getBoundingClientRect();
+    const xTransformer = gsap.utils.pipe(
+      gsap.utils.mapRange(0, width, 0, 100),
+      gsap.utils.clamp(0, 100)
+    );
+    const yTransformer = gsap.utils.pipe(
+      gsap.utils.mapRange(0, height, 0, 100),
+      gsap.utils.clamp(0, 100)
+    );
+    return {
+      x: xTransformer(e.clientX - left),
+      y: yTransformer(e.clientY - top),
+    };
+  }
+  initEvents() {
+    this.DOM.button.addEventListener("mouseenter", (e) => {
+      const { x, y } = this.getXY(e);
+      this.xSet(x);
+      this.ySet(y);
+      gsap.to(this.DOM.flair, {
+        scale: 1,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    });
+    this.DOM.button.addEventListener("mouseleave", (e) => {
+      const { x, y } = this.getXY(e);
+      gsap.killTweensOf(this.DOM.flair);
+      gsap.to(this.DOM.flair, {
+        xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
+        yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
+        scale: 0,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    });
+    this.DOM.button.addEventListener("mousemove", (e) => {
+      const { x, y } = this.getXY(e);
+      gsap.to(this.DOM.flair, {
+        xPercent: x,
+        yPercent: y,
+        duration: 0.4,
+        ease: "power2",
+      });
+    });
+  }
+}
+
+const buttonElements = document.querySelectorAll('[data-block="button"]');
+buttonElements.forEach((buttonElement) => {
+  new Button(buttonElement);
+});
