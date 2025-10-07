@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./img/favicon.png" />
+    <title>Work</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- GSAP & ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <div id="preloader">
+      <div id="logo"></div>
+
+      <div class="loading-container">
+        <div class="loading-screen">
+          <div class="numbers">
+            <div class="number number-2 number-ten-times">
+              <div class="number-wrap">
+                <p class="number-p">0</p>
+                <p class="number-p">1</p>
+                <p class="number-p">2</p>
+                <p class="number-p">3</p>
+                <p class="number-p">4</p>
+                <p class="number-p">5</p>
+                <p class="number-p">6</p>
+                <p class="number-p">7</p>
+                <p class="number-p">8</p>
+                <p class="number-p">9</p>
+              </div>
+            </div>
+
+            <div class="number number-3 number-ten-times">
+              <div class="number-wrap">
+                <p class="number-p">0</p>
+                <p class="number-p">1</p>
+                <p class="number-p">2</p>
+                <p class="number-p">3</p>
+                <p class="number-p">4</p>
+                <p class="number-p">5</p>
+                <p class="number-p">6</p>
+                <p class="number-p">7</p>
+                <p class="number-p">8</p>
+                <p class="number-p">9</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- optional: create 10 tail elements -->
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+
+    <div class="cursor-circle">View</div>
+
+    <div id="scroll-animate">
+      <div id="scroll-animate-main">
+        <div class="wrapper-parallax">
+          <section class="content">
+            <div class="work-container">
+              <nav class="navbar">
+                <div class="nav-container">
+                  <div class="logo">
+                    <img src="img/logo01.png" alt="Logo" />
+                  </div>
+                  <ul class="nav-menu">
+                    <li><a href="#">Work</a></li>
+                  </ul>
+                  <div class="menu-trigger" id="menuTrigger">
+                    <span class="menu-label-work" id="hamburgerBtn">Menu</span>
+                  </div>
+                </div>
+                <div class="nav-line"></div>
+              </nav>
+
+              <!-- Mobile Menu -->
+              <div class="mobile-menu" id="mobileMenu">
+                <div class="menu-top">
+                  <div class="menu-trigger" id="menuTriggerInside">
+                    <div class="btn btn-hamburger" id="hamburgerInside">
+                      <div class="btn-click"><div class="btn-bars"></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="menu-inner">
+                  <div class="menu-nav">
+                    <h5>Navigation</h5>
+                    <div class="stripe"></div>
+                    <ul>
+                      <li><a href="#">Work</a></li>
+                    </ul>
+                  </div>
+                  <div class="menu-socials">
+                    <h5>For Your Attention</h5>
+                    <div class="stripe"></div>
+                    <ul>
+                      <li>
+                        <a href="#"
+                          >The remaining pages are under construction. You can
+                          view my projects here.</a
+                        >
+                      </li>
+                      <li><a href="#"></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <header class="portfolio-header">
+                <h1 class="portfolio-title" id="wordsText">
+                  Transforming Ideas into Impactful Digital Products
+                  <span> .</span>
+                </h1>
+                <div class="header-controls">
+                  <nav class="filters">
+                    <div class="btn-container">
+                      <button
+                        class="button button--stroke filter-btn active"
+                        data-filter="all"
+                        data-hash="all"
+                        data-block="button"
+                      >
+                        <span class="button__label">All</span>
+                        <span class="button__flair"></span>
+                      </button>
+                    </div>
+
+                    <div class="btn-container" id="design">
+                      <button
+                        class="button button--stroke filter-btn"
+                        data-filter="webdesign"
+                        data-hash="web-design"
+                        data-block="button"
+                      >
+                        <span class="button__label">WebDesign</span>
+                        <span class="button__flair"></span>
+                      </button>
+                    </div>
+
+                    <div class="btn-container">
+                      <button
+                        class="button button--stroke filter-btn"
+                        data-filter="webdev"
+                        data-hash="web-dev"
+                        data-block="button"
+                      >
+                        <span class="button__label">WebDev</span>
+                        <span class="button__flair"></span>
+                      </button>
+                    </div>
+
+                    <div class="btn-container">
+                      <button
+                        class="button button--stroke filter-btn"
+                        data-filter="webapp"
+                        data-hash="web-apps"
+                        data-block="button"
+                      >
+                        <span class="button__label">WebApps</span>
+                        <span class="button__flair"></span>
+                      </button>
+                    </div>
+
+                    <div class="btn-container">
+                      <button
+                        class="button button--stroke filter-btn"
+                        data-filter="graphics"
+                        data-hash="graphics"
+                        data-block="button"
+                      >
+                        <span class="button__label">Graphics</span>
+                        <span class="button__flair"></span>
+                      </button>
+                    </div>
+                    <div class="btn-container">
+                      <button
+                        class="button button--stroke filter-btn"
+                        data-filter="seo"
+                        data-hash="seo"
+                        data-block="button"
+                      >
+                        <span class="button__label">SEO</span>
+                        <span class="button__flair"></span>
+                      </button>
+                    </div>
+                  </nav>
+
+                  <!-- View Toggles -->
+                  <div class="view-toggles">
+                    <div class="btn-container">
+                      <button
+                        class="button button--stroke toggle-btn list-view-btn"
+                        data-block="button"
+                      >
+                        <span class="button__label"
+                          ><i class="fas fa-bars"></i
+                        ></span>
+                        <span class="button__flair"></span>
+                      </button>
+                    </div>
+
+                    <div class="btn-container">
+                      <button
+                        class="button button--stroke toggle-btn grid-view-btn active"
+                        data-block="button"
+                      >
+                        <span class="button__label"
+                          ><i class="fa fa-th-large"></i
+                        ></span>
+                        <span class="button__flair"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </header>
+
+              <main class="portfolio-grid">
+                <!-- Web Design & Development Projects -->
+                <a
+                  href="./pages/webdesign/Fish Exports.html"
+                  class="portfolio-item"
+                  data-category="webdesign"
+                  target="_blank"
+                >
+                  <div class="image-container">
+                    <img
+                      src="../../img//portfolio//webdesign/Fish Export Company/01.jpg"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Fish Exports</h2>
+                    <div class="meta">
+                      <span class="tags">design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="./pages/webdesign/10-eleven.html"
+                  class="portfolio-item"
+                  data-category="webdesign webdev"
+                  target="_blank"
+                >
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/webdesign/10 Eleven/01.jpg"
+                      alt="10 Eleven"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">10 Eleven Consultants</h2>
+                    <div class="meta">
+                      <span class="tags">design & development</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a
+                  href="./pages/webdesign/Auto-point SriLanka.html"
+                  class="portfolio-item"
+                  data-category="webdesign webdev"
+                >
+                  <div class="image-container">
+                    <img
+                      src="./img//portfolio/webdesign/Autopoint Sri Lanka/01.jpg"
+                      alt="Fabric"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Autopoint Sri Lanka</h2>
+                    <div class="meta">
+                      <span class="tags">design & development</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a
+                  href="./pages/webdesign/promotional-page.html"
+                  class="portfolio-item"
+                  data-category="webdesign"
+                  target="_blank"
+                >
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/webdesign/Promotional landing page/01.jpg"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Promotional Landing Page</h2>
+                    <div class="meta">
+                      <span class="tags">design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a
+                  href="./pages/webdesign/acig.html"
+                  class="portfolio-item"
+                  data-category="webdesign"
+                  target="_blank"
+                >
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/webdesign/ACIG/01.jpg"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">ACIG</h2>
+                    <div class="meta">
+                      <span class="tags">design</span>
+                      <span class="year">2024</span>
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="./pages/webdesign/SJH.html"
+                  class="portfolio-item"
+                  data-category="webdesign"
+                  target="_blank"
+                >
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/webdesign/SJH/01.jpg"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">SJH</h2>
+                    <div class="meta">
+                      <span class="tags">design</span>
+                      <span class="year">2024</span>
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="./pages/webdesign/blockchainbpo.html"
+                  class="portfolio-item"
+                  data-category="webdesign webdev"
+                  target="_blank"
+                >
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/webdesign/BPO/01.jpg"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Blockchain BPO</h2>
+                    <div class="meta">
+                      <span class="tags">design & development</span>
+                      <span class="year">2024</span>
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="https://kidsandteensfoundation.org/"
+                  class="portfolio-item"
+                  data-category="webdev"
+                >
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/webdesign/Kids&Teens Foundation/01.jpg"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Kids & Teens Foundation</h2>
+                    <div class="meta">
+                      <span class="tags">development</span>
+                      <span class="year">2023</span>
+                    </div>
+                  </div>
+                </a>
+                <a
+                  href="https://www.ktdoctor.com/"
+                  class="portfolio-item"
+                  data-category="web-dev"
+                >
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/webdesign/Kids&Teens Medical Group/01.jpg"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Kids & Teens Medical Group</h2>
+                    <div class="meta">
+                      <span class="tags">development</span>
+                      <span class="year">2023</span>
+                    </div>
+                  </div>
+                </a>
+                <!-- Web Design & Development Projects -->
+
+                <!-- Graphic Design Projects -->
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/Hiring (registered nurse)/01.jpg"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Flyer - Registered Nurse</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/Hiring (Frontend Developer)/01.png"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Flyer - Frontend Devloper</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/Hiring (Course selling)/01.png"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Promotional Flyer</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/JRC Resturant Logo/01.png"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">JRC Resturant Logo</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/JR Brothers/01.png"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">JR Brothers Logo</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/logo Concepts 01/01.png"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Mascot Logos</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/The SriLanka Experience/01.png"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">The Sri Lanka Experience</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/5% OFF Web Banner/01.png"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Promotioanl -01 Web Banner</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/Promotional web banner/01.png"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Promotioanl -02 Web Banner</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="#" class="portfolio-item" data-category="graphics">
+                  <div class="image-container">
+                    <img
+                      src="./img/portfolio/Graphics/Tuk tuk island/01.png"
+                      alt="NextGen"
+                    />
+                  </div>
+                  <div class="details">
+                    <h2 class="title">Tuk Tuk Island Logo</h2>
+                    <div class="meta">
+                      <span class="tags">Graphic Design</span>
+                      <span class="year">2025</span>
+                    </div>
+                  </div>
+                </a>
+
+                <!-- Graphic Design Projects -->
+              </main>
+              <div class="pagination">
+                <button class="prev" disabled>Prev</button>
+                <span class="page-info">1 / 1</span>
+                <button class="next">Next</button>
+              </div>
+            </div>
+          </section>
+
+          <footer>
+            <div>
+              <h1 class="footer-title">
+                Let’s work <span class="together">together!</span>
+              </h1>
+            </div>
+
+            <div class="footer-bottom">
+              <div class="footer-section">
+                <p class="label">VERSION</p>
+                <p>2025 © Edition</p>
+              </div>
+
+              <div class="footer-section">
+                <p class="label">CODED BY</p>
+                <p>SURESH GOBI.</p>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <div class="float-image-wrap">
+      <img id="float-img" src="" alt="Floating Preview" />
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/custom-cursor.js"></script>
+
+    <script>
+      let itemsPerPage = 6; // default list view for desktop
+      const portfolioGrid = document.querySelector(".portfolio-grid");
+      const portfolioItems = Array.from(
+        portfolioGrid.querySelectorAll(".portfolio-item")
+      );
+
+      const prevBtn = document.querySelector(".pagination .prev");
+      const nextBtn = document.querySelector(".pagination .next");
+      const pageInfo = document.querySelector(".pagination .page-info");
+
+      const gridBtn = document.querySelector(".grid-view-btn");
+      const listBtn = document.querySelector(".list-view-btn");
+
+      let currentPage = 1;
+
+      // Force grid mode on mobile
+      if (window.innerWidth <= 768) {
+        portfolioGrid.classList.remove("list-view"); // grid only
+        gridBtn.classList.add("active");
+        listBtn.classList.remove("active");
+        itemsPerPage = 6; // smaller pages for grid
+      } else {
+        // Default for desktop → list view
+        portfolioGrid.classList.add("list-view");
+        listBtn.classList.add("active");
+        gridBtn.classList.remove("active");
+        itemsPerPage = 6;
+      }
+
+      function showPage(page) {
+        const totalPages = Math.ceil(portfolioItems.length / itemsPerPage);
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+
+        portfolioItems.forEach((item, index) => {
+          if (index >= start && index < end) {
+            item.style.display = "flex"; // images visible
+            gsap.to(item, { autoAlpha: 1, scale: 1, duration: 0.3 });
+          } else {
+            gsap.to(item, {
+              autoAlpha: 0,
+              scale: 0.9,
+              duration: 0.3,
+              onComplete: () => (item.style.display = "none"),
+            });
+          }
+        });
+
+        pageInfo.textContent = `${page} / ${totalPages}`;
+        prevBtn.disabled = page === 1;
+        nextBtn.disabled = page === totalPages;
+      }
+
+      // Initial load
+      showPage(currentPage);
+
+      // Pagination buttons
+      prevBtn.addEventListener("click", () => {
+        if (currentPage > 1) {
+          currentPage--;
+          showPage(currentPage);
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        const totalPages = Math.ceil(portfolioItems.length / itemsPerPage);
+        if (currentPage < totalPages) {
+          currentPage++;
+          showPage(currentPage);
+        }
+      });
+
+      // View toggle buttons (desktop only)
+      gridBtn.addEventListener("click", () => {
+        if (window.innerWidth > 768) {
+          // prevent toggling on mobile
+          portfolioGrid.classList.remove("list-view");
+          gridBtn.classList.add("active");
+          listBtn.classList.remove("active");
+
+          itemsPerPage = 3;
+          currentPage = 1;
+          showPage(currentPage);
+        }
+      });
+
+      listBtn.addEventListener("click", () => {
+        if (window.innerWidth > 768) {
+          // prevent toggling on mobile
+          portfolioGrid.classList.add("list-view");
+          listBtn.classList.add("active");
+          gridBtn.classList.remove("active");
+
+          itemsPerPage = 6;
+          currentPage = 1;
+          showPage(currentPage);
+        }
+      });
+    </script>
+
+    <script>
+      window.addEventListener("load", () => {
+        const items = document.querySelectorAll(".portfolio-item");
+        const grid = document.querySelector(".portfolio-grid");
+        const listBtn = document.querySelector(".list-view-btn");
+        const gridBtn = document.querySelector(".grid-view-btn");
+        const toggleBtns = document.querySelector(".view-toggles");
+        const filterBtns = document.querySelectorAll(".filter-btn");
+
+        // --- Mobile check ---
+        if (window.innerWidth <= 768) {
+          grid.classList.remove("list-view");
+          gridBtn.classList.add("active");
+          listBtn.classList.remove("active");
+          if (toggleBtns) toggleBtns.style.display = "none";
+        } else {
+          grid.classList.add("list-view");
+          listBtn.classList.add("active");
+          gridBtn.classList.remove("active");
+        }
+
+        // --- Filter function ---
+        function applyFilter(filter) {
+          items.forEach((item) => {
+            const categories = item.dataset.category.split(" ");
+            if (filter === "all" || categories.includes(filter)) {
+              item.style.display = "flex";
+              gsap.to(item, { autoAlpha: 1, scale: 1, duration: 0.3 });
+              item.style.pointerEvents = "auto";
+            } else {
+              gsap.to(item, {
+                autoAlpha: 0,
+                scale: 0.9,
+                duration: 0.3,
+                onComplete: () => (item.style.display = "none"),
+              });
+              item.style.pointerEvents = "none";
+            }
+          });
+        }
+
+        // --- Apply hash filter on load ---
+        let currentHash = window.location.hash.replace("#", "");
+        let initialFilter = "all";
+
+        if (currentHash) {
+          const hashBtn = Array.from(filterBtns).find(
+            (b) => b.dataset.hash === currentHash
+          );
+          if (hashBtn) {
+            initialFilter = hashBtn.dataset.filter;
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            hashBtn.classList.add("active");
+          }
+        } else {
+          const allBtn = Array.from(filterBtns).find(
+            (b) => b.dataset.filter === "all"
+          );
+          if (allBtn) {
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            allBtn.classList.add("active");
+          }
+        }
+
+        // Apply the filter **immediately**
+        applyFilter(initialFilter);
+
+        // --- Filter button click events ---
+        filterBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filter = btn.dataset.filter;
+            applyFilter(filter);
+
+            const hash = btn.dataset.hash;
+            if (hash) {
+              history.replaceState(null, null, `#${hash}`);
+            } else {
+              history.replaceState(null, null, "#");
+            }
+          });
+        });
+
+        // --- View toggle logic for desktop ---
+        if (window.innerWidth > 768) {
+          gridBtn.addEventListener("click", () => {
+            grid.classList.remove("list-view");
+            gridBtn.classList.add("active");
+            listBtn.classList.remove("active");
+          });
+
+          listBtn.addEventListener("click", () => {
+            grid.classList.add("list-view");
+            listBtn.classList.add("active");
+            gridBtn.classList.remove("active");
+          });
+        }
+      });
+    </script>
+
+    <script>
+      function scrollFooter(scrollY, heightFooter) {
+        const footer = document.querySelector("footer");
+        if (scrollY >= heightFooter) {
+          footer.style.bottom = "0px"; // show
+        } else {
+          footer.style.bottom = "-" + heightFooter + "px"; // hide
+        }
+      }
+
+      window.addEventListener("load", () => {
+        const windowHeight = window.innerHeight;
+        const footer = document.querySelector("footer");
+        const footerHeight = footer.offsetHeight;
+        const contentHeight = document.querySelector(".content").offsetHeight;
+        const heightDocument = windowHeight + contentHeight;
+
+        // set scroll container size
+        document
+          .querySelectorAll("#scroll-animate, #scroll-animate-main")
+          .forEach((el) => (el.style.height = heightDocument + "px"));
+
+        // push content below viewport initially
+        //   document.querySelector(".wrapper-parallax").style.marginTop =
+        //     windowHeight + "px";
+
+        scrollFooter(window.scrollY, footerHeight);
+
+        // on scroll
+        let scrollPos = 0;
+        const scrollEase = 0.1;
+
+        function smoothScroll() {
+          const scroll = window.scrollY;
+          scrollPos += (scroll - scrollPos) * scrollEase;
+
+          document.getElementById("scroll-animate-main").style.top =
+            "-" + scrollPos + "px";
+
+          scrollFooter(scrollPos, footerHeight);
+
+          requestAnimationFrame(smoothScroll);
+        }
+
+        // start the smooth scroll loop
+        smoothScroll();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../../img/favicon.png" />
+    <title>Work - SJH</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <style>
+      .card.one {
+        background-image: url("../../img/portfolio/webdesign/SJH/01.jpg");
+      }
+      .card.two {
+        background-image: url("../../img/portfolio/webdesign/SJH/02.jpg");
+      }
+      .card.three {
+        background-image: url("../../img/portfolio/webdesign/SJH/03.jpg");
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- optional: create 10 tail elements -->
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
+
+    <div class="layout">
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="logo">
+            <img src="../../img/logo01.png" alt="Logo" />
+          </div>
+          <ul class="nav-menu">
+            <li><a href="../../work.html">Work</a></li>
+          </ul>
+          <div class="menu-trigger" id="menuTrigger">
+            <span class="menu-label-work" id="hamburgerBtn">Menu</span>
+          </div>
+        </div>
+        <div class="nav-line"></div>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-top">
+          <div class="menu-trigger" id="menuTriggerInside">
+            <div class="btn btn-hamburger" id="hamburgerInside">
+              <div class="btn-click"><div class="btn-bars"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-inner">
+          <div class="menu-nav">
+            <h5>Navigation</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="../../work.html">Work</a></li>
+            </ul>
+          </div>
+          <div class="menu-socials">
+            <h5>For Your Attention</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li>
+                <a href="#"
+                  >The remaining pages are under construction. You can view my
+                  projects here.</a
+                >
+              </li>
+              <li><a href="#"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEFT FIXED SECTION -->
+      <section class="project-info">
+        <h1 class="title">SJH</h1>
+        <div class="info-grid">
+          <div class="info-block">
+            <p class="label">ROLE / SERVICES</p>
+            <p class="content-work">Design</p>
+          </div>
+          <div class="info-block">
+            <p class="label">CREDITS</p>
+            <p class="content-work">Design: Suresh Gobi<br /></p>
+          </div>
+          <div class="info-block">
+            <p class="label">LOCATION &amp; YEAR</p>
+            <p class="content-work">Sri Lanka © 2024</p>
+          </div>
+          <div class="btn-container">
+            <a
+              href="https://www.figma.com/design/Vt8T7Vs9oni17pB7u9Qkok/Hospital?t=FvIuUvb1TgkhI6pY-1"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button class="button button--stroke" data-block="button">
+                <span class="button__label">VISIT SITE</span>
+                <span class="button__flair"></span>
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT SCROLL SECTION -->
+      <div class="cards-area">
+        <div class="card-wrapper"><div class="card one"></div></div>
+        <div class="card-wrapper"><div class="card two"></div></div>
+        <div class="card-wrapper"><div class="card three"></div></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="../../js/main.js"></script>
+    <script src="../../js/custom-cursor.js"></script>
+  </body>
+</html>
