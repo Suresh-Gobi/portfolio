@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="./img/favicon.png" />
     <title>Work</title>
     <link rel="stylesheet" href="css/style.css" />
     <link
@@ -15,10 +16,49 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   </head>
   <body>
+    <div id="preloader">
+      <div id="logo"></div>
+
+      <div class="loading-container">
+        <div class="loading-screen">
+          <div class="numbers">
+            <div class="number number-2 number-ten-times">
+              <div class="number-wrap">
+                <p class="number-p">0</p>
+                <p class="number-p">1</p>
+                <p class="number-p">2</p>
+                <p class="number-p">3</p>
+                <p class="number-p">4</p>
+                <p class="number-p">5</p>
+                <p class="number-p">6</p>
+                <p class="number-p">7</p>
+                <p class="number-p">8</p>
+                <p class="number-p">9</p>
+              </div>
+            </div>
+
+            <div class="number number-3 number-ten-times">
+              <div class="number-wrap">
+                <p class="number-p">0</p>
+                <p class="number-p">1</p>
+                <p class="number-p">2</p>
+                <p class="number-p">3</p>
+                <p class="number-p">4</p>
+                <p class="number-p">5</p>
+                <p class="number-p">6</p>
+                <p class="number-p">7</p>
+                <p class="number-p">8</p>
+                <p class="number-p">9</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="custom-cursor" id="cursor"></div>
 
     <!-- optional: create 10 tail elements -->
-    <!-- <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
@@ -27,7 +67,8 @@
     <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
     <div class="cursor-tail"></div>
-    <div class="cursor-tail"></div> -->
+    <div class="cursor-tail"></div>
+    <div class="cursor-tail"></div>
 
     <div class="cursor-circle">View</div>
 
@@ -85,7 +126,7 @@
               </div>
 
               <header class="portfolio-header">
-                <h1 class="portfolio-title">
+                <h1 class="portfolio-title" id="wordsText">
                   Transforming Ideas into Impactful Digital Products
                   <span> .</span>
                 </h1>
@@ -336,7 +377,11 @@
                     </div>
                   </div>
                 </a>
-                <a href="https://kidsandteensfoundation.org/" class="portfolio-item" data-category="webdev">
+                <a
+                  href="https://kidsandteensfoundation.org/"
+                  class="portfolio-item"
+                  data-category="webdev"
+                >
                   <div class="image-container">
                     <img
                       src="./img/portfolio/webdesign/Kids&Teens Foundation/01.jpg"
@@ -351,7 +396,11 @@
                     </div>
                   </div>
                 </a>
-                <a href="https://www.ktdoctor.com/" class="portfolio-item" data-category="web-dev">
+                <a
+                  href="https://www.ktdoctor.com/"
+                  class="portfolio-item"
+                  data-category="web-dev"
+                >
                   <div class="image-container">
                     <img
                       src="./img/portfolio/webdesign/Kids&Teens Medical Group/01.jpg"

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suresh Gobi | Portfolio</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- GSAP & ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <!-- <div id="preloader">
+      <div id="logo"></div>
+
+      <div class="loading-container">
+        <div class="loading-screen">
+          <div class="numbers">
+            <div class="number number-2 number-ten-times">
+              <div class="number-wrap">
+                <p class="number-p">0</p>
+                <p class="number-p">1</p>
+                <p class="number-p">2</p>
+                <p class="number-p">3</p>
+                <p class="number-p">4</p>
+                <p class="number-p">5</p>
+                <p class="number-p">6</p>
+                <p class="number-p">7</p>
+                <p class="number-p">8</p>
+                <p class="number-p">9</p>
+              </div>
+            </div>
+
+            <div class="number number-3 number-ten-times">
+              <div class="number-wrap">
+                <p class="number-p">0</p>
+                <p class="number-p">1</p>
+                <p class="number-p">2</p>
+                <p class="number-p">3</p>
+                <p class="number-p">4</p>
+                <p class="number-p">5</p>
+                <p class="number-p">6</p>
+                <p class="number-p">7</p>
+                <p class="number-p">8</p>
+                <p class="number-p">9</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- <div class="custom-cursor">
+      <div class="cursor-circle">
+        <span
+          >scroll <br />
+          to <br />
+          view</span
+        >
+      </div>
+    </div> -->
+
+    <!-- Navigation Bar -->
+    <div id="homepage">
+      <nav class="navbar">
+        <div class="nav-container">
+          <div class="logo"><img src="img/logo.png" alt="Logo" /></div>
+          <ul class="nav-menu">
+            <li><a href="#">Work</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <div class="menu-trigger" id="menuTrigger">
+            <span class="menu-label" id="hamburgerBtn">Menu</span>
+          </div>
+        </div>
+        <div class="nav-line"></div>
+      </nav>
+
+      <!-- Mobile Menu -->
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-top">
+          <div class="menu-trigger" id="menuTriggerInside">
+            <div class="btn btn-hamburger" id="hamburgerInside">
+              <div class="btn-click"><div class="btn-bars"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-inner">
+          <div class="menu-nav">
+            <h5>Navigation</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Work</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="menu-socials">
+            <h5>Socials</h5>
+            <div class="stripe"></div>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="container"></div>
+
+      <div class="panel panel1">
+        <div class="hero">
+          <div class="hero-content">
+            <div class="profile-header">
+              <!-- <img src="img/propic.png" alt="Suresh Gobi" class="profile-pic" /> -->
+              <h2 id="wordsText">
+                <span style="color: #e62727">#</span>Suresh Gobi
+              </h2>
+            </div>
+
+            <h1 id="wordsText">
+              Designer <span>&</span><br />
+              <span class="highlight">Developer</span>
+            </h1>
+          </div>
+
+          <!-- Right Side Text -->
+          <div class="hero-text">
+            <h4 id="linesText1">
+              Helping brands thrive in the digital age. Together, we’ll shape
+              what’s next— fearless, innovative, and future-driven.
+            </h4>
+            <br />
+            <h3 id="linesText2">
+              My passion for design, code, and interaction places me in a unique
+              position within the digital world.
+            </h3>
+            <!-- <p class="credit" id="linesText2">&copy; Coded by Gobi</p> -->
+          </div>
+        </div>
+      </div>
+      <div class="panel panel2">
+        <div class="container">
+          <div class="grid-sub-title">
+            <h2>Recent work</h2>
+          </div>
+
+          <ul class="work-items mouse-pos-list-image-wrap">
+            <li
+              class="portfolio-item"
+              data-img="https://picsum.photos/id/1015/600/400"
+            >
+              <a href="#"
+                ><h4>TWICE</h4>
+                <p>Interaction & Development</p></a
+              >
+            </li>
+            <li
+              class="portfolio-item"
+              data-img="https://picsum.photos/id/1016/600/400"
+            >
+              <a href="#"
+                ><h4>The Damai</h4>
+                <p>Design & Development</p></a
+              >
+            </li>
+            <li
+              class="portfolio-item"
+              data-img="https://picsum.photos/id/1018/600/400"
+            >
+              <a href="#"
+                ><h4>FABRIC™</h4>
+                <p>Design & Development</p></a
+              >
+            </li>
+            <li
+              class="portfolio-item"
+              data-img="https://picsum.photos/id/1020/600/400"
+            >
+              <a href="#"
+                ><h4>Aanstekelijk</h4>
+                <p>Design & Development</p></a
+              >
+            </li>
+            <li
+              class="portfolio-item"
+              data-img="https://picsum.photos/id/1024/600/400"
+            >
+              <a href="#"
+                ><h4>Another Project</h4>
+                <p>Design & Development</p></a
+              >
+            </li>
+            <li
+              class="portfolio-item"
+              data-img="https://picsum.photos/id/1025/600/400"
+            >
+              <a href="#"
+                ><h4>Final Showcase</h4>
+                <p>Design & Development</p></a
+              >
+            </li>
+          </ul>
+
+          <!-- Button -->
+          <div class="btn-container">
+            <button class="button button--stroke" data-block="button">
+              <span class="button__label">More Work<sup>11</sup></span>
+
+              <span class="button__flair"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel3">Panel 3</div>
+
+      <!-- <div id="portfolio-modal" class="modal">
+        <div class="modal-content">
+          <span class="modal-close">&times;</span>
+          <p id="modal-title"></p>
+          <div class="modal-body">
+           
+
+            <div class="modal-left">
+              <h3>Project Description.</h3>
+              <p id="modal-description"></p>
+              <h3>Skills and deliverables</h3>
+              <div id="modal-skills"></div>
+              <div class="modal-buttons">
+                <button
+                  id="modal-live"
+                  target="_blank"
+                  class="button-1"
+                  role="button"
+                >
+                  Live Site <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <a id="modal-github" target="_blank">
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+
+              <div class="modal-meta">
+                <p id="modal-published"></p>
+
+                <div id="modal-company"></div>
+              </div>
+              <hr />
+            </div>
+
+            
+            <div class="modal-right">
+              <div id="modal-images"></div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Floating image -->
+      <div class="float-image-wrap">
+        <img id="float-img" src="" alt="preview" />
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <!-- <script src="js/custom-cursor.js"></script> -->
+    <script src="./js/map.js"></script>
+    <script>
+      // Floating portfolio image
+      const floatWrap = document.querySelector(".float-image-wrap");
+      const floatImg = document.getElementById("float-img");
+
+      document.querySelectorAll(".portfolio-item").forEach((item) => {
+        item.addEventListener("mouseenter", () => {
+          floatImg.src = item.getAttribute("data-img");
+          gsap.to(floatWrap, { opacity: 1, scale: 1, duration: 0.3 });
+        });
+        item.addEventListener("mouseleave", () => {
+          gsap.to(floatWrap, { opacity: 0, scale: 0.9, duration: 0.3 });
+        });
+        item.addEventListener("mousemove", (e) => {
+          gsap.to(floatWrap, {
+            x: e.clientX + 20,
+            y: e.clientY - 20,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        });
+      });
+
+      // Button animation
+      class Button {
+        constructor(buttonElement) {
+          this.block = buttonElement;
+          this.init();
+          this.initEvents();
+        }
+        init() {
+          const el = gsap.utils.selector(this.block);
+          this.DOM = { button: this.block, flair: el(".button__flair") };
+          this.xSet = gsap.quickSetter(this.DOM.flair, "xPercent");
+          this.ySet = gsap.quickSetter(this.DOM.flair, "yPercent");
+        }
+        getXY(e) {
+          const { left, top, width, height } =
+            this.DOM.button.getBoundingClientRect();
+          const xTransformer = gsap.utils.pipe(
+            gsap.utils.mapRange(0, width, 0, 100),
+            gsap.utils.clamp(0, 100)
+          );
+          const yTransformer = gsap.utils.pipe(
+            gsap.utils.mapRange(0, height, 0, 100),
+            gsap.utils.clamp(0, 100)
+          );
+          return {
+            x: xTransformer(e.clientX - left),
+            y: yTransformer(e.clientY - top),
+          };
+        }
+        initEvents() {
+          this.DOM.button.addEventListener("mouseenter", (e) => {
+            const { x, y } = this.getXY(e);
+            this.xSet(x);
+            this.ySet(y);
+            gsap.to(this.DOM.flair, {
+              scale: 1,
+              duration: 0.4,
+              ease: "power2.out",
+            });
+          });
+          this.DOM.button.addEventListener("mouseleave", (e) => {
+            const { x, y } = this.getXY(e);
+            gsap.killTweensOf(this.DOM.flair);
+            gsap.to(this.DOM.flair, {
+              xPercent: x > 90 ? x + 20 : x < 10 ? x - 20 : x,
+              yPercent: y > 90 ? y + 20 : y < 10 ? y - 20 : y,
+              scale: 0,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          });
+          this.DOM.button.addEventListener("mousemove", (e) => {
+            const { x, y } = this.getXY(e);
+            gsap.to(this.DOM.flair, {
+              xPercent: x,
+              yPercent: y,
+              duration: 0.4,
+              ease: "power2",
+            });
+          });
+        }
+      }
+
+      const buttonElements = document.querySelectorAll('[data-block="button"]');
+      buttonElements.forEach((buttonElement) => {
+        new Button(buttonElement);
+      });
+    </script>
+    <script>
+      const navLinks = document.querySelectorAll(".nav-menu li a");
+      const navLine = document.querySelector(".nav-line");
+      const logo = document.querySelector(".logo img"); 
+
+      let menuPositions = [];
+      let navLineRect = null;
+      let logoRect = null;
+
+      function updatePositions() {
+        menuPositions = Array.from(navLinks).map((link) => {
+          const rect = link.getBoundingClientRect();
+          return {
+            link,
+            left: rect.left + rect.width / 2,
+            top: rect.top + rect.height / 2,
+          };
+        });
+
+        if (navLine) {
+          navLineRect = navLine.getBoundingClientRect();
+        }
+        if (logo) {
+          logoRect = logo.getBoundingClientRect();
+        }
+      }
+
+      // init and keep updated on resize / refresh
+      updatePositions();
+      if (window.ScrollTrigger)
+        ScrollTrigger.addEventListener("refreshInit", updatePositions);
+      window.addEventListener("resize", () =>
+        gsap.delayedCall(0.1, updatePositions)
+      );
+
+      gsap.to(".panel2", {
+        scrollTrigger: {
+          trigger: "#container",
+          start: "top top",
+          end: "15% top",
+          scrub: 1.2,
+        },
+        clipPath: "circle(150% at 100% 0%)",
+        opacity: 1,
+        ease: "expo.inOut",
+        onUpdate: function () {
+          const style = window.getComputedStyle(this.targets()[0]);
+          const clipPath = style.clipPath || style.webkitClipPath;
+          const match = clipPath.match(
+            /circle\(([\d.]+)% at ([\d.]+)% ([\d.]+)%\)/
+          );
+          if (!match) return;
+
+          const radiusPercent = parseFloat(match[1]);
+          const circleX = window.innerWidth * (parseFloat(match[2]) / 100);
+          const circleY = window.innerHeight * (parseFloat(match[3]) / 100);
+
+          const maxDim = Math.max(window.innerWidth, window.innerHeight);
+          const radiusPx = (radiusPercent / 100) * maxDim;
+
+          // --- nav links ---
+          menuPositions.forEach(({ link, left, top }) => {
+            const distance = Math.hypot(left - circleX, top - circleY);
+            link.style.color = distance <= radiusPx ? "#000" : "#fff";
+          });
+
+          // --- nav line ---
+          if (navLine && navLineRect) {
+            const closestX = Math.max(
+              navLineRect.left,
+              Math.min(circleX, navLineRect.right)
+            );
+            const closestY = Math.max(
+              navLineRect.top,
+              Math.min(circleY, navLineRect.bottom)
+            );
+            const distanceToNavLine = Math.hypot(
+              closestX - circleX,
+              closestY - circleY
+            );
+
+            navLine.style.background =
+              distanceToNavLine <= radiusPx ? "#000" : "#fff";
+          }
+
+          // --- logo image ---
+          if (logo && logoRect) {
+            const logoCenterX = logoRect.left + logoRect.width / 2;
+            const logoCenterY = logoRect.top + logoRect.height / 2;
+            const distanceToLogo = Math.hypot(
+              logoCenterX - circleX,
+              logoCenterY - circleY
+            );
+
+            if (distanceToLogo <= radiusPx) {
+              logo.style.filter =
+                "brightness(0) saturate(100%) invert(24%) sepia(92%) saturate(7481%) hue-rotate(0deg) brightness(96%) contrast(119%)";
+              // this makes it red, works for PNG/SVG logos
+            } else {
+              logo.style.filter = "none"; // back to normal
+            }
+          }
+        },
+      });
+
+      // PANEL 3 reveal (bottom-left)
+      gsap.to(".panel3", {
+        scrollTrigger: {
+          trigger: "#container",
+          start: "15% top",
+          end: "66% top",
+          scrub: 1.2,
+        },
+        clipPath: "circle(150% at 0% 100%)",
+        opacity: 1,
+        ease: "expo.inOut",
+      });
+    </script>
+  </body>
+</html>
