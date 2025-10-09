@@ -367,13 +367,13 @@ function scrollFooter(scrollY, heightFooter) {
   const windowHeight = window.innerHeight;
   const contentHeight = content ? content.offsetHeight : 0;
 
-  // ✅ If content is shorter than viewport, always show footer
+
   if (contentHeight <= windowHeight) {
     footer.style.bottom = "0px";
     return;
   }
 
-  // ✅ Otherwise, apply scroll-based footer visibility
+
   if (scrollY >= heightFooter) {
     footer.style.bottom = "0px"; // show
   } else {
@@ -389,7 +389,7 @@ window.addEventListener("load", () => {
   const contentHeight = content ? content.offsetHeight : 0;
   const heightDocument = windowHeight + contentHeight;
 
-  // ✅ Set scroll container size dynamically
+
   document
     .querySelectorAll("#scroll-animate, #scroll-animate-main")
     .forEach((el) => (el.style.height = heightDocument + "px"));
@@ -414,6 +414,171 @@ window.addEventListener("load", () => {
     requestAnimationFrame(smoothScroll);
   }
 
-  // ✅ Start the smooth scroll loop
   smoothScroll();
 });
+
+
+// ---------------------------
+// Pagination + Fliter Button
+// ---------------------------
+document.addEventListener("DOMContentLoaded", () => {
+        // === ELEMENT REFERENCES ===
+        const portfolioGrid = document.querySelector(".portfolio-grid");
+        const portfolioItems = Array.from(
+          portfolioGrid.querySelectorAll(".portfolio-item")
+        );
+        const prevBtn = document.querySelector(".pagination .prev");
+        const nextBtn = document.querySelector(".pagination .next");
+        const pageInfo = document.querySelector(".pagination .page-info");
+        const gridBtn = document.querySelector(".grid-view-btn");
+        const listBtn = document.querySelector(".list-view-btn");
+        const toggleBtns = document.querySelector(".view-toggles");
+        const filterBtns = document.querySelectorAll(".filter-btn");
+
+        // === GLOBAL STATE ===
+        let itemsPerPage = 6;
+        let currentPage = 1;
+        let currentFilter = "all";
+        let filteredItems = [...portfolioItems];
+
+        // === HELPER FUNCTIONS ===
+        function animateItem(item, show = true) {
+          if (show) {
+            item.style.display = "flex";
+            item.style.pointerEvents = "auto";
+            gsap.to(item, { autoAlpha: 1, scale: 1, duration: 0.3 });
+          } else {
+            gsap.to(item, {
+              autoAlpha: 0,
+              scale: 0.9,
+              duration: 0.2,
+              onComplete: () => {
+                item.style.display = "none";
+                item.style.pointerEvents = "none";
+              },
+            });
+          }
+        }
+
+        function showPage(page) {
+          const totalPages =
+            Math.ceil(filteredItems.length / itemsPerPage) || 1;
+          const start = (page - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+
+          // Hide all, then show only visible filtered ones
+          portfolioItems.forEach((item) => (item.style.display = "none"));
+          filteredItems.forEach((item, index) => {
+            if (index >= start && index < end) {
+              item.style.display = "flex";
+              item.style.opacity = "1";
+              item.style.pointerEvents = "auto";
+            } else {
+              item.style.display = "none";
+            }
+          });
+
+          pageInfo.textContent = `${page} / ${totalPages}`;
+          prevBtn.disabled = page === 1;
+          nextBtn.disabled = page === totalPages;
+        }
+
+        function applyFilter(filter) {
+          currentFilter = filter;
+
+          filteredItems = portfolioItems.filter((item) => {
+            const categories = (item.dataset.category || "").split(" ");
+            return filter === "all" || categories.includes(filter);
+          });
+
+          currentPage = 1;
+          showPage(currentPage);
+        }
+
+        function setViewMode(mode) {
+          if (window.innerWidth > 768) {
+            const isList = mode === "list";
+            portfolioGrid.classList.toggle("list-view", isList);
+            gridBtn.classList.toggle("active", !isList);
+            listBtn.classList.toggle("active", isList);
+            itemsPerPage = isList ? 6 : 3;
+            currentPage = 1;
+            showPage(currentPage);
+          }
+        }
+
+        // === PAGINATION LOGIC ===
+        prevBtn.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+          }
+        });
+        nextBtn.addEventListener("click", () => {
+          const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+          if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
+          }
+        });
+
+        // === VIEW TOGGLE ===
+        gridBtn.addEventListener("click", () => setViewMode("grid"));
+        listBtn.addEventListener("click", () => setViewMode("list"));
+
+        // === MOBILE DETECTION ===
+        if (window.innerWidth <= 768) {
+          portfolioGrid.classList.remove("list-view");
+          gridBtn.classList.add("active");
+          listBtn.classList.remove("active");
+          if (toggleBtns) toggleBtns.style.display = "none";
+        } else {
+          portfolioGrid.classList.add("list-view");
+          listBtn.classList.add("active");
+          gridBtn.classList.remove("active");
+        }
+
+        // === INITIAL FILTER LOAD (BASED ON URL HASH) ===
+        let currentHash = window.location.hash.replace("#", "");
+        let initialFilter = "all";
+
+        if (currentHash) {
+          const hashBtn = Array.from(filterBtns).find(
+            (b) => b.dataset.hash === currentHash
+          );
+          if (hashBtn) {
+            initialFilter = hashBtn.dataset.filter;
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            hashBtn.classList.add("active");
+          }
+        } else {
+          const allBtn = Array.from(filterBtns).find(
+            (b) => b.dataset.filter === "all"
+          );
+          if (allBtn) {
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            allBtn.classList.add("active");
+          }
+        }
+
+        applyFilter(initialFilter); // initial display fix
+        showPage(currentPage); // ensure portfolios show
+
+        // === FILTER BUTTON CLICK EVENTS ===
+        filterBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            filterBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filter = btn.dataset.filter;
+            applyFilter(filter);
+
+            const hash = btn.dataset.hash;
+            if (hash) {
+              history.replaceState(null, null, `#${hash}`);
+            } else {
+              history.replaceState(null, null, "#");
+            }
+          });
+        });
+      });
