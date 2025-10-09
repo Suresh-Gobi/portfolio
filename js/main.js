@@ -362,48 +362,58 @@ buttonElements.forEach((buttonElement) => {
 // ---------------------------
 
 function scrollFooter(scrollY, heightFooter) {
-        const footer = document.querySelector("footer");
-        if (scrollY >= heightFooter) {
-          footer.style.bottom = "0px"; // show
-        } else {
-          footer.style.bottom = "-" + heightFooter + "px"; // hide
-        }
-      }
+  const footer = document.querySelector("footer");
+  const content = document.querySelector(".content");
+  const windowHeight = window.innerHeight;
+  const contentHeight = content ? content.offsetHeight : 0;
 
-      window.addEventListener("load", () => {
-        const windowHeight = window.innerHeight;
-        const footer = document.querySelector("footer");
-        const footerHeight = footer.offsetHeight;
-        const contentHeight = document.querySelector(".content").offsetHeight;
-        const heightDocument = windowHeight + contentHeight;
+  // ✅ If content is shorter than viewport, always show footer
+  if (contentHeight <= windowHeight) {
+    footer.style.bottom = "0px";
+    return;
+  }
 
-        // set scroll container size
-        document
-          .querySelectorAll("#scroll-animate, #scroll-animate-main")
-          .forEach((el) => (el.style.height = heightDocument + "px"));
+  // ✅ Otherwise, apply scroll-based footer visibility
+  if (scrollY >= heightFooter) {
+    footer.style.bottom = "0px"; // show
+  } else {
+    footer.style.bottom = "-" + heightFooter + "px"; // hide
+  }
+}
 
-        // push content below viewport initially
-        //   document.querySelector(".wrapper-parallax").style.marginTop =
-        //     windowHeight + "px";
+window.addEventListener("load", () => {
+  const windowHeight = window.innerHeight;
+  const footer = document.querySelector("footer");
+  const footerHeight = footer.offsetHeight;
+  const content = document.querySelector(".content");
+  const contentHeight = content ? content.offsetHeight : 0;
+  const heightDocument = windowHeight + contentHeight;
 
-        scrollFooter(window.scrollY, footerHeight);
+  // ✅ Set scroll container size dynamically
+  document
+    .querySelectorAll("#scroll-animate, #scroll-animate-main")
+    .forEach((el) => (el.style.height = heightDocument + "px"));
 
-        // on scroll
-        let scrollPos = 0;
-        const scrollEase = 0.1;
+  scrollFooter(window.scrollY, footerHeight);
 
-        function smoothScroll() {
-          const scroll = window.scrollY;
-          scrollPos += (scroll - scrollPos) * scrollEase;
+  // Smooth scroll logic
+  let scrollPos = 0;
+  const scrollEase = 0.1;
 
-          document.getElementById("scroll-animate-main").style.top =
-            "-" + scrollPos + "px";
+  function smoothScroll() {
+    const scroll = window.scrollY;
+    scrollPos += (scroll - scrollPos) * scrollEase;
 
-          scrollFooter(scrollPos, footerHeight);
+    const scrollAnimateMain = document.getElementById("scroll-animate-main");
+    if (scrollAnimateMain) {
+      scrollAnimateMain.style.top = "-" + scrollPos + "px";
+    }
 
-          requestAnimationFrame(smoothScroll);
-        }
+    scrollFooter(scrollPos, footerHeight);
 
-        // start the smooth scroll loop
-        smoothScroll();
-      });
+    requestAnimationFrame(smoothScroll);
+  }
+
+  // ✅ Start the smooth scroll loop
+  smoothScroll();
+});
