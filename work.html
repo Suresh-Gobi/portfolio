@@ -635,149 +635,125 @@
     <script src="js/main.js"></script>
     <script src="js/custom-cursor.js"></script>
 
-    <script>
-      let itemsPerPage = 6; // default list view for desktop
-      const portfolioGrid = document.querySelector(".portfolio-grid");
-      const portfolioItems = Array.from(
-        portfolioGrid.querySelectorAll(".portfolio-item")
-      );
+   <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // === ELEMENT REFERENCES ===
+        const portfolioGrid = document.querySelector(".portfolio-grid");
+        const portfolioItems = Array.from(
+          portfolioGrid.querySelectorAll(".portfolio-item")
+        );
+        const prevBtn = document.querySelector(".pagination .prev");
+        const nextBtn = document.querySelector(".pagination .next");
+        const pageInfo = document.querySelector(".pagination .page-info");
+        const gridBtn = document.querySelector(".grid-view-btn");
+        const listBtn = document.querySelector(".list-view-btn");
+        const toggleBtns = document.querySelector(".view-toggles");
+        const filterBtns = document.querySelectorAll(".filter-btn");
 
-      const prevBtn = document.querySelector(".pagination .prev");
-      const nextBtn = document.querySelector(".pagination .next");
-      const pageInfo = document.querySelector(".pagination .page-info");
+        // === GLOBAL STATE ===
+        let itemsPerPage = 6;
+        let currentPage = 1;
+        let currentFilter = "all";
+        let filteredItems = [...portfolioItems];
 
-      const gridBtn = document.querySelector(".grid-view-btn");
-      const listBtn = document.querySelector(".list-view-btn");
-
-      let currentPage = 1;
-
-      // Force grid mode on mobile
-      if (window.innerWidth <= 768) {
-        portfolioGrid.classList.remove("list-view"); // grid only
-        gridBtn.classList.add("active");
-        listBtn.classList.remove("active");
-        itemsPerPage = 6; // smaller pages for grid
-      } else {
-        // Default for desktop → list view
-        portfolioGrid.classList.add("list-view");
-        listBtn.classList.add("active");
-        gridBtn.classList.remove("active");
-        itemsPerPage = 6;
-      }
-
-      function showPage(page) {
-        const totalPages = Math.ceil(portfolioItems.length / itemsPerPage);
-        const start = (page - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-
-        portfolioItems.forEach((item, index) => {
-          if (index >= start && index < end) {
-            item.style.display = "flex"; // images visible
+        // === HELPER FUNCTIONS ===
+        function animateItem(item, show = true) {
+          if (show) {
+            item.style.display = "flex";
+            item.style.pointerEvents = "auto";
             gsap.to(item, { autoAlpha: 1, scale: 1, duration: 0.3 });
           } else {
             gsap.to(item, {
               autoAlpha: 0,
               scale: 0.9,
-              duration: 0.3,
-              onComplete: () => (item.style.display = "none"),
+              duration: 0.2,
+              onComplete: () => {
+                item.style.display = "none";
+                item.style.pointerEvents = "none";
+              },
             });
+          }
+        }
+
+        function showPage(page) {
+          const totalPages =
+            Math.ceil(filteredItems.length / itemsPerPage) || 1;
+          const start = (page - 1) * itemsPerPage;
+          const end = start + itemsPerPage;
+
+          // Hide all, then show only visible filtered ones
+          portfolioItems.forEach((item) => (item.style.display = "none"));
+          filteredItems.forEach((item, index) => {
+            if (index >= start && index < end) {
+              item.style.display = "flex";
+              item.style.opacity = "1";
+              item.style.pointerEvents = "auto";
+            } else {
+              item.style.display = "none";
+            }
+          });
+
+          pageInfo.textContent = `${page} / ${totalPages}`;
+          prevBtn.disabled = page === 1;
+          nextBtn.disabled = page === totalPages;
+        }
+
+        function applyFilter(filter) {
+          currentFilter = filter;
+
+          filteredItems = portfolioItems.filter((item) => {
+            const categories = (item.dataset.category || "").split(" ");
+            return filter === "all" || categories.includes(filter);
+          });
+
+          currentPage = 1;
+          showPage(currentPage);
+        }
+
+        function setViewMode(mode) {
+          if (window.innerWidth > 768) {
+            const isList = mode === "list";
+            portfolioGrid.classList.toggle("list-view", isList);
+            gridBtn.classList.toggle("active", !isList);
+            listBtn.classList.toggle("active", isList);
+            itemsPerPage = isList ? 6 : 3;
+            currentPage = 1;
+            showPage(currentPage);
+          }
+        }
+
+        // === PAGINATION LOGIC ===
+        prevBtn.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+          }
+        });
+        nextBtn.addEventListener("click", () => {
+          const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+          if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
           }
         });
 
-        pageInfo.textContent = `${page} / ${totalPages}`;
-        prevBtn.disabled = page === 1;
-        nextBtn.disabled = page === totalPages;
-      }
+        // === VIEW TOGGLE ===
+        gridBtn.addEventListener("click", () => setViewMode("grid"));
+        listBtn.addEventListener("click", () => setViewMode("list"));
 
-      // Initial load
-      showPage(currentPage);
-
-      // Pagination buttons
-      prevBtn.addEventListener("click", () => {
-        if (currentPage > 1) {
-          currentPage--;
-          showPage(currentPage);
-        }
-      });
-
-      nextBtn.addEventListener("click", () => {
-        const totalPages = Math.ceil(portfolioItems.length / itemsPerPage);
-        if (currentPage < totalPages) {
-          currentPage++;
-          showPage(currentPage);
-        }
-      });
-
-      // View toggle buttons (desktop only)
-      gridBtn.addEventListener("click", () => {
-        if (window.innerWidth > 768) {
-          // prevent toggling on mobile
-          portfolioGrid.classList.remove("list-view");
-          gridBtn.classList.add("active");
-          listBtn.classList.remove("active");
-
-          itemsPerPage = 3;
-          currentPage = 1;
-          showPage(currentPage);
-        }
-      });
-
-      listBtn.addEventListener("click", () => {
-        if (window.innerWidth > 768) {
-          // prevent toggling on mobile
-          portfolioGrid.classList.add("list-view");
-          listBtn.classList.add("active");
-          gridBtn.classList.remove("active");
-
-          itemsPerPage = 6;
-          currentPage = 1;
-          showPage(currentPage);
-        }
-      });
-    </script>
-
-    <script>
-      window.addEventListener("load", () => {
-        const items = document.querySelectorAll(".portfolio-item");
-        const grid = document.querySelector(".portfolio-grid");
-        const listBtn = document.querySelector(".list-view-btn");
-        const gridBtn = document.querySelector(".grid-view-btn");
-        const toggleBtns = document.querySelector(".view-toggles");
-        const filterBtns = document.querySelectorAll(".filter-btn");
-
-        // --- Mobile check ---
+        // === MOBILE DETECTION ===
         if (window.innerWidth <= 768) {
-          grid.classList.remove("list-view");
+          portfolioGrid.classList.remove("list-view");
           gridBtn.classList.add("active");
           listBtn.classList.remove("active");
           if (toggleBtns) toggleBtns.style.display = "none";
         } else {
-          grid.classList.add("list-view");
+          portfolioGrid.classList.add("list-view");
           listBtn.classList.add("active");
           gridBtn.classList.remove("active");
         }
 
-        // --- Filter function ---
-        function applyFilter(filter) {
-          items.forEach((item) => {
-            const categories = item.dataset.category.split(" ");
-            if (filter === "all" || categories.includes(filter)) {
-              item.style.display = "flex";
-              gsap.to(item, { autoAlpha: 1, scale: 1, duration: 0.3 });
-              item.style.pointerEvents = "auto";
-            } else {
-              gsap.to(item, {
-                autoAlpha: 0,
-                scale: 0.9,
-                duration: 0.3,
-                onComplete: () => (item.style.display = "none"),
-              });
-              item.style.pointerEvents = "none";
-            }
-          });
-        }
-
-        // --- Apply hash filter on load ---
+        // === INITIAL FILTER LOAD (BASED ON URL HASH) ===
         let currentHash = window.location.hash.replace("#", "");
         let initialFilter = "all";
 
@@ -800,10 +776,10 @@
           }
         }
 
-        // Apply the filter **immediately**
-        applyFilter(initialFilter);
+        applyFilter(initialFilter); // initial display fix
+        showPage(currentPage); // ensure portfolios show
 
-        // --- Filter button click events ---
+        // === FILTER BUTTON CLICK EVENTS ===
         filterBtns.forEach((btn) => {
           btn.addEventListener("click", () => {
             filterBtns.forEach((b) => b.classList.remove("active"));
@@ -820,71 +796,8 @@
             }
           });
         });
-
-        // --- View toggle logic for desktop ---
-        if (window.innerWidth > 768) {
-          gridBtn.addEventListener("click", () => {
-            grid.classList.remove("list-view");
-            gridBtn.classList.add("active");
-            listBtn.classList.remove("active");
-          });
-
-          listBtn.addEventListener("click", () => {
-            grid.classList.add("list-view");
-            listBtn.classList.add("active");
-            gridBtn.classList.remove("active");
-          });
-        }
       });
     </script>
 
-    <script>
-      function scrollFooter(scrollY, heightFooter) {
-        const footer = document.querySelector("footer");
-        if (scrollY >= heightFooter) {
-          footer.style.bottom = "0px"; // show
-        } else {
-          footer.style.bottom = "-" + heightFooter + "px"; // hide
-        }
-      }
-
-      window.addEventListener("load", () => {
-        const windowHeight = window.innerHeight;
-        const footer = document.querySelector("footer");
-        const footerHeight = footer.offsetHeight;
-        const contentHeight = document.querySelector(".content").offsetHeight;
-        const heightDocument = windowHeight + contentHeight;
-
-        // set scroll container size
-        document
-          .querySelectorAll("#scroll-animate, #scroll-animate-main")
-          .forEach((el) => (el.style.height = heightDocument + "px"));
-
-        // push content below viewport initially
-        //   document.querySelector(".wrapper-parallax").style.marginTop =
-        //     windowHeight + "px";
-
-        scrollFooter(window.scrollY, footerHeight);
-
-        // on scroll
-        let scrollPos = 0;
-        const scrollEase = 0.1;
-
-        function smoothScroll() {
-          const scroll = window.scrollY;
-          scrollPos += (scroll - scrollPos) * scrollEase;
-
-          document.getElementById("scroll-animate-main").style.top =
-            "-" + scrollPos + "px";
-
-          scrollFooter(scrollPos, footerHeight);
-
-          requestAnimationFrame(smoothScroll);
-        }
-
-        // start the smooth scroll loop
-        smoothScroll();
-      });
-    </script>
   </body>
 </html>
