@@ -1,0 +1,5 @@
+title: SGPixels Blog
+description: Blog about Design & Development
+baseurl: "/blog"  # Important for subfolder
+url: "https://sgpixels.com"
+theme: minima      # You can change to any Jekyll theme
